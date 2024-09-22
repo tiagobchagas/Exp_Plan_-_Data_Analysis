@@ -1,0 +1,143 @@
+---
+title: "Planejamento experimental <br> e  Análise de dados agronômicos"
+author: "José Tiago Barroso Chagas"
+format:
+  revealjs:
+    incremental: true
+    theme:  simple
+    footer: "Exp_Plan_&_Data_Analysis"
+    logo: "https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png"
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Apresentação{.smaller}
+
+
+![](misc/linkedin.png)
+
+Engenheiro agronômo (UFCA- 2018)
+
+Mestre em genética e melhoramento de plantas (UENF -2020)
+
+Doutor em genética e melhoramento (UFV - 2024)
+
+Pesquisador de pós doutorado (UFV - Atual)
+
+
+## Sumário
+
+-   Princípios da experimentação agrícola
+-   Planejamento de Experimentos agronômicos
+-   Equações de Modelos Mistos
+-   Análise de variância individual
+-   Análise de variância conjunta
+-   Predição de valores genotípicos
+-   Índices de seleção
+
+## Princípios da Experimentação agrícola
+
+::: {layout-ncol="2"}
+-   Repetição
+-   Casualização
+-   Controle local
+
+```{r}
+library(FielDHub)
+crd1 <- CRD(
+  t =5,
+  reps = 3,
+  plotNumber = 101,
+  seed = 1987,
+  locationName = "Coimbra"
+)
+#crd1$infoDesign
+#head(crd1$fieldBook, 3)
+plot(crd1)
+
+rcbd1 <- RCBD(t = 5, reps = 3,l = 1, 
+              plotNumber =101, 
+              continuous = TRUE,
+              planter = "serpentine", 
+              seed = 1020, 
+              locationNames = "Coimbra")
+#rcbd1$infoDesign
+#head(rcbd1$fieldBook, 3)
+plot(rcbd1)
+```
+:::
+
+## Planejamento de Experimentos agronômicos {.smaller}
+
+::: {layout-ncol="2"}
+-   Experimentos com grande número de tratamentos para DBC
+-   Látice quadrado (9t/k3/r3)
+
+```{r,fig.width=8, fig.height=6}
+squareLattice1 <- square_lattice(t =9, k =3, r = 3, l = 1, 
+                                 plotNumber = 1001,
+                                 locationNames = "COIMBRA", 
+                                 seed = 1986)
+#squareLattice1$infoDesign
+#head(squareLattice1$fieldBook,12)
+plot(squareLattice1)
+```
+:::
+
+## Planejamento de Experimentos agronômicos {.smaller}
+
+::: {layout-ncol="2"}
+-   Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental
+-   Delineamento em blocos aumentados (30g/3t/k6)
+
+```{r,fig.width=8, fig.height=6}
+ARCBD1 <- RCBD_augmented(lines = 30, checks = 3, b = 6, l = 1, 
+                         planter = "serpentine", 
+                         plotNumber = 1001,
+                         seed = 23, 
+                         locationNames = "COIMBRA")
+# ARCBD1$infoDesign
+# ARCBD1$layoutRandom
+# ARCBD1$exptNames
+# ARCBD1$plotNumber
+# head(ARCBD1$fieldBook, 12)
+plot(ARCBD1)
+```
+:::
+
+## Equações de modelos mistos {.smaller}
+
+Charles Roy Henderson (melhorista animal) descobriu em 1953 as equações de modelos mistos.
+
+As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de $\beta$.
+
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMCAcy-db2L5NduVmnliFiasE3-6Qk2vCjg&s)
+
+## Equações de modelos mistos {.smaller}
+
+$$
+\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
+$$
+
+$$
+\begin{align*}
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
+ \mathbf{Z}'\mathbf{X} & \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{y} \\
+ \mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\end{align*}
+
+$$
+
+## Equações de modelos mistos {.smaller}
+

@@ -4,27 +4,28 @@ author: "José Tiago Barroso Chagas"
 format:
   revealjs:
     incremental: true
+    transition: slide
+    background-transition: fade
+    chalkboard: true
     theme:  simple
     footer: "Exp_Plan_&_Data_Analysis"
     logo: "https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png"
-    embed-resources: true
+    embed-resources: false
 editor_options: 
   chunk_output_type: console
 ---
 
-## Apresentação{.smaller}
-
+## Apresentação {.smaller}
 
 ![](misc/linkedin.png)
 
-Engenheiro agronômo (UFCA- 2018)
+*Engenheiro agronômo (**UFCA**- 2018)*
 
-Mestre em genética e melhoramento de plantas (UENF -2020)
+*Mestre em genética e melhoramento de plantas (**UENF**-2020)*
 
-Doutor em genética e melhoramento (UFV - 2024)
+*Doutor em genética e melhoramento (**UFV**- 2024)*
 
-Pesquisador de pós doutorado (UFV - Atual)
-
+*Pesquisador de pós doutorado (**UFV**- Atual)*
 
 ## Sumário
 
@@ -114,13 +115,15 @@ As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor lin
 
 ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMCAcy-db2L5NduVmnliFiasE3-6Qk2vCjg&s)
 
-## Equações de modelos mistos {.smaller}
+## Equações de modelos mistos {.smaller .scrollable}
+
 
 $$
 \textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
 $$
 
-$$
+
+$$ 
 \begin{align*}
 \begin{bmatrix}
  \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
@@ -136,8 +139,246 @@ $$
  \mathbf{Z}'\mathbf{y}
 \end{bmatrix}
 \end{align*}
-
 $$
 
-## Equações de modelos mistos {.smaller}
+
+### Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood) {.smaller}
+
+Patterson & Thompson (1971)
+
+Função de densidade de probabilidade normal
+
+
+$$
+f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+$$
+
+A função de Máxima verossimilhança buscar a otimização dos valores da média $\mu$ e variância $\sigma$, dado as observações e considerando distribuição normal.
+
+Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com 
+média 10 ($\mu$) e desvio padrão $\sqrt{10}$ ($\sigma$)  
+
+```{r}
+set.seed(2024) #fixando o valor da "semente aleatória"set.seed(2024) #fixando o valor da "semente aleatória"
+y=rnorm(100,10,sqrt(10)) #gerando as 100 obs amostrais com media=10 e desvio padrão= sqrt(10)
+cat("head de valores amostrados")
+head(y) #visualizando a amostra
+
+plot(density(y),main = "Distribuição normal")#plotar
+n=100 #tamanho da amostra
+mu=seq(5,15,0.1) #possíveis valores de média (eixo x)
+sig2=seq(5,15,0.1) #possíveis valores de variância (eixo y)
+soma_y=sum(y) #somatório Syi
+soma_y2=sum(y^2) #somatório Syi2
+f <- function(mu,sig2)
+{((2*pi*sig2)^(-n/2))*exp((-1/(2*sig2))*(soma_y2-2*mu*soma_y+n*mu^2))}
+like <- outer(mu, sig2, f)# função de verossimilhança
+persp(mu, sig2, like, theta = 30, phi = 30, expand = 0.5,
+col = "lightblue", ltheta = 120, shade = 0.75, ticktype = "detailed",
+xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main="Função densidade de probabilidade normal")
+```
+
+
+
+
+
+## Equações de modelos mistos {.smaller .scrollable}
+
+BLUE (Melhor estimador linear não viesado - efeitos fixos)
+BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)
+
+
+### Simulação de dados fenotípicos - Exemplo
+
+2 características 
+100 genótipos
+2 blocos
+
+```{r}
+# simulação de ensaio multiambientes com múltiplas características
+library(FieldSimR)
+
+ntraits <- 2 # Number of traits
+nenvs <- 3 # Number of environments
+nblocks <- c(2, 2, 3) # Number of blocks per environment
+block_dir <- "col" # Arrangement of blocks ("side-by-side")
+ncols <- c(10, 10, 15) # Number of columns per environment
+nrows <- 20 # Number of rows per environment
+plot_length <- 8 # Plot length; here in meters (column direction)
+plot_width <- 2 # Plot width; here in meters (row direction)
+
+ #H2 = 0.3 for grain yield and H2 = 0.5 for plant height 
+ 
+H2 <- c(0.3, 0.3, 0.3, 0.5, 0.5, 0.5) # c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+var <- c(0.086, 0.12, 0.06, 15.1, 8.5, 11.7) # c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+#set.seed(2024)
+
+# Calculation of error variances based on the genetic variance and target heritability vectors.
+calc_varR <- function(var, H2) {
+  varR <- (var / H2) - var
+  return(varR)
+}
+
+varR <- calc_varR(var, H2)
+cat("Variâncias residuais Trait per environment -
+    c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3")
+round(varR, 2) # Vector of error variances: c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+
+
+spatial_model <- "Bivariate" # Spatial error model.
+prop_spatial <- 0.4 # Proportion of spatial trend.
+
+ScorR <- rand_cor_mat(ntraits, min.cor = 0, max.cor = 0.5, pos.def = TRUE)
+cat("Correlação dos erros devido tendências espaciais")
+round(ScorR, 2)
+# extraneous variation
+ext_ord <- "zig-zag"
+ext_dir <- "row"
+prop_ext <- 0.2
+
+EcorR <- rand_cor_mat(ntraits, min.cor = 0, max.cor = 0.5, pos.def = TRUE)
+cat("Correlação dos erros devido causas não conhecidas
+    (Caminhamento,máquinas e implementos)")
+round(EcorR, 2)
+gv_df <- gv_df_unstr
+
+error_ls <- field_trial_error(
+  ntraits = ntraits,
+  nenvs = nenvs,
+  nblocks = nblocks,
+  block.dir = block_dir,
+  ncols = ncols,
+  nrows = nrows,
+  plot.length = plot_length,
+  plot.width = plot_width,
+  varR = varR,
+  ScorR = ScorR,
+  EcorR = EcorR,
+  RcorR = NULL,
+  spatial.model = spatial_model,
+  prop.spatial = prop_spatial,
+  ext.ord = ext_ord,
+  ext.dir = ext_dir,
+  prop.ext = prop_ext,
+  return.effects = TRUE
+)
+pheno_df <- make_phenotypes(
+  gv_df,
+  error_ls$error.df,
+  randomise = TRUE
+)
+
+pheno_env1 <- droplevels(pheno_df[pheno_df$env == 1, ])
+
+colnames(pheno_env1) <- c("env","block","col","row","id","GY","PH")
+
+cat("Banco de dados simulado de Milho")
+str(pheno_env1)
+
+plot(density(pheno_env1$GY))
+
+cat("Solving mixed models with RHS")
+
+y=pheno_env1$GY
+head(y)
+
+
+X= model.matrix(~block-1,data = pheno_env1)
+cat("X matrix - Efeitos fixos")
+head(X)
+#X=matrix(c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1), 9,byrow=F) #X incidence matrix
+
+Z=model.matrix(~id-1,data = pheno_env1)
+cat("Z matrix - Efeitos aleatórios")
+Z[1:10,1:10]
+cat("Phenotypic data")
+pheno_env1[1:10,]
+#Z=matrix(c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1), 9,byrow=F) #Z incidence matrix
+cat("Error variance")
+se = 0.2075                    #error variance 
+se
+cat("Genotypic variance")
+su = 0.0948                   #Genotypic variance 
+su
+
+cat("Lambda")
+lambda = se/su   #lambda
+lambda
+
+
+cat("XpX")
+XpX = crossprod(X)  #X' X
+head(XpX)
+cat("XpZ")
+XpZ = crossprod(X, Z) #X' Z
+head(XpZ)[1:2,1:5]
+cat("ZpX")
+ZpX = crossprod(Z,X) #Z' X
+head(ZpX)
+cat("ZpZ")
+ZpZ = crossprod(Z)  #Z' Z
+head(ZpZ)[1:5,1:5]
+cat("Xpy")
+Xpy = crossprod(X, y) #X` y
+head(Xpy)
+cat("Zpy")
+Zpy = crossprod(Z, y) #Z` y
+head(Zpy)
+cat("LHS")
+LHS = rbind(cbind(XpX, XpZ), cbind(ZpX, ZpZ + diag(100)* lambda)) #LHS
+head(LHS)[1:5,1:5]
+
+RHS = rbind(Xpy,Zpy) #RHS
+head(RHS)
+
+sol = solve(LHS) %*% RHS  #Solutions
+head(sol)
+
+head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS") 
+
+
+
+
+```
+
+
+```{r}
+cat("Solving mixed models with package LME4")
+library(lme4)
+mmi=lme4::lmer(GY ~ block + 
+     (1 | id), data=pheno_env1)
+summary(mm)
+unlist(ranef(mm))[1:6] |> kableExtra::kable(caption = "LME4") 
+
+#cor(sol[-c(1:2)],unlist(ranef(mm)))
+
+```
+
+## Análise conjunta
+
+## Índice de Seleção
+
+Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.
+
+
+```{r}
+library(tidyverse)
+colnames(pheno_df)=c("env","block","col","row","id","GY","PH")
+str(pheno_df)
+
+mmc=lme4::lmer(GY ~ block:env+env+ (1| id)+ 
+     (1| id:env), data=pheno_df)
+summary(mmc)
+unlist(ranef(mmc))[1:6] |> kableExtra::kable(caption = "LME4 - g x e") 
+unlist(ranef(mmc))[301:306] |> kableExtra::kable(caption = "LME4 - g") 
+
+
+```
+
+
+::: {layout-ncol="2"}
+
+
+:::
+
 

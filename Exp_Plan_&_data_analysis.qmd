@@ -55,6 +55,7 @@ crd1 <- CRD(
 )
 #crd1$infoDesign
 #head(crd1$fieldBook, 3)
+cat("DIC")
 plot(crd1)
 
 rcbd1 <- RCBD(t = 5, reps = 3,l = 1, 
@@ -65,6 +66,7 @@ rcbd1 <- RCBD(t = 5, reps = 3,l = 1,
               locationNames = "Coimbra")
 #rcbd1$infoDesign
 #head(rcbd1$fieldBook, 3)
+cat("DBC")
 plot(rcbd1)
 ```
 :::
@@ -72,8 +74,9 @@ plot(rcbd1)
 ## Planejamento de Experimentos agronômicos {.smaller}
 
 ::: {layout-ncol="2"}
--   Experimentos com grande número de tratamentos para DBC
--   Látice quadrado (9t/k3/r3)
+-   Experimentos com grande número de tratamentos para os blocos casualizados em DBC
+-   **k** Tratamentos divididos em **k** blocos (ktrat\*kblocos)\
+-   Látice quadrado (9trat/k3/rep3)
 
 ```{r,fig.width=8, fig.height=6}
 squareLattice1 <- square_lattice(t =9, k =3, r = 3, l = 1, 
@@ -82,30 +85,36 @@ squareLattice1 <- square_lattice(t =9, k =3, r = 3, l = 1,
                                  seed = 1986)
 #squareLattice1$infoDesign
 #head(squareLattice1$fieldBook,12)
+cat("LÁTICE")
 plot(squareLattice1)
+head(squareLattice1$fieldBook)[1:3,]
 ```
 :::
 
 ## Planejamento de Experimentos agronômicos {.smaller}
 
-::: {layout-ncol="2"}
+::: columns
+::: {.column width="30%"}
 -   Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental
--   Delineamento em blocos aumentados (30g/3t/k6)
+-   Delineamento em blocos aumentados (30gen/3test/k6)
+:::
 
-```{r,fig.width=8, fig.height=6}
-ARCBD1 <- RCBD_augmented(lines = 30, checks = 3, b = 6, l = 1, 
-                         planter = "serpentine", 
-                         plotNumber = 1001,
-                         seed = 23, 
-                         locationNames = "COIMBRA")
-# ARCBD1$infoDesign
-# ARCBD1$layoutRandom
-# ARCBD1$exptNames
-# ARCBD1$plotNumber
-# head(ARCBD1$fieldBook, 12)
+::: {.column width="70%"}
+```{r,fig.width=6, fig.height=4} 
+ARCBD1 <- RCBD_augmented(lines = 30, checks = 3, b = 6, l = 1, planter = "serpentine", plotNumber = 1001, seed = 23, locationNames = "COIMBRA")
+head(ARCBD1$fieldBook)[1:3,] 
+cat("DBA") 
 plot(ARCBD1)
 ```
 :::
+:::
+
+::: {style="width: 80%"}
+```{}
+```
+:::
+
+::::
 
 ## Equações de modelos mistos {.smaller}
 
@@ -117,11 +126,9 @@ As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor lin
 
 ## Equações de modelos mistos {.smaller .scrollable}
 
-
 $$
 \textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
 $$
-
 
 $$ 
 \begin{align*}
@@ -141,13 +148,11 @@ $$
 \end{align*}
 $$
 
-
 ### Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood) {.smaller}
 
 Patterson & Thompson (1971)
 
 Função de densidade de probabilidade normal
-
 
 $$
 f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
@@ -155,8 +160,7 @@ $$
 
 A função de Máxima verossimilhança buscar a otimização dos valores da média $\mu$ e variância $\sigma$, dado as observações e considerando distribuição normal.
 
-Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com 
-média 10 ($\mu$) e desvio padrão $\sqrt{10}$ ($\sigma$)  
+Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com média 10 ($\mu$) e desvio padrão $\sqrt{10}$ ($\sigma$)
 
 ```{r}
 set.seed(2024) #fixando o valor da "semente aleatória"set.seed(2024) #fixando o valor da "semente aleatória"
@@ -178,21 +182,13 @@ col = "lightblue", ltheta = 120, shade = 0.75, ticktype = "detailed",
 xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main="Função densidade de probabilidade normal")
 ```
 
-
-
-
-
 ## Equações de modelos mistos {.smaller .scrollable}
 
-BLUE (Melhor estimador linear não viesado - efeitos fixos)
-BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)
-
+BLUE (Melhor estimador linear não viesado - efeitos fixos) BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)
 
 ### Simulação de dados fenotípicos - Exemplo
 
-2 características 
-100 genótipos
-2 blocos
+2 características 100 genótipos 2 blocos
 
 ```{r}
 # simulação de ensaio multiambientes com múltiplas características
@@ -270,7 +266,7 @@ pheno_df <- make_phenotypes(
 
 pheno_env1 <- droplevels(pheno_df[pheno_df$env == 1, ])
 
-colnames(pheno_env1) <- c("env","block","col","row","id","GY","PH")
+colnames(pheno_env1) <- c("env","block","col","row","id","rep", "GY","PH")
 
 cat("Banco de dados simulado de Milho")
 str(pheno_env1)
@@ -341,14 +337,13 @@ head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS")
 
 ```
 
-
 ```{r}
 cat("Solving mixed models with package LME4")
 library(lme4)
-mmi=lme4::lmer(GY ~ block + 
+mmi=lme4::lmer(GY ~ rep + 
      (1 | id), data=pheno_env1)
-summary(mm)
-unlist(ranef(mm))[1:6] |> kableExtra::kable(caption = "LME4") 
+summary(mmi)
+unlist(ranef(mmi))[1:6] |> kableExtra::kable(caption = "LME4") 
 
 #cor(sol[-c(1:2)],unlist(ranef(mm)))
 
@@ -360,25 +355,15 @@ unlist(ranef(mm))[1:6] |> kableExtra::kable(caption = "LME4")
 
 Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.
 
-
 ```{r}
 library(tidyverse)
-colnames(pheno_df)=c("env","block","col","row","id","GY","PH")
+colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
 str(pheno_df)
 
-mmc=lme4::lmer(GY ~ block:env+env+ (1| id)+ 
-     (1| id:env), data=pheno_df)
+mmc=lme4::lmer(GY ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
 summary(mmc)
 unlist(ranef(mmc))[1:6] |> kableExtra::kable(caption = "LME4 - g x e") 
 unlist(ranef(mmc))[301:306] |> kableExtra::kable(caption = "LME4 - g") 
 
 
 ```
-
-
-::: {layout-ncol="2"}
-
-
-:::
-
-

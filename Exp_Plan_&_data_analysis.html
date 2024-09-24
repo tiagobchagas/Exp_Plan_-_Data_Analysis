@@ -371,12 +371,18 @@ José Tiago Barroso Chagas
 </ul>
 </div>
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>DIC</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DBC</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -395,11 +401,16 @@ José Tiago Barroso Chagas
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <ul>
-<li class="fragment">Experimentos com grande número de tratamentos para DBC</li>
-<li class="fragment">Látice quadrado (9t/k3/r3)</li>
+<li class="fragment">Experimentos com grande número de tratamentos para os blocos casualizados em DBC</li>
+<li class="fragment"><strong>k</strong> Tratamentos divididos em <strong>k</strong> blocos (ktrat*kblocos)<br>
+</li>
+<li class="fragment">Látice quadrado (9trat/k3/rep3)</li>
 </ul>
 </div>
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>LÁTICE</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -407,31 +418,49 @@ José Tiago Barroso Chagas
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID LOCATION PLOT REP IBLOCK UNIT ENTRY TREATMENT
+1  1  COIMBRA 1001   1      1    1     7       G-7
+2  2  COIMBRA 1002   1      1    2     3       G-3
+3  3  COIMBRA 1003   1      1    3     4       G-4</code></pre>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="planejamento-de-experimentos-agronômicos-1" class="slide level2 smaller">
 <h2>Planejamento de Experimentos agronômicos</h2>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="columns">
+<div class="column" style="width:30%;">
 <ul>
 <li class="fragment">Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental</li>
-<li class="fragment">Delineamento em blocos aumentados (30g/3t/k6)</li>
+<li class="fragment">Delineamento em blocos aumentados (30gen/3test/k6)</li>
 </ul>
+</div><div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  EXPT LOCATION YEAR PLOT ROW COLUMN CHECKS BLOCK ENTRY TREATMENT
+1  1 Expt1  COIMBRA 2024 1001   1      1      1     1     3       CH3
+2  2 Expt1  COIMBRA 2024 1002   1      2      1     1     2       CH2
+3  3 Expt1  COIMBRA 2024 1003   1      3      0     1    23       G23</code></pre>
 </div>
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>DBA</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="768"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
+<div style="width: 80%">
+<pre><code></code></pre>
+</div>
+<p>::::</p>
 </section>
 <section id="equações-de-modelos-mistos" class="slide level2 smaller">
 <h2>Equações de modelos mistos</h2>
@@ -494,10 +523,9 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 </section>
 <section id="equações-de-modelos-mistos-2" class="slide level2 smaller scrollable">
 <h2>Equações de modelos mistos</h2>
-<ul>
-<li class="fragment">BLUE (Melhor estimador linear não viesado - efeitos fixos)</li>
-<li class="fragment">BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)</li>
-</ul>
+<p>BLUE (Melhor estimador linear não viesado - efeitos fixos) BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)</p>
+<h3 id="simulação-de-dados-fenotípicos---exemplo">Simulação de dados fenotípicos - Exemplo</h3>
+<p>2 características 100 genótipos 2 blocos</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Variâncias residuais Trait per environment -
@@ -527,24 +555,25 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 <pre><code>Banco de dados simulado de Milho</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   200 obs. of  7 variables:
+<pre><code>'data.frame':   200 obs. of  8 variables:
  $ env  : Factor w/ 1 level "1": 1 1 1 1 1 1 1 1 1 1 ...
  $ block: Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
  $ col  : Factor w/ 10 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
  $ row  : Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
- $ id   : Factor w/ 100 levels "1","2","3","4",..: 27 25 12 85 7 55 83 31 79 9 ...
- $ GY   : num  5.76 5.67 5.4 5.44 5.06 ...
- $ PH   : num  226 235 227 230 228 ...</code></pre>
+ $ id   : Factor w/ 100 levels "1","2","3","4",..: 39 4 77 14 49 62 47 94 40 63 ...
+ $ rep  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
+ $ PH   : num  230 230 230 232 239 ...</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
+
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving mixed models with RHS</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>X matrix</code></pre>
+<pre><code>[1] 5.513532 5.703086 5.796593 5.168647 5.323202 5.033188</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X matrix - Efeitos fixos</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  block1 block2
@@ -556,54 +585,54 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 6      1      0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Z matrix</code></pre>
+<pre><code>Z matrix - Efeitos aleatórios</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id1 id2 id3 id4 id5 id6 id7 id8 id9 id10
 1    0   0   0   0   0   0   0   0   0    0
-2    0   0   0   0   0   0   0   0   0    0
+2    0   0   0   1   0   0   0   0   0    0
 3    0   0   0   0   0   0   0   0   0    0
 4    0   0   0   0   0   0   0   0   0    0
-5    0   0   0   0   0   0   1   0   0    0
+5    0   0   0   0   0   0   0   0   0    0
 6    0   0   0   0   0   0   0   0   0    0
 7    0   0   0   0   0   0   0   0   0    0
 8    0   0   0   0   0   0   0   0   0    0
 9    0   0   0   0   0   0   0   0   0    0
-10   0   0   0   0   0   0   0   0   1    0</code></pre>
+10   0   0   0   0   0   0   0   0   0    0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Phenotypic data</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   env block col row id       GY       PH
-1    1     1   1   1 27 5.761704 226.1196
-2    1     1   1   2 25 5.672783 235.1769
-3    1     1   1   3 12 5.401780 226.8196
-4    1     1   1   4 85 5.437692 230.1563
-5    1     1   1   5  7 5.064853 227.5631
-6    1     1   1   6 55 4.623103 236.2333
-7    1     1   1   7 83 5.216219 224.1315
-8    1     1   1   8 31 4.761881 236.9095
-9    1     1   1   9 79 3.768588 227.9237
-10   1     1   1  10  9 5.234443 227.6176</code></pre>
+<pre><code>   env block col row id rep       GY       PH
+1    1     1   1   1 39   1 5.513532 230.2357
+2    1     1   1   2  4   1 5.703086 230.2436
+3    1     1   1   3 77   1 5.796593 230.4429
+4    1     1   1   4 14   1 5.168647 231.6617
+5    1     1   1   5 49   1 5.323202 238.9142
+6    1     1   1   6 62   1 5.033188 233.4361
+7    1     1   1   7 47   1 5.969180 227.9464
+8    1     1   1   8 94   1 5.296897 233.5849
+9    1     1   1   9 40   1 3.751499 226.4649
+10   1     1   1  10 63   1 4.588704 235.6345</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error variance</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1823</code></pre>
+<pre><code>[1] 0.2075</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Genotypic variance</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1209</code></pre>
+<pre><code>[1] 0.0948</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lambda</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.507858</code></pre>
+<pre><code>[1] 2.188819</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>XpX</code></pre>
@@ -657,12 +686,12 @@ block2 509.2963</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         [,1]
-id1  9.864385
-id2  9.087090
-id3 10.941683
-id4  9.197062
-id5  9.410150
-id6 10.808091</code></pre>
+id1  8.834306
+id2 10.478144
+id3 11.530348
+id4 10.042302
+id5  9.734658
+id6  9.007352</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>LHS</code></pre>
@@ -671,27 +700,27 @@ id6 10.808091</code></pre>
 <pre><code>       block1 block2      id1      id2      id3
 block1    100      0 1.000000 1.000000 1.000000
 block2      0    100 1.000000 1.000000 1.000000
-id1         1      1 3.507858 0.000000 0.000000
-id2         1      1 0.000000 3.507858 0.000000
-id3         1      1 0.000000 0.000000 3.507858</code></pre>
+id1         1      1 4.188819 0.000000 0.000000
+id2         1      1 0.000000 4.188819 0.000000
+id3         1      1 0.000000 0.000000 4.188819</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             [,1]
 block1 498.020468
 block2 509.296324
-id1      9.864385
-id2      9.087090
-id3     10.941683
-id4      9.197062</code></pre>
+id1      8.834306
+id2     10.478144
+id3     11.530348
+id4     10.042302</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              [,1]
-block1  4.98020468
-block2  5.09296324
-id1    -0.05951875
-id2    -0.28110535
-id3     0.24759137
-id4    -0.24975533</code></pre>
+<pre><code>               [,1]
+block1  4.980204681
+block2  5.092963242
+id1    -0.295754501
+id2     0.096680330
+id3     0.347873860
+id4    -0.007368719</code></pre>
 </div>
 <div class="cell-output-display">
 <table class="caption-top">
@@ -703,53 +732,56 @@ id4    -0.24975533</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">-0.0595188</td>
+<td style="text-align: right;">-0.2957545</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">-0.2811054</td>
+<td style="text-align: right;">0.0966803</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">0.2475914</td>
+<td style="text-align: right;">0.3478739</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">-0.2497553</td>
+<td style="text-align: right;">-0.0073687</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">-0.1890092</td>
+<td style="text-align: right;">-0.0808127</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">0.2095076</td>
+<td style="text-align: right;">-0.2544430</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="cell">
+<img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving mixed models with package LME4</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: GY ~ block + (1 | id)
+Formula: GY ~ rep + (1 | id)
    Data: pheno_env1
 
-REML criterion at convergence: 324
+REML criterion at convergence: 320.2
 
 Scaled residuals: 
      Min       1Q   Median       3Q      Max 
--2.70090 -0.51023  0.04309  0.55715  2.72508 
+-2.15158 -0.56334  0.05882  0.58978  2.09491 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- id       (Intercept) 0.0948   0.3079  
- Residual             0.2075   0.4555  
+ id       (Intercept) 0.1010   0.3178  
+ Residual             0.1982   0.4451  
 Number of obs: 200, groups:  id, 100
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept)  4.98020    0.05498   90.58
-block2       0.11276    0.06442    1.75
+(Intercept)  4.98020    0.05469  91.058
+rep2         0.11276    0.06295   1.791
 
 Correlation of Fixed Effects:
-       (Intr)
-block2 -0.586</code></pre>
+     (Intr)
+rep2 -0.576</code></pre>
 </div>
 <div class="cell-output-display">
 <table class="caption-top">
@@ -763,27 +795,160 @@ block2 -0.586</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">id.(Intercept)1</td>
-<td style="text-align: right;">-0.0498451</td>
+<td style="text-align: right;">-0.3126610</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">id.(Intercept)2</td>
-<td style="text-align: right;">-0.2354171</td>
+<td style="text-align: right;">0.1022069</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">id.(Intercept)3</td>
-<td style="text-align: right;">0.2073502</td>
+<td style="text-align: right;">0.3677597</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">id.(Intercept)4</td>
-<td style="text-align: right;">-0.2091624</td>
+<td style="text-align: right;">-0.0077899</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">id.(Intercept)5</td>
-<td style="text-align: right;">-0.1582894</td>
+<td style="text-align: right;">-0.0854323</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">id.(Intercept)6</td>
-<td style="text-align: right;">0.1754562</td>
+<td style="text-align: right;">-0.2689879</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="análise-conjunta" class="slide level2">
+<h2>Análise conjunta</h2>
+</section>
+<section id="índice-de-seleção" class="slide level2">
+<h2>Índice de Seleção</h2>
+<p>Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   700 obs. of  8 variables:
+ $ env  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+ $ block: Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+ $ col  : Factor w/ 15 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ row  : Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ id   : Factor w/ 100 levels "1","2","3","4",..: 39 4 77 14 49 62 47 94 40 63 ...
+ $ rep  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+ $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
+ $ PH   : num  230 230 230 232 239 ...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+   Data: pheno_df
+
+REML criterion at convergence: 1063.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.67400 -0.55510  0.01111  0.57905  2.30558 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id:env   (Intercept) 0.09360  0.3059  
+ id       (Intercept) 0.01043  0.1021  
+ Residual             0.18065  0.4250  
+Number of obs: 700, groups:  id:env, 300; id, 100
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  4.98020    0.05336  93.340
+env2         0.13322    0.07406   1.799
+env3         0.48945    0.07406   6.609
+env1:rep2    0.11276    0.06011   1.876
+env2:rep2   -0.02553    0.06011  -0.425
+env3:rep2   -0.12331    0.06011  -2.051
+env3:rep3   -0.19016    0.06011  -3.164
+
+Correlation of Fixed Effects:
+          (Intr) env2   env3   env1:2 env2:2 env3:2
+env2      -0.694                                   
+env3      -0.694  0.500                            
+env1:rep2 -0.563  0.406  0.406                     
+env2:rep2  0.000 -0.406  0.000  0.000              
+env3:rep2  0.000  0.000 -0.406  0.000  0.000       
+env3:rep3  0.000  0.000 -0.406  0.000  0.000  0.500
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>LME4 - g x e</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id:env.(Intercept)1</td>
+<td style="text-align: right;">-0.2994339</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.(Intercept)2</td>
+<td style="text-align: right;">-0.0883629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id:env.(Intercept)3</td>
+<td style="text-align: right;">0.1092676</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.(Intercept)4</td>
+<td style="text-align: right;">0.0992936</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id:env.(Intercept)5</td>
+<td style="text-align: right;">-0.0491773</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.(Intercept)6</td>
+<td style="text-align: right;">0.0160696</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>LME4 - g</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)1</td>
+<td style="text-align: right;">-0.0310489</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)2</td>
+<td style="text-align: right;">0.0073780</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)3</td>
+<td style="text-align: right;">0.0317793</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)4</td>
+<td style="text-align: right;">-0.0026264</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)5</td>
+<td style="text-align: right;">0.0316266</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)6</td>
+<td style="text-align: right;">-0.0007239</td>
 </tr>
 </tbody>
 </table>

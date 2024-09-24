@@ -351,19 +351,29 @@ unlist(ranef(mmi))[1:6] |> kableExtra::kable(caption = "LME4")
 
 ## Análise conjunta
 
-## Índice de Seleção
+
 
 Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.
 
 ```{r}
 library(tidyverse)
+library(lme4)
 colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
 str(pheno_df)
 
 mmc=lme4::lmer(GY ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
 summary(mmc)
+mmcr=lme4::lmer(GY ~ env+ rep:env + (1| id), data=pheno_df)
+cat("LRT GxE effect")
+2*c(logLik(mmc, REML=TRUE) - logLik(mmcr, REML=TRUE)) 
+anova(mmcr,mmc)
 unlist(ranef(mmc))[1:6] |> kableExtra::kable(caption = "LME4 - g x e") 
 unlist(ranef(mmc))[301:306] |> kableExtra::kable(caption = "LME4 - g") 
-
-
+library(lattice)
+str(rr1 <- ranef(mmc))
+dotplot(rr1) 
 ```
+
+## Índice de Seleção
+
+

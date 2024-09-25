@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="Exp_Plan_and_data_analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Exp_Plan_and_data_analysis_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Exp_Plan_and_data_analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="Exp_Plan_and_data_analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Exp_Plan_and_data_analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Exp_Plan_and_data_analysis_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Exp_Plan_and_data_analysis_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Exp_Plan_and_data_analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="José Tiago Barroso Chagas">
+  <title>Planejamento experimental   e Análise de dados agronômicos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="Exp_Plan_and_data_analysis_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Exp_Plan_and_data_analysis_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="Exp_Plan_and_data_analysis_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
+  <link href="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="Exp_Plan_and_data_analysis_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="Exp_Plan_and_data_analysis_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Planejamento experimental <br> e Análise de dados agronômicos</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+José Tiago Barroso Chagas 
+</div>
+</div>
+</div>
+
+</section>
+<section id="apresentação" class="slide level2 smaller">
+<h2>Apresentação</h2>
+
+<img data-src="misc/linkedin.png" class="r-stretch"><p><em>Engenheiro agronômo (<strong>UFCA</strong>- 2018)</em></p>
+<p><em>Mestre em genética e melhoramento de plantas (<strong>UENF</strong>-2020)</em></p>
+<p><em>Doutor em genética e melhoramento (<strong>UFV</strong>- 2024)</em></p>
+<p><em>Pesquisador de pós doutorado (<strong>UFV</strong>- Atual)</em></p>
+</section>
+<section id="sumário" class="slide level2">
+<h2>Sumário</h2>
+<ul>
+<li class="fragment">Princípios da experimentação agrícola</li>
+<li class="fragment">Planejamento de Experimentos agronômicos</li>
+<li class="fragment">Equações de Modelos Mistos</li>
+<li class="fragment">Análise de variância individual</li>
+<li class="fragment">Análise de variância conjunta</li>
+<li class="fragment">Predição de valores genotípicos</li>
+<li class="fragment">Análise de Fatores</li>
+<li class="fragment">Índices de seleção</li>
+</ul>
+</section>
+<section id="princípios-da-experimentação-agrícola" class="slide level2 smaller">
+<h2>Princípios da Experimentação agrícola</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<ul>
+<li class="fragment">Repetição</li>
+<li class="fragment">Casualização</li>
+<li class="fragment">Controle local</li>
+</ul>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>DIC - 5trat*3rep</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DBC - 5trat*3rep</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-1-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="planejamento-de-experimentos-agronômicos" class="slide level2 smaller">
+<h2>Planejamento de Experimentos agronômicos</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<ul>
+<li class="fragment">Experimentos com grande número de tratamentos para os blocos casualizados em DBC</li>
+<li class="fragment"><strong>k</strong> Tratamentos divididos em <strong>k</strong> blocos (ktrat*kblocos)<br>
+</li>
+<li class="fragment">Látice quadrado (9trat/k3/rep3)</li>
+</ul>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>LÁTICE</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-2-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID LOCATION PLOT REP IBLOCK UNIT ENTRY TREATMENT
+1  1  COIMBRA 1001   1      1    1     7       G-7
+2  2  COIMBRA 1002   1      1    2     3       G-3
+3  3  COIMBRA 1003   1      1    3     4       G-4</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="planejamento-de-experimentos-agronômicos-1" class="slide level2 smaller">
+<h2>Planejamento de Experimentos agronômicos</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li class="fragment">Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental</li>
+<li class="fragment">Delineamento em blocos aumentados</li>
+</ul>
+<p>(30gen/3test/k6)</p>
+</div><div class="column" style="width:65%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID  EXPT LOCATION YEAR PLOT ROW COLUMN CHECKS BLOCK ENTRY TREATMENT
+1  1 Expt1  COIMBRA 2024 1001   1      1      1     1     3       CH3
+2  2 Expt1  COIMBRA 2024 1002   1      2      1     1     2       CH2
+3  3 Expt1  COIMBRA 2024 1003   1      3      0     1    23       G23</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DBA</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-3-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div style="width: 80%">
+<pre><code></code></pre>
+</div>
+<p>::::</p>
+</section>
+<section id="equações-de-modelos-mistos" class="slide level2 smaller">
+<h2>Equações de modelos mistos</h2>
+<p><span class="citation" data-cites="henderson1953estimation">Charles R. Henderson (<a href="#/referências" role="doc-biblioref" onclick="">1953</a>)</span> (melhorista animal) propôs as equações de modelos mistos</p>
+<p>As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de <span class="math inline">\(\beta\)</span>.</p>
+
+<img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMCAcy-db2L5NduVmnliFiasE3-6Qk2vCjg&amp;s.png" class="r-stretch"></section>
+<section id="equações-de-modelos-mistos-1" class="slide level2 smaller scrollable">
+<h2>Equações de modelos mistos</h2>
+<p><span class="math display">\[
+\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+\begin{bmatrix}
+\mathbf{X}'\mathbf{X} &amp; \mathbf{X}'\mathbf{Z} \\
+\mathbf{Z}'\mathbf{X} &amp; \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{\hat{b}} \\
+\mathbf{\hat{u}}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\mathbf{X}'\mathbf{y} \\
+\mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\end{align*}
+\]</span></p>
+<h3 id="máxima-verossimilhança-restrita-reml-restricted-maximum-likelihood">Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood)</h3>
+<p><span class="citation" data-cites="Patterson1971">Patterson and Thompson (<a href="#/referências" role="doc-biblioref" onclick="">1971</a>)</span></p>
+<p>Função de densidade de probabilidade normal</p>
+<p><span class="math display">\[
+f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+\]</span></p>
+<p>A função de máxima verossimilhança buscar a otimização dos valores da média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma\)</span>, dado as observações e considerando distribuição normal.</p>
+<p>Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com média 10 (<span class="math inline">\(\mu\)</span>) e desvio padrão <span class="math inline">\(\sqrt{10}\)</span> (<span class="math inline">\(\sigma\)</span>)</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>head de valores amostrados</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.105260 11.482207  9.658565  9.326820 13.662229 14.086785</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-4-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="equações-de-modelos-mistos-2" class="slide level2 smaller scrollable">
+<h2>Equações de modelos mistos</h2>
+<p>BLUE (Melhor estimador linear não viesado - efeitos fixos)</p>
+<p>BLUP (Melhor preditor linear não viesado - efeitos aleatórios)</p>
+<p><span class="citation" data-cites="Henderson1975">C. R. Henderson (<a href="#/referências" role="doc-biblioref" onclick="">1975</a>)</span></p>
+<h3 id="simulação-de-dados-fenotípicos---exemplo">Simulação de dados fenotípicos - Exemplo</h3>
+<p>Traits: Produtividade de grãos e altura de planta</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="misc/gy.jpeg"></p>
+<figcaption>Fonte: Bayer crop science</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="misc/ph.jpeg"></p>
+<figcaption>Fonte: Bayer crop science</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>2 características; 100 genótipos; 2 blocos</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Variâncias residuais Trait per environment -
+    c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.20  0.28  0.14 15.10  8.50 11.70</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Correlação dos erros devido tendências espaciais</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     1    2
+1 1.00 0.49
+2 0.49 1.00</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Correlação dos erros devido causas não conhecidas
+    (Caminhamento,máquinas e implementos)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     1    2
+1 1.00 0.02
+2 0.02 1.00</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Banco de dados simulado de Milho</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   200 obs. of  8 variables:
+ $ env  : Factor w/ 1 level "1": 1 1 1 1 1 1 1 1 1 1 ...
+ $ block: Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ col  : Factor w/ 10 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ row  : Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ id   : Factor w/ 100 levels "1","2","3","4",..: 39 4 77 14 49 62 47 94 40 63 ...
+ $ rep  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
+ $ PH   : num  230 230 230 232 239 ...</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving mixed models with RHS</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.513532 5.703086 5.796593 5.168647 5.323202 5.033188</code></pre>
+</div>
+</div>
+<h3 id="resolvendo-as-equações-de-modelos-mistos-rhs---gy">Resolvendo as equações de modelos mistos (RHS) - GY</h3>
+<p><span class="math display">\[
+\begin{align*}
+\begin{bmatrix}
+\mathbf{X}'\mathbf{X} &amp; \mathbf{X}'\mathbf{Z} \\
+\mathbf{Z}'\mathbf{X} &amp; \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{\hat{b}} \\
+\mathbf{\hat{u}}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\mathbf{X}'\mathbf{y} \\
+\mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\end{align*}
+\]</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>X matrix - Efeitos fixos</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  block1 block2
+1      1      0
+2      1      0
+3      1      0
+4      1      0
+5      1      0
+6      1      0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Z matrix - Efeitos aleatórios</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id1 id2 id3 id4 id5 id6 id7 id8 id9 id10
+1    0   0   0   0   0   0   0   0   0    0
+2    0   0   0   1   0   0   0   0   0    0
+3    0   0   0   0   0   0   0   0   0    0
+4    0   0   0   0   0   0   0   0   0    0
+5    0   0   0   0   0   0   0   0   0    0
+6    0   0   0   0   0   0   0   0   0    0
+7    0   0   0   0   0   0   0   0   0    0
+8    0   0   0   0   0   0   0   0   0    0
+9    0   0   0   0   0   0   0   0   0    0
+10   0   0   0   0   0   0   0   0   0    0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Phenotypic data</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   env block col row id rep       GY       PH
+1    1     1   1   1 39   1 5.513532 230.2357
+2    1     1   1   2  4   1 5.703086 230.2436
+3    1     1   1   3 77   1 5.796593 230.4429
+4    1     1   1   4 14   1 5.168647 231.6617
+5    1     1   1   5 49   1 5.323202 238.9142
+6    1     1   1   6 62   1 5.033188 233.4361
+7    1     1   1   7 47   1 5.969180 227.9464
+8    1     1   1   8 94   1 5.296897 233.5849
+9    1     1   1   9 40   1 3.751499 226.4649
+10   1     1   1  10 63   1 4.588704 235.6345</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error variance</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2075</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Genotypic variance</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0948</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lambda</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.188819</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>XpX</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       block1 block2
+block1    100      0
+block2      0    100</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>XpZ</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       id1 id2 id3 id4 id5
+block1   1   1   1   1   1
+block2   1   1   1   1   1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ZpX</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    block1 block2
+id1      1      1
+id2      1      1
+id3      1      1
+id4      1      1
+id5      1      1
+id6      1      1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ZpZ</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id1 id2 id3 id4 id5
+id1   2   0   0   0   0
+id2   0   2   0   0   0
+id3   0   0   2   0   0
+id4   0   0   0   2   0
+id5   0   0   0   0   2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Xpy</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+block1 498.0205
+block2 509.2963</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Zpy</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+id1  8.834306
+id2 10.478144
+id3 11.530348
+id4 10.042302
+id5  9.734658
+id6  9.007352</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LHS</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       block1 block2      id1      id2      id3
+block1    100      0 1.000000 1.000000 1.000000
+block2      0    100 1.000000 1.000000 1.000000
+id1         1      1 4.188819 0.000000 0.000000
+id2         1      1 0.000000 4.188819 0.000000
+id3         1      1 0.000000 0.000000 4.188819</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RHS</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             [,1]
+block1 498.020468
+block2 509.296324
+id1      8.834306
+id2     10.478144
+id3     11.530348
+id4     10.042302</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solutions solve(LHS) %*% RHS</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]
+block1  4.980204681
+block2  5.092963242
+id1    -0.295754501
+id2     0.096680330
+id3     0.347873860
+id4    -0.007368719</code></pre>
+</div>
+</div>
+<h3 id="resolvendo-as-equações-de-modelos-mistos-lme4---gy">Resolvendo as equações de modelos mistos (LME4) - GY</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving mixed models with package LME4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: GY ~ rep + (1 | id)
+   Data: pheno_env1
+
+REML criterion at convergence: 320.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.15158 -0.56334  0.05882  0.58978  2.09491 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 0.1010   0.3178  
+ Residual             0.1982   0.4451  
+Number of obs: 200, groups:  id, 100
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  4.98020    0.05469  91.058
+rep2         0.11276    0.06295   1.791
+
+Correlation of Fixed Effects:
+     (Intr)
+rep2 -0.576</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top" data-quarto-postprocess="true" style="font-size: 20px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>RHS</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-0.2957545</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0966803</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.3478739</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.0073687</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.0808127</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.2544430</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top" data-quarto-postprocess="true" style="font-size: 20px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>LME4</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)1</td>
+<td style="text-align: right;">-0.3126610</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)2</td>
+<td style="text-align: right;">0.1022069</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)3</td>
+<td style="text-align: right;">0.3677597</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)4</td>
+<td style="text-align: right;">-0.0077899</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.(Intercept)5</td>
+<td style="text-align: right;">-0.0854323</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.(Intercept)6</td>
+<td style="text-align: right;">-0.2689879</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="análise-conjunta" class="slide level2 smaller scrollable">
+<h2>Análise conjunta</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon}
+\]</span></p>
+<p><span class="math inline">\([\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]\)</span> e <span class="math inline">\([\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]\)</span>, onde n é o número de genótipos e p é o número de ambientes.</p>
+<p><strong>2 características; 100 genótipos; 2-3 blocos; 3 ambientes</strong></p>
+<p>Testar os efeitos de genótipo e da interação genótipo x ambiente para as características avaliadas. <span class="math display">\[
+LRT = -2(LogL_-LogL_{r})
+\]</span> onde <span class="math inline">\(LogL\)</span> é o ponto de máxima da função de verossimilhança residual do modelo completo e <span class="math inline">\(LogL_{r}\)</span> é o mesmo para o modelo reduzido.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Análise de variância conjunta - GY</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+   Data: pheno_df
+
+REML criterion at convergence: 1063.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.67400 -0.55510  0.01111  0.57905  2.30558 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id:env   (Intercept) 0.09360  0.3059  
+ id       (Intercept) 0.01043  0.1021  
+ Residual             0.18065  0.4250  
+Number of obs: 700, groups:  id:env, 300; id, 100
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  4.98020    0.05336  93.340
+env2         0.13322    0.07406   1.799
+env3         0.48945    0.07406   6.609
+env1:rep2    0.11276    0.06011   1.876
+env2:rep2   -0.02553    0.06011  -0.425
+env3:rep2   -0.12331    0.06011  -2.051
+env3:rep3   -0.19016    0.06011  -3.164
+
+Correlation of Fixed Effects:
+          (Intr) env2   env3   env1:2 env2:2 env3:2
+env2      -0.694                                   
+env3      -0.694  0.500                            
+env1:rep2 -0.563  0.406  0.406                     
+env2:rep2  0.000 -0.406  0.000  0.000              
+env3:rep2  0.000  0.000 -0.406  0.000  0.000       
+env3:rep3  0.000  0.000 -0.406  0.000  0.000  0.500
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LRT GxE effect - Trait GY</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43.31988</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: pheno_df
+Models:
+mmcr: GY ~ env + rep:env + (1 | id)
+mmc: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+     npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
+mmcr    9 1096.1 1137.0 -539.03   1078.1                         
+mmc    10 1054.3 1099.8 -517.15   1034.3 43.758  1  3.717e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top" data-quarto-postprocess="true" style="font-size: 20px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>LME4 - g x e</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">(Intercept)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id:env.1:1</td>
+<td style="text-align: right;">-0.2994339</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.1:2</td>
+<td style="text-align: right;">-0.0883629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id:env.1:3</td>
+<td style="text-align: right;">0.1092676</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.2:1</td>
+<td style="text-align: right;">0.0992936</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id:env.2:2</td>
+<td style="text-align: right;">-0.0491773</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id:env.2:3</td>
+<td style="text-align: right;">0.0160696</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top" data-quarto-postprocess="true" style="font-size: 20px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>LME4 - g</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">(Intercept)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id.1</td>
+<td style="text-align: right;">-0.0310489</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.2</td>
+<td style="text-align: right;">0.0073780</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.3</td>
+<td style="text-align: right;">0.0317793</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.4</td>
+<td style="text-align: right;">-0.0026264</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">id.5</td>
+<td style="text-align: right;">0.0316266</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id.6</td>
+<td style="text-align: right;">-0.0007239</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_and_data_analysis_files/figure-revealjs/unnamed-chunk-9-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="índice-de-seleção" class="slide level2 smaller">
+<h2>Índice de Seleção</h2>
+<p>Diversos índices de seleção foram propostos com e sem restrições (<span class="citation" data-cites="Smith1936">Smith (<a href="#/referências" role="doc-biblioref" onclick="">1936</a>)</span> &amp; <span class="citation" data-cites="Hazel1943">Hazel (<a href="#/referências" role="doc-biblioref" onclick="">1943</a>)</span> ; <span class="citation" data-cites="Kempthorne1959">Kempthorne and Nordskog (<a href="#/referências" role="doc-biblioref" onclick="">1959</a>)</span>)</p>
+<p>Neste curso abordaremos o índice de seleção da <em>análise de fatores e desenho da distância genótipo ideótipo</em> <span class="citation" data-cites="rocha2018multitrait">Rocha, Machado, and Carneiro (<a href="#/referências" role="doc-biblioref" onclick="">2018</a>)</span>.</p>
+</section>
+<section id="análise-de-fatores" class="slide level2 smaller scrollable">
+<h2>Análise de Fatores</h2>
+<p>Considerando o dataset simulado de milho (2 traits * 3 ambientes)</p>
+<p>Para proceder análise fatorial, deve-se realizar a análise de correlação de pearson entre pares de variáveis e criar a matriz de correlações.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Blups per trait:env</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          GY_1        GY_2         GY_3       PH_1       PH_2       PH_3
+1 -0.299433931 -0.08836286  0.109267596 -0.7960276 -3.2359131  1.5381855
+2  0.099293639 -0.04917734  0.016069572 -2.6922993 -2.2370177  1.3938318
+3  0.354614536  0.04186552 -0.111398567  0.7017383 -0.4216252  1.2066291
+4 -0.006517491 -0.23820750  0.221164735 -3.2523328 -1.3943519 -0.1705401
+5 -0.102230756  0.26035403  0.125588089 -1.4563768 -3.3728975  1.4816980
+6 -0.270834073  0.26110773  0.003232461 -7.0252473 -0.8419086  2.4660021</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Blups per trait:env standarized</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         GY_1       GY_2        GY_3       PH_1       PH_2        PH_3
+1 -1.37867867 -0.3996783  0.49698215 -0.4213632 -1.5317044  0.80693911
+2  0.45717605 -0.2224364  0.07308928 -1.4251213 -1.0588819  0.73121050
+3  1.63274581  0.1893639 -0.50667445  0.3714528 -0.1995743  0.63300313
+4 -0.03000838 -1.0774477  1.00592425 -1.7215651 -0.6600100 -0.08946613
+5 -0.47069937  1.1776197  0.57121270 -0.7709074 -1.5965453  0.77730550
+6 -1.24699682  1.1810288  0.01470221 -3.7186910 -0.3985135  1.29367592</code></pre>
+</div>
+</div>
+<h3 id="matriz-de-correlações">Matriz de correlações</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            GY_1        GY_2        GY_3        PH_1       PH_2        PH_3
+GY_1  1.00000000 -0.05369986 -0.15382851  0.09624741  0.1535808 -0.03312696
+GY_2 -0.05369986  1.00000000  0.04461362 -0.08982962  0.2295911  0.14690621
+GY_3 -0.15382851  0.04461362  1.00000000  0.09267733 -0.2505011  0.38971600
+PH_1  0.09624741 -0.08982962  0.09267733  1.00000000  0.1306623 -0.26498653
+PH_2  0.15358083  0.22959111 -0.25050112  0.13066234  1.0000000 -0.34163029
+PH_3 -0.03312696  0.14690621  0.38971600 -0.26498653 -0.3416303  1.00000000</code></pre>
+</div>
+</div>
+<p>Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).</p>
+<h3 id="autovalores">Autovalores</h3>
+<p>Determinação dos autovalores pela seguinte equação:</p>
+<p><span class="math display">\[
+[\det(\lambda^².I-\rho) = 0]
+\]</span></p>
+<p>Multiplicado por uma matriz identidade diminuida da matriz de correlações <span class="math inline">\(\rho\)</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\lambda^2 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \lambda^2 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; \lambda^2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^2
+\end{bmatrix}
+  \begin{bmatrix}
+    \rho_{11} &amp; \rho_{12} &amp; \rho_{13} &amp; \cdots &amp; \rho_{1n} \\
+    \rho_{21} &amp; \rho_{22} &amp; \rho_{23} &amp; \cdots &amp; \rho_{2n} \\
+    \rho_{31} &amp; \rho_{32} &amp; \rho_{33} &amp; \cdots &amp; \rho_{3n} \\
+    \vdots    &amp; \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots   \\
+    \rho_{n1} &amp; \rho_{n2} &amp; \rho_{n3} &amp; \cdots &amp; \rho_{nn}
+    \end{bmatrix}\cdots
+\begin{bmatrix}
+\lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
+-\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
+-\rho_{31} &amp; -\rho_{32} &amp; \lambda^2 - \rho_{33} &amp; \cdots &amp; -\rho_{3n} \\
+\vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
+-\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
+\end{bmatrix}= 0
+\]</span></p>
+<h3 id="polinômio-característico">Polinômio característico</h3>
+<p>Obtenção do polinôminio característica de ordem relativa à quantidade de fatores.</p>
+<p>(n características - ordem n)</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Error term: 1.070302 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Polinômio característico</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5352 - 3.9883*x + 11.8003*x^2 - 17.7752*x^3 + 14.4279*x^4 - 6*x^5 + x^6 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Raízes do polinômio - Autovalores</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.7653 1.2008 1.0624 0.9772 0.5603 0.4340</code></pre>
+</div>
+</div>
+<p>Os <em>auto valores</em> são as raízes do polinômio característico da matriz de correlações.</p>
+<p>A soma dos autovalores é igual a quantidade de variáveis originais</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p><strong>Percentual de variância - valor do autovalor dividido pelo total</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.4224 20.0130 17.7060 16.2864  9.3389  7.2333</code></pre>
+</div>
+</div>
+<h3 id="autovetores">Autovetores</h3>
+<p>Os autovetores são derivados dos autovalores e resultam de um sistema de equações.</p>
+<p><span class="math display">\[
+[det(\lambda^².I-\rho)\mathbf{v}_i = 0]
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
+-\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
+-\rho_{31} &amp; -\rho_{32} &amp; \lambda^2 - \rho_{33} &amp; \cdots &amp; -\rho_{3n} \\
+\vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
+-\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\begin{bmatrix}
+v_{i1} \\
+v_{i2} \\
+v_{i3} \\
+\vdots \\
+v_{in}
+\end{bmatrix}= 0
+\]</span></p>
+<p><span class="math display">\[
+(\lambda^2 - \rho_{11}) v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0 ]
+\]</span></p>
+<h3 id="escores-fatoriais">Escores fatoriais</h3>
+<p>Obtido por meio do <em>autovalor</em> dividido pela raiz quadrada do seu respectivo <em>autovetor</em>.</p>
+<p>Indica relação com as variáveis originais.</p>
+<p><span class="math display">\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
+\]</span></p>
+<h3 id="extração-dos-fatores">Extração dos fatores</h3>
+<p>Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore) geram os fatores.</p>
+<p>A grandeza dos escores para cada variável representará o seu peso em cada fator.</p>
+<p><span class="math display">\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
+\]</span></p>
+<h3 id="cargas-fatoriais">Cargas fatoriais</h3>
+<p>Representam as correlações de pearson entre os fatores extraídos e as variáveis originais (+carga = +importância da variável em cada fator).</p>
+<p>O resultado da soma das cargas fatoriais ao quadrado de cada fator é próprio autovalor do qual ele foi extraído.</p>
+<p>Mais informações sobre a história da análise fatorial nesse artigo <span class="citation" data-cites="Bartholomew1995">Bartholomew (<a href="#/referências" role="doc-biblioref" onclick="">1995</a>)</span></p>
+</section>
+<section id="índice-de-seleção-1" class="slide level2 smaller scrollable">
+<h2>Índice de Seleção</h2>
+<p><span class="math display">\[
+Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
+\]</span></p>
+<p><span class="math inline">\(Pij\)</span> probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, <span class="math inline">\(d_{ij}\)</span> distância genótipo-ideótipo euclidiana padronizada.</p>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bartholomew1995" class="csl-entry" role="listitem">
+Bartholomew, D. J. 1995. <span>“Spearman and the Origin and Development of Factor Analysis.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 48 (November): 211–20. <a href="https://doi.org/10.1111/J.2044-8317.1995.TB01060.X">https://doi.org/10.1111/J.2044-8317.1995.TB01060.X</a>.
+</div>
+<div id="ref-Hazel1943" class="csl-entry" role="listitem">
+Hazel, L N. 1943. <span>“The Genetic Basis for Constructing Selection Indexes.”</span> <em>Genetics</em> 28: 476–90. <a href="http://www.ncbi.nlm.nih.gov/pubmed/17247099%0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC1209225">http://www.ncbi.nlm.nih.gov/pubmed/17247099%0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC1209225</a>.
+</div>
+<div id="ref-Henderson1975" class="csl-entry" role="listitem">
+Henderson, C R. 1975. <span>“Best Linear Unbiased Estimation and Prediction Under a Selection Model.”</span> <em>Biometrics</em> 31: 423. <a href="https://doi.org/10.2307/2529430">https://doi.org/10.2307/2529430</a>.
+</div>
+<div id="ref-henderson1953estimation" class="csl-entry" role="listitem">
+Henderson, Charles R. 1953. <span>“Estimation of Variance and Covariance Components.”</span> <em>Biometrics</em> 9 (2): 226–52.
+</div>
+<div id="ref-Kempthorne1959" class="csl-entry" role="listitem">
+Kempthorne, Oscar, and Arne W Nordskog. 1959. <span>“Restricted Selection Indices.”</span> <em>Biometrics</em> 15: 10–19. <a href="http://www.jstor.org/stable/2527598">http://www.jstor.org/stable/2527598</a>.
+</div>
+<div id="ref-Patterson1971" class="csl-entry" role="listitem">
+Patterson, H D, and R Thompson. 1971. <span>“Recovery of Inter-Block Information When Block Sizes Are Unequal.”</span> <em>Biometrika</em> 58: 545–54. <a href="https://doi.org/10.2307/2334389">https://doi.org/10.2307/2334389</a>.
+</div>
+<div id="ref-rocha2018multitrait" class="csl-entry" role="listitem">
+Rocha, João Romero do Amaral Santos de Carvalho, Juarez Campolina Machado, and Pedro Crescêncio Souza Carneiro. 2018. <span>“Multitrait Index Based on Factor Analysis and Ideotype-Design: Proposal and Application on Elephant Grass Breeding for Bioenergy.”</span> <em>Gcb Bioenergy</em> 10 (1): 52–60.
+</div>
+<div id="ref-Smith1936" class="csl-entry" role="listitem">
+Smith, H. F. 1936. <span>“A Discriminant Function for Plant Selection.”</span> <em>Annuals of Eugenics</em> 7: 240–50.
+</div>
+</div>
+<div class="quarto-auto-generated-content">
+<p><img src="https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Exp_Plan_&amp;_Data_Analysis</p>
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Exp_Plan_and_data_analysis_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

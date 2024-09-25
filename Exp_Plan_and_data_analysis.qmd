@@ -1,0 +1,702 @@
+---
+title: "Planejamento experimental <br> e  Análise de dados agronômicos"
+author: "José Tiago Barroso Chagas"
+format:
+  revealjs:
+    incremental: true
+    transition: slide
+    background-transition: fade
+    chalkboard: true
+    pointer: true
+    theme:  simple
+    footer: "Exp_Plan_&_Data_Analysis"
+    logo: "https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png"
+    embed-resources: false
+revealjs-plugins:
+  - pointer
+editor_options: 
+bibliography: references.bib
+---
+
+## Apresentação {.smaller}
+
+![](misc/linkedin.png)
+
+*Engenheiro agronômo (**UFCA**- 2018)*
+
+*Mestre em genética e melhoramento de plantas (**UENF**-2020)*
+
+*Doutor em genética e melhoramento (**UFV**- 2024)*
+
+*Pesquisador de pós doutorado (**UFV**- Atual)*
+
+## Sumário
+
+-   Princípios da experimentação agrícola
+-   Planejamento de Experimentos agronômicos
+-   Equações de Modelos Mistos
+-   Análise de variância individual
+-   Análise de variância conjunta
+-   Predição de valores genotípicos
+-   Análise de Fatores
+-   Índices de seleção
+
+## Princípios da Experimentação agrícola {.smaller}
+
+::: {layout-ncol="2"}
+-   Repetição
+-   Casualização
+-   Controle local
+
+```{r}
+library(tidyverse)
+library(FielDHub)
+crd1 <- CRD(
+  t =5,
+  reps = 3,
+  plotNumber = 101,
+  seed = 1987,
+  locationName = "Coimbra"
+)
+#crd1$infoDesign
+#head(crd1$fieldBook, 3)
+cat("DIC - 5trat*3rep")
+plot(crd1)
+
+rcbd1 <- RCBD(t = 5, reps = 3,l = 1, 
+              plotNumber =101, 
+              continuous = TRUE,
+              planter = "serpentine", 
+              seed = 1020, 
+              locationNames = "Coimbra")
+#rcbd1$infoDesign
+#head(rcbd1$fieldBook, 3)
+cat("DBC - 5trat*3rep")
+plot(rcbd1)
+```
+:::
+
+## Planejamento de Experimentos agronômicos {.smaller}
+
+::: {layout-ncol="2"}
+-   Experimentos com grande número de tratamentos para os blocos casualizados em DBC
+-   **k** Tratamentos divididos em **k** blocos (ktrat\*kblocos)\
+-   Látice quadrado (9trat/k3/rep3)
+
+```{r,fig.width=8, fig.height=6}
+squareLattice1 <- square_lattice(t =9, k =3, r = 3, l = 1, 
+                                 plotNumber = 1001,
+                                 locationNames = "COIMBRA", 
+                                 seed = 1986)
+#squareLattice1$infoDesign
+#head(squareLattice1$fieldBook,12)
+cat("LÁTICE")
+plot(squareLattice1)
+head(squareLattice1$fieldBook)[1:3,]
+```
+:::
+
+## Planejamento de Experimentos agronômicos {.smaller}
+
+::::: columns
+::: {.column width="35%"}
+-   Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental
+-   Delineamento em blocos aumentados
+
+(30gen/3test/k6)
+:::
+
+::: {.column width="65%"}
+```{r,fig.width=6, fig.height=4}
+ARCBD1 <- RCBD_augmented(lines = 30, checks = 3, b = 6, l = 1, planter = "serpentine", plotNumber = 1001, seed = 23, locationNames = "COIMBRA")
+head(ARCBD1$fieldBook)[1:3,] 
+cat("DBA") 
+plot(ARCBD1)
+```
+:::
+:::::
+
+::: {style="width: 80%"}
+```         
+```
+:::
+
+::::
+
+## Equações de modelos mistos {.smaller}
+
+@henderson1953estimation (melhorista animal) propôs as equações de modelos mistos
+
+As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de $\beta$.
+
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMCAcy-db2L5NduVmnliFiasE3-6Qk2vCjg&s)
+
+## Equações de modelos mistos {.smaller .scrollable}
+
+$$
+\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
+$$
+
+$$ 
+\begin{align*}
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
+ \mathbf{Z}'\mathbf{X} & \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{y} \\
+ \mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\end{align*}
+$$
+
+### Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood)
+
+@Patterson1971
+
+Função de densidade de probabilidade normal
+
+$$
+f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+$$
+
+A função de máxima verossimilhança buscar a otimização dos valores da média $\mu$ e variância $\sigma$, dado as observações e considerando distribuição normal.
+
+Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com média 10 ($\mu$) e desvio padrão $\sqrt{10}$ ($\sigma$)
+
+```{r}
+set.seed(2024) #fixando o valor da "semente aleatória"set.seed(2024) #fixando o valor da "semente aleatória"
+y=rnorm(100,10,sqrt(10)) #gerando as 100 obs amostrais com media=10 e desvio padrão= sqrt(10)
+cat("head de valores amostrados")
+head(y) #visualizando a amostra
+
+
+plot(density(y),main = "Distribuição normal")#plotar
+n=100 #tamanho da amostra
+mu=seq(5,15,0.1) #possíveis valores de média (eixo x)
+sig2=seq(5,15,0.1) #possíveis valores de variância (eixo y)
+soma_y=sum(y) #somatório Syi
+soma_y2=sum(y^2) #somatório Syi2
+f <- function(mu,sig2)
+{((2*pi*sig2)^(-n/2))*exp((-1/(2*sig2))*(soma_y2-2*mu*soma_y+n*mu^2))}
+like <- outer(mu, sig2, f)# função de verossimilhança
+persp(mu, sig2, like, theta = 30, phi = 30, expand = 0.5,
+col = "lightblue", ltheta = 120, shade = 0.75, ticktype = "detailed",
+xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main="Função densidade de probabilidade normal",cex.axis = 0.5
+)
+
+
+```
+
+## Equações de modelos mistos {.smaller .scrollable}
+
+BLUE (Melhor estimador linear não viesado - efeitos fixos)
+
+BLUP (Melhor preditor linear não viesado - efeitos aleatórios)
+
+@Henderson1975
+
+### Simulação de dados fenotípicos - Exemplo
+
+Traits: Produtividade de grãos e altura de planta
+
+
+::: {layout-ncol="2"}
+![Fonte: Bayer crop science](misc/gy.jpeg)
+
+![Fonte: Bayer crop science](misc/ph.jpeg)
+:::
+
+**2 características; 100 genótipos; 2 blocos**
+
+```{r}
+# simulação de ensaio multiambientes com múltiplas características
+library(FieldSimR)
+
+ntraits <- 2 # Number of traits
+nenvs <- 3 # Number of environments
+nblocks <- c(2, 2, 3) # Number of blocks per environment
+block_dir <- "col" # Arrangement of blocks ("side-by-side")
+ncols <- c(10, 10, 15) # Number of columns per environment
+nrows <- 20 # Number of rows per environment
+plot_length <- 8 # Plot length; here in meters (column direction)
+plot_width <- 2 # Plot width; here in meters (row direction)
+
+ #H2 = 0.3 for grain yield and H2 = 0.5 for plant height 
+ 
+H2 <- c(0.3, 0.3, 0.3, 0.5, 0.5, 0.5) # c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+var <- c(0.086, 0.12, 0.06, 15.1, 8.5, 11.7) # c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+#set.seed(2024)
+
+# Calculation of error variances based on the genetic variance and target heritability vectors.
+calc_varR <- function(var, H2) {
+  varR <- (var / H2) - var
+  return(varR)
+}
+
+varR <- calc_varR(var, H2)
+cat("Variâncias residuais Trait per environment -
+    c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3")
+round(varR, 2) # Vector of error variances: c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3)
+
+
+spatial_model <- "Bivariate" # Spatial error model.
+prop_spatial <- 0.4 # Proportion of spatial trend.
+
+ScorR <- rand_cor_mat(ntraits, min.cor = 0, max.cor = 0.5, pos.def = TRUE)
+cat("Correlação dos erros devido tendências espaciais")
+round(ScorR, 2)
+# extraneous variation
+ext_ord <- "zig-zag"
+ext_dir <- "row"
+prop_ext <- 0.2
+
+EcorR <- rand_cor_mat(ntraits, min.cor = 0, max.cor = 0.5, pos.def = TRUE)
+cat("Correlação dos erros devido causas não conhecidas
+    (Caminhamento,máquinas e implementos)")
+round(EcorR, 2)
+gv_df <- gv_df_unstr
+
+error_ls <- field_trial_error(
+  ntraits = ntraits,
+  nenvs = nenvs,
+  nblocks = nblocks,
+  block.dir = block_dir,
+  ncols = ncols,
+  nrows = nrows,
+  plot.length = plot_length,
+  plot.width = plot_width,
+  varR = varR,
+  ScorR = ScorR,
+  EcorR = EcorR,
+  RcorR = NULL,
+  spatial.model = spatial_model,
+  prop.spatial = prop_spatial,
+  ext.ord = ext_ord,
+  ext.dir = ext_dir,
+  prop.ext = prop_ext,
+  return.effects = TRUE
+)
+pheno_df <- make_phenotypes(
+  gv_df,
+  error_ls$error.df,
+  randomise = TRUE
+)
+
+pheno_env1 <- droplevels(pheno_df[pheno_df$env == 1, ])
+
+colnames(pheno_env1) <- c("env","block","col","row","id","rep", "GY","PH")
+
+cat("Banco de dados simulado de Milho")
+str(pheno_env1)
+
+plot(density(pheno_env1$GY))
+
+cat("Solving mixed models with RHS")
+
+y=pheno_env1$GY
+head(y)
+```
+
+### Resolvendo as equações de modelos mistos (RHS) - GY
+
+
+$$ 
+\begin{align*}
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
+ \mathbf{Z}'\mathbf{X} & \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{y} \\
+ \mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\end{align*}
+$$
+
+
+```{r}
+X= model.matrix(~block-1,data = pheno_env1)
+cat("X matrix - Efeitos fixos")
+head(X)
+#X=matrix(c(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1), 9,byrow=F) #X incidence matrix
+
+Z=model.matrix(~id-1,data = pheno_env1)
+cat("Z matrix - Efeitos aleatórios")
+Z[1:10,1:10]
+cat("Phenotypic data")
+pheno_env1[1:10,]
+#Z=matrix(c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1), 9,byrow=F) #Z incidence matrix
+cat("Error variance")
+se = 0.2075                    #error variance 
+se
+cat("Genotypic variance")
+su = 0.0948                   #Genotypic variance 
+su
+
+cat("Lambda")
+lambda = se/su   #lambda
+lambda
+
+
+cat("XpX")
+XpX = crossprod(X)  #X' X
+head(XpX)
+cat("XpZ")
+XpZ = crossprod(X, Z) #X' Z
+head(XpZ)[1:2,1:5]
+cat("ZpX")
+ZpX = crossprod(Z,X) #Z' X
+head(ZpX)
+cat("ZpZ")
+ZpZ = crossprod(Z)  #Z' Z
+head(ZpZ)[1:5,1:5]
+cat("Xpy")
+Xpy = crossprod(X, y) #X` y
+head(Xpy)
+cat("Zpy")
+Zpy = crossprod(Z, y) #Z` y
+head(Zpy)
+cat("LHS")
+LHS = rbind(cbind(XpX, XpZ), cbind(ZpX, ZpZ + diag(100)* lambda)) #LHS
+head(LHS)[1:5,1:5]
+
+RHS = rbind(Xpy,Zpy) #RHS
+cat("RHS")
+head(RHS)
+
+sol = solve(LHS) %*% RHS  #Solutions
+cat("Solutions solve(LHS) %*% RHS")
+head(sol)
+
+
+
+
+
+
+```
+
+### Resolvendo as equações de modelos mistos (LME4) - GY 
+
+```{r}
+cat("Solving mixed models with package LME4")
+library(lme4)
+mmi=lme4::lmer(GY ~ rep + 
+     (1 | id), data=pheno_env1)
+summary(mmi)
+library(kableExtra)
+head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS") |>  kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE, 
+                font_size = 20) 
+unlist(ranef(mmi))[1:6] |> kableExtra::kable(caption = "LME4") |>  kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE, 
+                font_size = 20) 
+#fixef(mmi) # efeitos fixos
+#cor(sol[-c(1:2)],unlist(ranef(mm)))
+
+```
+
+## Análise conjunta {.smaller .scrollable}
+
+```{r}
+#colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
+colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
+data_long <- pheno_df |>  pivot_longer(cols = c("GY","PH"))
+
+ 
+p2=data_long |> ggplot( aes(x=rep, y=value)) +
+geom_boxplot(aes(color = rep)) +
+ geom_point(aes(color = rep), alpha = 0.2, position = "jitter", size = 1) + facet_grid(name ~ env,  scales = "free") + theme_bw()
+ 
+ 
+ 
+plot(p2)
+```
+
+$$
+\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon} 
+$$
+
+$[\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]$ e $[\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]$, onde n é o número de genótipos e p é o número de ambientes.
+
+**2 características; 100 genótipos; 2-3 blocos; 3 ambientes**
+
+Testar os efeitos de genótipo e da interação genótipo x ambiente para as características avaliadas. $$
+LRT = -2(LogL_-LogL_{r})
+$$ onde $LogL$ é o ponto de máxima da função de verossimilhança residual do modelo completo e $LogL_{r}$ é o mesmo para o modelo reduzido.
+
+
+```{r}
+library(tidyverse)
+library(lme4)
+colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
+#str(pheno_df)
+
+mmc=lme4::lmer(GY ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
+
+cat("Análise de variância conjunta - GY")
+summary(mmc)
+mmcr=lme4::lmer(GY ~ env+ rep:env + (1| id), data=pheno_df)
+
+cat("LRT GxE effect - Trait GY")
+
+2*c(logLik(mmc, REML=TRUE) - logLik(mmcr, REML=TRUE)) 
+anova(mmcr,mmc)
+
+head(do.call(rbind,ranef(mmc,whichel=("id:env")))) |> kableExtra::kable(caption = "LME4 - g x e") |>
+  kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE, 
+                font_size = 20) 
+head(do.call(rbind,ranef(mmc,whichel=("id")))) |> kableExtra::kable(caption = "LME4 - g") |> 
+   kable_styling(bootstrap_options = "striped", 
+                full_width = FALSE, 
+                font_size = 20) 
+
+library(lattice)
+rr1 <- ranef(mmc)
+
+
+p1=dotplot(rr1)
+plot(p1$`id:env`)
+plot(p1$id)
+
+```
+
+## Índice de Seleção {.smaller}
+
+Diversos índices de seleção foram propostos com e sem restrições (@Smith1936 & @Hazel1943 ; @Kempthorne1959)
+
+Neste curso abordaremos o índice de seleção da *análise de fatores e desenho da distância genótipo ideótipo* @rocha2018multitrait.
+
+## Análise de Fatores {.smaller .scrollable}
+
+Considerando o dataset simulado de milho (2 traits \* 3 ambientes)
+
+Para proceder análise fatorial, deve-se realizar a análise de correlação de pearson entre pares de variáveis e criar a matriz de correlações.
+
+```{r}
+mmcp=lme4::lmer(PH ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
+PH.df=do.call(rbind,ranef(mmc,whichel=("id:env")))
+PH.df=do.call(rbind,ranef(mmcp,whichel=("id:env")))
+GY.df=do.call(rbind,ranef(mmc,whichel=("id:env")))
+PH.df <- PH.df |> rownames_to_column("effect") |> 
+  mutate(env=sub(".*:","",effect)) |> mutate(geno=str_extract(string = rownames(PH.df), pattern = paste(rev(seq(1:100)), collapse = "|"))) |> 
+  rename("blup"=2) |> mutate(trait="PH")
+
+GY.df <- GY.df |> rownames_to_column("effect") |> 
+  mutate(env=sub(".*:","",effect)) |> mutate(geno=str_extract(string = rownames(GY.df), pattern = paste(rev(seq(1:100)), collapse = "|"))) |> 
+  rename("blup"=2) |> mutate(trait="GY")
+
+
+blup.env=rbind(GY.df,PH.df)
+
+blup.env <- blup.env |> pivot_wider(names_from = c("trait","env"),values_from = c("blup"),id_cols = "geno") |> column_to_rownames("geno")
+
+cat("Blups per trait:env")
+head(blup.env)
+
+blup.env.std <-scale(blup.env)
+cat("Blups per trait:env standarized")
+head(blup.env.std)
+
+
+
+
+
+```
+
+
+### Matriz de correlações
+
+
+```{r,fig.format='png', fig.height=6, fig.width=8}
+
+cormat = cor(blup.env.std) 
+print(cormat)
+# p3=ggcorrplot(cormat)
+# 
+# 
+# plot(p3)
+
+```
+
+
+Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).
+
+### Autovalores
+
+Determinação dos autovalores pela seguinte equação:
+
+$$
+[\det(\lambda^².I-\rho) = 0]
+$$
+
+
+Multiplicado por uma matriz identidade diminuida da matriz de correlações $\rho$
+
+
+
+$$
+\begin{bmatrix}
+\lambda^2 & 0 & 0 & \cdots & 0 \\
+0 & \lambda^2 & 0 & \cdots & 0 \\
+0 & 0 & \lambda^2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda^2
+\end{bmatrix}
+  \begin{bmatrix}
+    \rho_{11} & \rho_{12} & \rho_{13} & \cdots & \rho_{1n} \\
+    \rho_{21} & \rho_{22} & \rho_{23} & \cdots & \rho_{2n} \\
+    \rho_{31} & \rho_{32} & \rho_{33} & \cdots & \rho_{3n} \\
+    \vdots    & \vdots    & \vdots    & \ddots & \vdots   \\
+    \rho_{n1} & \rho_{n2} & \rho_{n3} & \cdots & \rho_{nn}
+    \end{bmatrix}\cdots
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}= 0
+$$
+
+### Polinômio característico
+
+Obtenção do polinôminio característica de ordem relativa à quantidade de fatores.
+
+(n características - ordem n)
+
+```{r}
+library(pracma)
+
+A <- charpoly(cormat, info = TRUE)
+#round(A$cp,4) 
+#A$det
+#zapsmall(A$inv %*% cormat)
+library(polyMatrix)
+poly=charpolynom(cormat)
+poly=round(poly,4)
+
+cat("Polinômio característico")
+print(poly)
+
+cat("Raízes do polinômio - Autovalores")
+round(roots(A$cp),4) 
+
+```
+
+Os *auto valores* são as raízes do polinômio característico da matriz de correlações.
+
+A soma dos autovalores é igual a quantidade de variáveis originais
+
+```{r}
+sum(roots(A$cp)) 
+```
+
+**Percentual de variância - valor do autovalor dividido pelo total**
+
+```{r}
+
+
+round((roots(A$cp)/6)*100,4) 
+```
+
+### Autovetores
+
+Os autovetores são derivados dos autovalores e resultam de um sistema de equações.
+
+
+$$
+[det(\lambda^².I-\rho)\mathbf{v}_i = 0]
+$$
+
+
+
+$$
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\begin{bmatrix}
+v_{i1} \\
+v_{i2} \\
+v_{i3} \\
+\vdots \\
+v_{in}
+\end{bmatrix}= 0
+$$
+
+
+
+$$
+(\lambda^2 - \rho_{11}) v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0 ]
+$$
+
+
+### Escores fatoriais
+
+
+Obtido por meio do *autovalor* dividido pela raiz quadrada do seu respectivo *autovetor*.
+
+Indica relação com as variáveis originais.
+
+
+$$
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+$$
+
+
+### Extração dos fatores
+
+
+Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore) geram os fatores.
+
+A grandeza dos escores para cada variável representará o seu peso em cada fator.
+
+
+$$
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+$$
+
+
+### Cargas fatoriais
+
+
+Representam as correlações de pearson entre os fatores extraídos e as variáveis originais
+(+carga = +importância da variável em cada fator).
+
+O resultado da soma das cargas fatoriais ao quadrado de cada fator é próprio autovalor do 
+qual ele foi extraído.
+
+
+Mais informações sobre a história da análise fatorial nesse artigo @Bartholomew1995
+
+## Índice de Seleção {.smaller .scrollable}
+
+
+$$
+Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
+$$
+
+
+$Pij$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, $d_{ij}$ distância genótipo-ideótipo euclidiana padronizada.
+
+
+
+## Referências
+
+::: {#refs}
+:::

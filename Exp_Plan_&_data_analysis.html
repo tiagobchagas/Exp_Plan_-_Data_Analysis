@@ -555,7 +555,30 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 <p>BLUP (Melhor preditor linear não viesado - efeitos aleatórios)</p>
 <p><span class="citation" data-cites="Henderson1975">C. R. Henderson (<a href="#/referências" role="doc-biblioref" onclick="">1975</a>)</span></p>
 <h3 id="simulação-de-dados-fenotípicos---exemplo">Simulação de dados fenotípicos - Exemplo</h3>
-<p>2 características 100 genótipos 2 blocos</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="misc/gy.jpeg"></p>
+<figcaption>Fonte: Bayer crop science</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="misc/ph.jpeg"></p>
+<figcaption>Fonte: Bayer crop science</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>2 características; 100 genótipos; 2 blocos</strong></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Variâncias residuais Trait per environment -
@@ -595,7 +618,13 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
  $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
  $ PH   : num  230 230 230 232 239 ...</code></pre>
 </div>
-
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Solving mixed models with RHS</code></pre>
 </div>
@@ -753,7 +782,7 @@ id3     0.347873860
 id4    -0.007368719</code></pre>
 </div>
 </div>
-<img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Solving mixed models with package LME4</code></pre>
 </div>
@@ -854,18 +883,26 @@ rep2 -0.576</code></pre>
 </section>
 <section id="análise-conjunta" class="slide level2 smaller scrollable">
 <h2>Análise conjunta</h2>
-<p>Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon}
+\]</span></p>
+<p><span class="math inline">\([\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]\)</span> e <span class="math inline">\([\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]\)</span>, onde n é o número de genótipos e p é o número de ambientes.</p>
+<p><strong>2 características; 100 genótipos; 2-3 blocos; 3 ambientes</strong></p>
+<p>Testar os efeitos de genótipo e da interação genótipo x ambiente para as características avaliadas. <span class="math display">\[
+LRT = -2(LogL_{cm}-LogL_{rm})
+\]</span> onde <span class="math inline">\(LogL_{cm}\)</span> é o ponto de máxima da função de verossimilhança residual do modelo completo e <span class="math inline">\(LogL_{rm}\)</span> é o mesmo para o modelo reduzido.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   700 obs. of  8 variables:
- $ env  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
- $ block: Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
- $ col  : Factor w/ 15 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
- $ row  : Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
- $ id   : Factor w/ 100 levels "1","2","3","4",..: 39 4 77 14 49 62 47 94 40 63 ...
- $ rep  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
- $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
- $ PH   : num  230 230 230 232 239 ...</code></pre>
+<pre><code>Análise de variância conjunta - GY</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
@@ -907,7 +944,7 @@ fit warnings:
 fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>LRT GxE effect</code></pre>
+<pre><code>LRT GxE effect - Trait GY</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 43.31988</code></pre>
@@ -997,41 +1034,34 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody>
 </table>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 2
- $ id:env:'data.frame': 300 obs. of  1 variable:
-  ..$ (Intercept): num [1:300] -0.2994 -0.0884 0.1093 0.0993 -0.0492 ...
-  ..- attr(*, "postVar")= num [1, 1, 1:300] 0.0483 0.0483 0.0399 0.0483 0.0483 ...
- $ id    :'data.frame': 100 obs. of  1 variable:
-  ..$ (Intercept): num [1:100] -0.03105 0.00738 0.03178 -0.00263 0.03163 ...
-  ..- attr(*, "postVar")= num [1, 1, 1:100] 0.00883 0.00883 0.00883 0.00883 0.00883 ...
- - attr(*, "class")= chr "ranef.mer"</code></pre>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>null device 
-          1 </code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$`id:env`</code></pre>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-8-2.png" width="960"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-$id</code></pre>
 </div>
 </div>
 </section>
 <section id="índice-de-seleção" class="slide level2 smaller">
 <h2>Índice de Seleção</h2>
 <p>Diversos índices de seleção foram propostos com e sem restrições (<span class="citation" data-cites="Smith1936">Smith (<a href="#/referências" role="doc-biblioref" onclick="">1936</a>)</span> &amp; <span class="citation" data-cites="Hazel1943">Hazel (<a href="#/referências" role="doc-biblioref" onclick="">1943</a>)</span> ; <span class="citation" data-cites="Kempthorne1959">Kempthorne and Nordskog (<a href="#/referências" role="doc-biblioref" onclick="">1959</a>)</span>)</p>
-<p>Aqui iremos abordar o índice de seleção da análise de fatores e desenho da distância genótipo ideótipo <span class="citation" data-cites="rocha2018multitrait">Rocha, Machado, and Carneiro (<a href="#/referências" role="doc-biblioref" onclick="">2018</a>)</span>.</p>
+<p>Neste curso abordaremos o índice de seleção da <em>análise de fatores e desenho da distância genótipo ideótipo</em> <span class="citation" data-cites="rocha2018multitrait">Rocha, Machado, and Carneiro (<a href="#/referências" role="doc-biblioref" onclick="">2018</a>)</span>.</p>
 </section>
 <section id="análise-de-fatores" class="slide level2 smaller scrollable">
 <h2>Análise de Fatores</h2>
-<p>Considerando o Dataset de milho (2 traits * 3 variáveis)</p>
-<p>Inicia com a análise de correlação de pearson entre pares de variáveis e cria a matriz de correlação.</p>
+<p>Considerando o dataset simulado de milho (2 traits * 3 ambientes)</p>
+<p>Para proceder análise fatorial, deve-se realizar a análise de correlação de pearson entre pares de variáveis e criar a matriz de correlações.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Blue.env</code></pre>
+<pre><code>Blups per trait:env</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          GY_1        GY_2         GY_3       PH_1       PH_2       PH_3
@@ -1046,7 +1076,7 @@ $id</code></pre>
 <h3 id="matriz-de-correlações">Matriz de correlações</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Blue.env.std</code></pre>
+<pre><code>Blups per trait:env standarized</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         GY_1       GY_2        GY_3       PH_1       PH_2        PH_3
@@ -1057,34 +1087,43 @@ $id</code></pre>
 5 -0.47069937  1.1776197  0.57121270 -0.7709074 -1.5965453  0.77730550
 6 -1.24699682  1.1810288  0.01470221 -3.7186910 -0.3985135  1.29367592</code></pre>
 </div>
-
 </div>
-<img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p>Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).</p>
+
+<img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"><div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            GY_1        GY_2        GY_3        PH_1       PH_2        PH_3
+GY_1  1.00000000 -0.05369986 -0.15382851  0.09624741  0.1535808 -0.03312696
+GY_2 -0.05369986  1.00000000  0.04461362 -0.08982962  0.2295911  0.14690621
+GY_3 -0.15382851  0.04461362  1.00000000  0.09267733 -0.2505011  0.38971600
+PH_1  0.09624741 -0.08982962  0.09267733  1.00000000  0.1306623 -0.26498653
+PH_2  0.15358083  0.22959111 -0.25050112  0.13066234  1.0000000 -0.34163029
+PH_3 -0.03312696  0.14690621  0.38971600 -0.26498653 -0.3416303  1.00000000</code></pre>
+</div>
+</div>
+<p>Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).</p>
 <h3 id="autovalores">Autovalores</h3>
-<p>Determinação dos autovalores pela seguinte equação <span class="math display">\[
-\[
-\det(\lambda^².I-\rho) = 0
-\]
+<p>Determinação dos autovalores pela seguinte equação</p>
+<p><span class="math display">\[
+[\det(\lambda^².I-\rho) = 0]
 \]</span></p>
-Multiplicado por uma matriz identidade diminuida das matriz de correlações <span class="math inline">\(\rho\)</span> $$ [ ( ^2 - ) = (
+<p>Multiplicado por uma matriz identidade diminuida das matriz de correlações <span class="math inline">\(\rho\)</span></p>
+<p>$$ (^2 - ) (</p>
 <span class="math display">\[\begin{bmatrix}
 \lambda^2 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
 0 &amp; \lambda^2 &amp; 0 &amp; \cdots &amp; 0 \\
 0 &amp; 0 &amp; \lambda^2 &amp; \cdots &amp; 0 \\
 \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^2
-\end{bmatrix}\]</span>
-<ul>
-<li class="fragment"><span class="math display">\[\begin{bmatrix}
-\rho_{11} &amp; \rho_{12} &amp; \rho_{13} &amp; \cdots &amp; \rho_{1n} \\
-\rho_{21} &amp; \rho_{22} &amp; \rho_{23} &amp; \cdots &amp; \rho_{2n} \\
-\rho_{31} &amp; \rho_{32} &amp; \rho_{33} &amp; \cdots &amp; \rho_{3n} \\
-\vdots    &amp; \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots   \\
-\rho_{n1} &amp; \rho_{n2} &amp; \rho_{n3} &amp; \cdots &amp; \rho_{nn}
-\end{bmatrix}\]</span>
-) ]</li>
-</ul>
-[ = (
+\end{bmatrix}
+  \begin{bmatrix}
+    \rho_{11} &amp; \rho_{12} &amp; \rho_{13} &amp; \cdots &amp; \rho_{1n} \\
+    \rho_{21} &amp; \rho_{22} &amp; \rho_{23} &amp; \cdots &amp; \rho_{2n} \\
+    \rho_{31} &amp; \rho_{32} &amp; \rho_{33} &amp; \cdots &amp; \rho_{3n} \\
+    \vdots    &amp; \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots   \\
+    \rho_{n1} &amp; \rho_{n2} &amp; \rho_{n3} &amp; \cdots &amp; \rho_{nn}
+    \end{bmatrix}\]</span>
+<pre><code>\right) </code></pre>
+<p>\det\left(</p>
 <span class="math display">\[\begin{bmatrix}
 \lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
 -\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
@@ -1092,7 +1131,8 @@ Multiplicado por uma matriz identidade diminuida das matriz de correlações <sp
 \vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
 -\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
 \end{bmatrix}\]</span>
-<p>) = 0 ] $$</p>
+<p>) = 0<br>
+$$</p>
 <h3 id="polinômio-característico">Polinômio característico</h3>
 <p>Obtenção do polinôminio característica de ordem relativa à quantidade de fatores.( 6 características - ordem 6)</p>
 <div class="cell">
@@ -1128,54 +1168,42 @@ Multiplicado por uma matriz identidade diminuida das matriz de correlações <sp
 <h3 id="autovetores">Autovetores</h3>
 <p>Os autovetores são derivados dos autovalores e resultam de um sistema de equações.</p>
 <p><span class="math display">\[
-det(\lambda^².I-\rho)\mathbf{v}_i = 0
+[det(\lambda^².I-\rho)\mathbf{v}_i = 0]
 \]</span></p>
-<p><span class="math display">\[
-\[
-\left(
-\begin{bmatrix}
+<p>$$</p>
+<span class="math display">\[\begin{bmatrix}
 \lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
 -\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
 -\rho_{31} &amp; -\rho_{32} &amp; \lambda^2 - \rho_{33} &amp; \cdots &amp; -\rho_{3n} \\
 \vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
 -\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
 \end{bmatrix}
-\right)
 \begin{bmatrix}
 v_{i1} \\
 v_{i2} \\
 v_{i3} \\
 \vdots \\
 v_{in}
-\end{bmatrix}
-= 0
-\]
-\]</span></p>
-<p><span class="math display">\[
-\[
-\left( \lambda^2 - \rho_{11} \right)v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0
-\]
-\[
--\rho_{21} v_{i1} + \left( \lambda^2 - \rho_{22} \right)v_{i2} - \rho_{23} v_{i3} - \cdots - \rho_{2n} v_{in} = 0
-\]
-\[
-\vdots
-\]
-\[
--\rho_{n1} v_{i1} - \rho_{n2} v_{i2} - \rho_{n3} v_{i3} - \cdots + \left( \lambda^2 - \rho_{nn} \right)v_{in} = 0
-\]
-\]</span></p>
+\end{bmatrix}\]</span>
+<p>= 0</p>
+<p>$$</p>
+<p>$$</p>
+<p>[( ^2 - * )v{i1} - v<em>{i2} - v</em>{i3} - - v*{in} = 0]</p>
+<p>$$</p>
 <h3 id="escores-fatoriais">Escores fatoriais</h3>
 <p>Obtido por meio autovalor dividido pela raiz quadrada do seu respectivo autovetor.</p>
-<p>Indica relação com as variáveis originais. <span class="math display">\[
+<p>Indica relação com as variáveis originais.</p>
+<p><span class="math display">\[
 S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
 \]</span></p>
-<h3 id="gerar-os-fatores">Gerar os fatores</h3>
-<p>O escores fatoriais multiplicado pelo Zscore da variável (variável padronizada)</p>
+<h3 id="extração-dos-fatores">Extração dos fatores</h3>
+<p>Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore) geram os fatores.</p>
+<p>A grandeza dos escores para cada variável representará o seu peso em cada fator.</p>
 <p><span class="math display">\[
 S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
 \]</span></p>
 <h3 id="cargas-fatoriais">Cargas fatoriais</h3>
+<p>Representam as correlações de pearson entre os fatores extraídos e as variáveis originais (+carga = +importância da variável em cada fator).</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.7653 1.2008 1.0624 0.9772 0.5603 0.4340</code></pre>
@@ -1196,12 +1224,18 @@ S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
 <h2>Índice de Seleção</h2>
 <p><span class="math display">\[
 Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
-\]</span> <span class="math inline">\(Pij\)</span> probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, <span class="math inline">\(d_{ij}\)</span> distância genótipo-ideótipo euclidiana padronizada.</p>
+\]</span></p>
+<p><span class="math inline">\(Pij\)</span> probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, <span class="math inline">\(d_{ij}\)</span> distância genótipo-ideótipo euclidiana padronizada.</p>
+<h3 id="análise-conjunta-e-índice-de-seleção">Análise conjunta e índice de seleção</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Evaluating trait GY |======================                      | 50% 00:00:06 
-Evaluating trait PH |============================================| 100% 00:00:12 
----------------------------------------------------------------------------
+<pre><code>Evaluating trait GY |======================                      | 50% 00:00:01 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Evaluating trait PH |============================================| 100% 00:00:02 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>---------------------------------------------------------------------------
 P-values for Likelihood Ratio Test of the analyzed traits
 ---------------------------------------------------------------------------
     model       GY       PH
@@ -1231,14 +1265,14 @@ All variables with significant (p &lt; 0.05) genotype-vs-environment interaction
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-15-2.png" width="960"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-18-2.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1475,12 +1509,12 @@ Comunalit Mean: 0.8342776
 Selection differential
 -----------------------------------------------------------------------------------
    VAR Factor            Xo          Xs          SD        SDperc    sense goal
-1 GY_3      1 -6.714737e-15  0.05526061  0.05526061  8.229750e+14 increase  100
-2 PH_3      1 -1.963264e-13  1.97229749  1.97229749  1.004601e+15 decrease    0
-3 GY_2      2 -3.267018e-15  0.10640752  0.10640752  3.257023e+15 increase  100
-4 PH_2      2 -1.509772e-13 -1.00403932 -1.00403932 -6.650270e+14 decrease  100
-5 PH_1      3  2.351697e-12 -1.30052771 -1.30052771 -5.530166e+13 decrease  100
-6 GY_1      4 -2.459659e-14  0.09774136  0.09774136  3.973777e+14 increase  100
+1 GY_3      1  7.389540e-15  0.05526061  0.05526061  7.478220e+14 increase  100
+2 PH_3      1 -7.385048e-13  1.97229749  1.97229749  2.670663e+14 decrease    0
+3 GY_2      2 -4.805878e-15  0.10640752  0.10640752  2.214112e+15 increase  100
+4 PH_2      2  1.126413e-13 -1.00403932 -1.00403932 -8.913600e+14 decrease  100
+5 PH_1      3  1.055123e-13 -1.30052771 -1.30052771 -1.232584e+15 decrease  100
+6 GY_1      4 -3.503101e-15  0.09774136  0.09774136  2.790138e+15 increase  100
 
 -----------------------------------------------------------------------------------
 Selected genotypes
@@ -1547,12 +1581,12 @@ Comunalit Mean: 0.8342776
 Selection differential
 -----------------------------------------------------------------------------------
    VAR Factor            Xo          Xs          SD        SDperc    sense goal
-1 GY_3      1 -6.714737e-15  0.05526061  0.05526061  8.229750e+14 increase  100
-2 PH_3      1 -1.963264e-13  1.97229749  1.97229749  1.004601e+15 decrease    0
-3 GY_2      2 -3.267018e-15  0.10640752  0.10640752  3.257023e+15 increase  100
-4 PH_2      2 -1.509772e-13 -1.00403932 -1.00403932 -6.650270e+14 decrease  100
-5 PH_1      3  2.351697e-12 -1.30052771 -1.30052771 -5.530166e+13 decrease  100
-6 GY_1      4 -2.459659e-14  0.09774136  0.09774136  3.973777e+14 increase  100
+1 GY_3      1  7.389540e-15  0.05526061  0.05526061  7.478220e+14 increase  100
+2 PH_3      1 -7.385048e-13  1.97229749  1.97229749  2.670663e+14 decrease    0
+3 GY_2      2 -4.805878e-15  0.10640752  0.10640752  2.214112e+15 increase  100
+4 PH_2      2  1.126413e-13 -1.00403932 -1.00403932 -8.913600e+14 decrease  100
+5 PH_1      3  1.055123e-13 -1.30052771 -1.30052771 -1.232584e+15 decrease  100
+6 GY_1      4 -3.503101e-15  0.09774136  0.09774136  2.790138e+15 increase  100
 
 -----------------------------------------------------------------------------------
 Selected genotypes
@@ -1562,7 +1596,7 @@ Selected genotypes
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1571,14 +1605,14 @@ Selected genotypes
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Evaluating trait GY |============================================| 100% 00:00:58 </code></pre>
+<pre><code>Evaluating trait GY |============================================| 100% 00:00:10 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 44
@@ -1624,9 +1658,9 @@ PH 0.81       0.65
 Comunalit Mean: 0.6538288 
 Selection differential
 -----------------------------------------------------------------------------------
-  VAR Factor        Xo        Xs SD SDperc    sense goal
-1  GY      1   5.19571   5.19571  0      0 increase    0
-2  PH      1 232.78294 232.78294  0      0 decrease    0
+  VAR Factor        Xo        Xs            SD        SDperc    sense goal
+1  GY      1   5.19571   5.19571  1.776357e-15  3.418891e-14 increase  100
+2  PH      1 232.78294 232.78294 -8.526513e-14 -3.662860e-14 decrease  100
 
 -----------------------------------------------------------------------------------
 Selected genotypes
@@ -1636,7 +1670,7 @@ Selected genotypes
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
 </figure>
 </div>
 </div>

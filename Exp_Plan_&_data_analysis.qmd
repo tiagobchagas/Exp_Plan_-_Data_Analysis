@@ -50,6 +50,7 @@ bibliography: references.bib
 -   Controle local
 
 ```{r}
+library(tidyverse)
 library(FielDHub)
 crd1 <- CRD(
   t =5,
@@ -98,7 +99,7 @@ head(squareLattice1$fieldBook)[1:3,]
 
 ## Planejamento de Experimentos agronômicos {.smaller}
 
-::: columns
+::::: columns
 ::: {.column width="35%"}
 -   Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental
 -   Delineamento em blocos aumentados
@@ -114,7 +115,7 @@ cat("DBA")
 plot(ARCBD1)
 ```
 :::
-:::
+:::::
 
 ::: {style="width: 80%"}
 ```         
@@ -125,7 +126,7 @@ plot(ARCBD1)
 
 ## Equações de modelos mistos {.smaller}
 
-@henderson1953estimation (melhorista animal) propôs as equações de modelos mistos 
+@henderson1953estimation (melhorista animal) propôs as equações de modelos mistos
 
 As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de $\beta$.
 
@@ -195,16 +196,21 @@ xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main=
 
 ## Equações de modelos mistos {.smaller .scrollable}
 
-BLUE (Melhor estimador linear não viesado - efeitos fixos) 
+BLUE (Melhor estimador linear não viesado - efeitos fixos)
 
-
-BLUP (Melhor preditor linear não viesado - efeitos aleatórios) 
+BLUP (Melhor preditor linear não viesado - efeitos aleatórios)
 
 @Henderson1975
 
 ### Simulação de dados fenotípicos - Exemplo
 
-2 características 100 genótipos 2 blocos
+::: {layout-ncol="2"}
+![Fonte: Bayer crop science](misc/gy.jpeg)
+
+![Fonte: Bayer crop science](misc/ph.jpeg)
+:::
+
+**2 características; 100 genótipos; 2 blocos**
 
 ```{r}
 # simulação de ensaio multiambientes com múltiplas características
@@ -367,48 +373,76 @@ unlist(ranef(mmi))[1:6] |> kableExtra::kable(caption = "LME4")
 
 ```
 
-## Análise conjunta{.smaller .scrollable}
+## Análise conjunta {.smaller .scrollable}
 
-Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.
+```{r}
+#colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
+colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
+data_long <- pheno_df |>  pivot_longer(cols = c("GY","PH"))
+
+ 
+p2=data_long |> ggplot( aes(x=rep, y=value)) +
+geom_boxplot(aes(color = rep)) +
+ geom_point(aes(color = rep), alpha = 0.2, position = "jitter", size = 1) + facet_grid(name ~ env,  scales = "free") + theme_bw()
+ 
+ 
+ 
+plot(p2)
+```
+
+$$
+\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon} 
+$$
+
+$[\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]$ e $[\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]$, onde n é o número de genótipos e p é o número de ambientes.
+
+**2 características; 100 genótipos; 2-3 blocos; 3 ambientes**
+
+Testar os efeitos de genótipo e da interação genótipo x ambiente para as características avaliadas. $$
+LRT = -2(LogL_{cm}-LogL_{rm})
+$$ onde $LogL_{cm}$ é o ponto de máxima da função de verossimilhança residual do modelo completo e $LogL_{rm}$ é o mesmo para o modelo reduzido.
 
 ```{r}
 library(tidyverse)
 library(lme4)
 colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
-str(pheno_df)
+#str(pheno_df)
 
 mmc=lme4::lmer(GY ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
+
+cat("Análise de variância conjunta - GY")
 summary(mmc)
 mmcr=lme4::lmer(GY ~ env+ rep:env + (1| id), data=pheno_df)
-cat("LRT GxE effect")
+
+cat("LRT GxE effect - Trait GY")
+
 2*c(logLik(mmc, REML=TRUE) - logLik(mmcr, REML=TRUE)) 
 anova(mmcr,mmc)
+
 unlist(ranef(mmc))[1:6] |> kableExtra::kable(caption = "LME4 - g x e") 
 unlist(ranef(mmc))[301:306] |> kableExtra::kable(caption = "LME4 - g") 
+
 library(lattice)
-str(rr1 <- ranef(mmc))
-dev.off()
+rr1 <- ranef(mmc)
 
-dotplot(rr1) 
 
+p1=dotplot(rr1)
+plot(p1$`id:env`)
+plot(p1$id)
 
 ```
 
+## Índice de Seleção {.smaller}
 
+Diversos índices de seleção foram propostos com e sem restrições (@Smith1936 & @Hazel1943 ; @Kempthorne1959)
 
-## Índice de Seleção{.smaller}
+Neste curso abordaremos o índice de seleção da *análise de fatores e desenho da distância genótipo ideótipo* @rocha2018multitrait.
 
-Diversos índices de seleção foram propostos com e sem restrições
-(@Smith1936 & @Hazel1943 ; @Kempthorne1959)
+## Análise de Fatores {.smaller .scrollable}
 
-Aqui iremos abordar o índice de seleção da análise de fatores e desenho da distância genótipo ideótipo @rocha2018multitrait.
+Considerando o dataset simulado de milho (2 traits \* 3 ambientes)
 
-## Análise de Fatores{.smaller .scrollable}
-
-Considerando o Dataset de milho (2 traits * 3 variáveis)
-
-Inicia com a análise de correlação de pearson entre pares de variáveis e 
-cria a matriz de correlação.
+Para proceder análise fatorial, deve-se realizar a análise de correlação de pearson entre pares de variáveis e criar a matriz de correlações.
 
 ```{r}
 mmcp=lme4::lmer(PH ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
@@ -427,36 +461,51 @@ GY.df <- GY.df |> rownames_to_column("effect") |>
 blup.env=rbind(GY.df,PH.df)
 
 blup.env <- blup.env |> pivot_wider(names_from = c("trait","env"),values_from = c("blup"),id_cols = "geno") |> column_to_rownames("geno")
-cat("Blue.env")
+
+cat("Blups per trait:env")
 head(blup.env)
 ```
 
+
 ### Matriz de correlações
-```{r}
+
+
+```{r, fig.height=6,fig.width=8}
 blup.env.std <-scale(blup.env)
-cat("Blue.env.std")
+cat("Blups per trait:env standarized")
 head(blup.env.std)
-library(corrplot)
-cormat <- cor(blup.env.std) 
-cormat |> corrplot()
+
 ```
 
-Correlações próximas de zero propiciam a extração de fatores diferentes.
-Representar as correlações entre os traits por meio de variáveis latentes (fatores).
+
+```{r}
+library(corrplot)
+cormat = cor(blup.env.std) 
+
+corrplot(cormat)
+
+```
+
+
+```{r}
+print(cormat)
+```
+
+
+Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).
 
 ### Autovalores
+
 Determinação dos autovalores pela seguinte equação
+
 $$
-\[
-\det(\lambda^².I-\rho) = 0
-\]
+[\det(\lambda^².I-\rho) = 0]
 $$
 
 Multiplicado por uma matriz identidade diminuida das matriz de correlações $\rho$
-$$
-\[
-\det\left( \lambda^2 \mathbf{I} - \rho \right) = 
-\det\left( 
+
+\$\$ \det\left(\lambda\^2 \mathbf{I} - \rho \right) \cdots \det\left(
+
 \begin{bmatrix}
 \lambda^2 & 0 & 0 & \cdots & 0 \\
 0 & \lambda^2 & 0 & \cdots & 0 \\
@@ -464,19 +513,20 @@ $$
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & 0 & \cdots & \lambda^2
 \end{bmatrix}
--
-\begin{bmatrix}
-\rho_{11} & \rho_{12} & \rho_{13} & \cdots & \rho_{1n} \\
-\rho_{21} & \rho_{22} & \rho_{23} & \cdots & \rho_{2n} \\
-\rho_{31} & \rho_{32} & \rho_{33} & \cdots & \rho_{3n} \\
-\vdots    & \vdots    & \vdots    & \ddots & \vdots   \\
-\rho_{n1} & \rho_{n2} & \rho_{n3} & \cdots & \rho_{nn}
-\end{bmatrix}
-\right)
-\]
+  \begin{bmatrix}
+    \rho_{11} & \rho_{12} & \rho_{13} & \cdots & \rho_{1n} \\
+    \rho_{21} & \rho_{22} & \rho_{23} & \cdots & \rho_{2n} \\
+    \rho_{31} & \rho_{32} & \rho_{33} & \cdots & \rho_{3n} \\
+    \vdots    & \vdots    & \vdots    & \ddots & \vdots   \\
+    \rho_{n1} & \rho_{n2} & \rho_{n3} & \cdots & \rho_{nn}
+    \end{bmatrix}
 
-\[
-= \det\left(
+```         
+\right) 
+```
+
+\cdots \\det\\left(
+
 \begin{bmatrix}
 \lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
 -\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
@@ -484,13 +534,13 @@ $$
 \vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
 -\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
 \end{bmatrix}
-\right) = 0
-\]
-$$
+
+\right) = 0\
+\$\$
 
 ### Polinômio característico
-Obtenção do polinôminio característica de ordem relativa à quantidade de 
-fatores.( 6 características - ordem 6)
+
+Obtenção do polinôminio característica de ordem relativa à quantidade de fatores.( 6 características - ordem 6)
 
 ```{r}
 library(pracma)
@@ -511,15 +561,16 @@ round(roots(A$cp),4)
 
 ```
 
-
 Os *auto valores* são as raízes do polinômio característico da matriz de correlações.
 
 A soma dos autovalores é igual a quantidade de variáveis originais
+
 ```{r}
 sum(roots(A$cp)) 
 ```
 
 **Percentual de variância - valor do autovalor dividido pelo total**
+
 ```{r}
 round((roots(A$cp)/6)*100,4)
 ```
@@ -529,14 +580,11 @@ round((roots(A$cp)/6)*100,4)
 Os autovetores são derivados dos autovalores e resultam de um sistema de equações.
 
 $$
-det(\lambda^².I-\rho)\mathbf{v}_i = 0 
+[det(\lambda^².I-\rho)\mathbf{v}_i = 0]
 $$
 
+\$\$
 
-
-$$
-\[
-\left( 
 \begin{bmatrix}
 \lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
 -\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
@@ -544,7 +592,6 @@ $$
 \vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
 -\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
 \end{bmatrix}
-\right)
 \begin{bmatrix}
 v_{i1} \\
 v_{i2} \\
@@ -552,45 +599,40 @@ v_{i3} \\
 \vdots \\
 v_{in}
 \end{bmatrix}
+
 = 0
-\]
-$$
 
+\$\$
 
-$$
-\[
-\left( \lambda^2 - \rho_{11} \right)v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0
-\]
-\[
--\rho_{21} v_{i1} + \left( \lambda^2 - \rho_{22} \right)v_{i2} - \rho_{23} v_{i3} - \cdots - \rho_{2n} v_{in} = 0
-\]
-\[
-\vdots
-\]
-\[
--\rho_{n1} v_{i1} - \rho_{n2} v_{i2} - \rho_{n3} v_{i3} - \cdots + \left( \lambda^2 - \rho_{nn} \right)v_{in} = 0
-\]
-$$
+\$\$
+
+\[\left( \lambda\^2 - \rho*{11}* \right)v{i1} - \rho*{12} v*{i2} - \rho*{13} v*{i3} - \cdots - \rho*{1n} v*{in} = 0\]
+
+\$\$
 
 ### Escores fatoriais
 
 Obtido por meio autovalor dividido pela raiz quadrada do seu respectivo autovetor.
 
 Indica relação com as variáveis originais.
-$$
-S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
-$$
-
-### Gerar os fatores
-
-O escores fatoriais multiplicado pelo Zscore da variável (variável padronizada)
 
 $$
 S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
 $$
 
+### Extração dos fatores
+
+Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore) geram os fatores.
+
+A grandeza dos escores para cada variável representará o seu peso em cada fator.
+
+$$
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+$$
 
 ### Cargas fatoriais
+
+Representam as correlações de pearson entre os fatores extraídos e as variáveis originais (+carga = +importância da variável em cada fator).
 
 ```{r}
 
@@ -612,16 +654,17 @@ print(round(pca_res$vectors,4))
 # print(num_components)
 ```
 
+Mais informações sobre a história da análise fatorial nesse artigo @Bartholomew1995
 
-Mais informações sobre a história da análise fatorial nesse 
-artigo @Bartholomew1995
-
-## Índice de Seleção{.smaller .scrollable}
+## Índice de Seleção {.smaller .scrollable}
 
 $$
 Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
 $$
+
 $Pij$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, $d_{ij}$ distância genótipo-ideótipo euclidiana padronizada.
+
+### Análise conjunta e índice de seleção
 
 ```{r}
 library(metan)
@@ -629,7 +672,6 @@ library(metan)
 #save(a,file = "a.rda")
 load("a.rda")
 ```
-
 
 ```{r}
 modelb= gamem_met(pheno_df,
@@ -653,7 +695,6 @@ head(modelb$GY$BLUPgen) |> kableExtra::kable(caption="GY")
 head(modelb$PH$BLUPgen) |> kableExtra::kable(caption="PH")
 ```
 
-
 ```{r}
 FAI.met=blup.env %>%
   fai_blup(SI = 20,
@@ -668,7 +709,6 @@ blup.env %>%
                 UI = c("min, min, min, max, max, max"),mineval = 0.7) %>%
 plot()
 ```
-
 
 ```{r}
 a <- plot_blup(modelb,var=1) # plotar variável 1 - GY
@@ -695,7 +735,6 @@ FAI$eigen
 FAI$FA
 FAI$canonical_loadings
 ```
-
 
 ## Referências
 

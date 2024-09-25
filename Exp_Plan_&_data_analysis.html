@@ -8,7 +8,7 @@
 <link href="Exp_Plan_&amp;_data_analysis_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Exp_Plan_&amp;_data_analysis_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Exp_Plan_&amp;_data_analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="José Tiago Barroso Chagas">
   <title>Planejamento experimental   e Análise de dados agronômicos</title>
@@ -29,13 +29,34 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/dist/theme/quarto.css">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
   <link href="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -356,11 +377,15 @@ José Tiago Barroso Chagas
 <li class="fragment">Análise de variância individual</li>
 <li class="fragment">Análise de variância conjunta</li>
 <li class="fragment">Predição de valores genotípicos</li>
+<li class="fragment">Análise de Fatores</li>
 <li class="fragment">Índices de seleção</li>
 </ul>
 </section>
-<section id="princípios-da-experimentação-agrícola" class="slide level2">
+<section id="princípios-da-experimentação-agrícola" class="slide level2 smaller">
 <h2>Princípios da Experimentação agrícola</h2>
+<div>
+
+</div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -372,7 +397,7 @@ José Tiago Barroso Chagas
 </div>
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output cell-output-stdout">
-<pre><code>DIC</code></pre>
+<pre><code>DIC - 5trat*3rep</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -382,7 +407,7 @@ José Tiago Barroso Chagas
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DBC</code></pre>
+<pre><code>DBC - 5trat*3rep</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -397,6 +422,9 @@ José Tiago Barroso Chagas
 </section>
 <section id="planejamento-de-experimentos-agronômicos" class="slide level2 smaller">
 <h2>Planejamento de Experimentos agronômicos</h2>
+<div>
+
+</div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -431,12 +459,13 @@ José Tiago Barroso Chagas
 <section id="planejamento-de-experimentos-agronômicos-1" class="slide level2 smaller">
 <h2>Planejamento de Experimentos agronômicos</h2>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column" style="width:35%;">
 <ul>
 <li class="fragment">Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental</li>
-<li class="fragment">Delineamento em blocos aumentados (30gen/3test/k6)</li>
+<li class="fragment">Delineamento em blocos aumentados</li>
 </ul>
-</div><div class="column" style="width:70%;">
+<p>(30gen/3test/k6)</p>
+</div><div class="column" style="width:65%;">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  ID  EXPT LOCATION YEAR PLOT ROW COLUMN CHECKS BLOCK ENTRY TREATMENT
@@ -455,8 +484,7 @@ José Tiago Barroso Chagas
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div style="width: 80%">
 <pre><code></code></pre>
 </div>
@@ -464,7 +492,7 @@ José Tiago Barroso Chagas
 </section>
 <section id="equações-de-modelos-mistos" class="slide level2 smaller">
 <h2>Equações de modelos mistos</h2>
-<p>Charles Roy Henderson (melhorista animal) descobriu em 1953 as equações de modelos mistos.</p>
+<p><span class="citation" data-cites="henderson1953estimation">Charles R. Henderson (<a href="#/referências" role="doc-biblioref" onclick="">1953</a>)</span> (melhorista animal) propôs as equações de modelos mistos</p>
 <p>As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de <span class="math inline">\(\beta\)</span>.</p>
 
 <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMCAcy-db2L5NduVmnliFiasE3-6Qk2vCjg&amp;s.png" class="r-stretch"></section>
@@ -490,13 +518,13 @@ José Tiago Barroso Chagas
 \end{bmatrix}
 \end{align*}
 \]</span></p>
-<h3 class="smaller" id="máxima-verossimilhança-restrita-reml-restricted-maximum-likelihood">Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood)</h3>
-<p>Patterson &amp; Thompson (1971)</p>
+<h3 id="máxima-verossimilhança-restrita-reml-restricted-maximum-likelihood">Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood)</h3>
+<p><span class="citation" data-cites="Patterson1971">Patterson and Thompson (<a href="#/referências" role="doc-biblioref" onclick="">1971</a>)</span></p>
 <p>Função de densidade de probabilidade normal</p>
 <p><span class="math display">\[
 f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 \]</span></p>
-<p>A função de Máxima verossimilhança buscar a otimização dos valores da média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma\)</span>, dado as observações e considerando distribuição normal.</p>
+<p>A função de máxima verossimilhança buscar a otimização dos valores da média <span class="math inline">\(\mu\)</span> e variância <span class="math inline">\(\sigma\)</span>, dado as observações e considerando distribuição normal.</p>
 <p>Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com média 10 (<span class="math inline">\(\mu\)</span>) e desvio padrão <span class="math inline">\(\sqrt{10}\)</span> (<span class="math inline">\(\sigma\)</span>)</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -523,7 +551,9 @@ f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 </section>
 <section id="equações-de-modelos-mistos-2" class="slide level2 smaller scrollable">
 <h2>Equações de modelos mistos</h2>
-<p>BLUE (Melhor estimador linear não viesado - efeitos fixos) BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)</p>
+<p>BLUE (Melhor estimador linear não viesado - efeitos fixos)</p>
+<p>BLUP (Melhor preditor linear não viesado - efeitos aleatórios)</p>
+<p><span class="citation" data-cites="Henderson1975">C. R. Henderson (<a href="#/referências" role="doc-biblioref" onclick="">1975</a>)</span></p>
 <h3 id="simulação-de-dados-fenotípicos---exemplo">Simulação de dados fenotípicos - Exemplo</h3>
 <p>2 características 100 genótipos 2 blocos</p>
 <div class="cell">
@@ -722,36 +752,6 @@ id2     0.096680330
 id3     0.347873860
 id4    -0.007368719</code></pre>
 </div>
-<div class="cell-output-display">
-<table class="caption-top">
-<caption>RHS</caption>
-<thead>
-<tr class="header">
-<th style="text-align: right;">x</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">-0.2957545</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.0966803</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.3478739</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-0.0073687</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-0.0808127</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-0.2544430</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -782,6 +782,36 @@ rep2         0.11276    0.06295   1.791
 Correlation of Fixed Effects:
      (Intr)
 rep2 -0.576</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>RHS</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-0.2957545</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0966803</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.3478739</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.0073687</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.0808127</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.2544430</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="cell-output-display">
 <table class="caption-top">
@@ -822,11 +852,8 @@ rep2 -0.576</code></pre>
 </div>
 </div>
 </section>
-<section id="análise-conjunta" class="slide level2">
+<section id="análise-conjunta" class="slide level2 smaller scrollable">
 <h2>Análise conjunta</h2>
-</section>
-<section id="índice-de-seleção" class="slide level2">
-<h2>Índice de Seleção</h2>
 <p>Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -878,6 +905,23 @@ env3:rep2  0.000  0.000 -0.406  0.000  0.000
 env3:rep3  0.000  0.000 -0.406  0.000  0.000  0.500
 fit warnings:
 fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LRT GxE effect</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43.31988</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: pheno_df
+Models:
+mmcr: GY ~ env + rep:env + (1 | id)
+mmc: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+     npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
+mmcr    9 1096.1 1137.0 -539.03   1078.1                         
+mmc    10 1054.3 1099.8 -517.15   1034.3 43.758  1  3.717e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div class="cell-output-display">
 <table class="caption-top">
@@ -953,6 +997,699 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
 </tbody>
 </table>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 2
+ $ id:env:'data.frame': 300 obs. of  1 variable:
+  ..$ (Intercept): num [1:300] -0.2994 -0.0884 0.1093 0.0993 -0.0492 ...
+  ..- attr(*, "postVar")= num [1, 1, 1:300] 0.0483 0.0483 0.0399 0.0483 0.0483 ...
+ $ id    :'data.frame': 100 obs. of  1 variable:
+  ..$ (Intercept): num [1:100] -0.03105 0.00738 0.03178 -0.00263 0.03163 ...
+  ..- attr(*, "postVar")= num [1, 1, 1:100] 0.00883 0.00883 0.00883 0.00883 0.00883 ...
+ - attr(*, "class")= chr "ranef.mer"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`id:env`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$id</code></pre>
+</div>
+</div>
+</section>
+<section id="índice-de-seleção" class="slide level2 smaller">
+<h2>Índice de Seleção</h2>
+<p>Diversos índices de seleção foram propostos com e sem restrições (<span class="citation" data-cites="Smith1936">Smith (<a href="#/referências" role="doc-biblioref" onclick="">1936</a>)</span> &amp; <span class="citation" data-cites="Hazel1943">Hazel (<a href="#/referências" role="doc-biblioref" onclick="">1943</a>)</span> ; <span class="citation" data-cites="Kempthorne1959">Kempthorne and Nordskog (<a href="#/referências" role="doc-biblioref" onclick="">1959</a>)</span>)</p>
+<p>Aqui iremos abordar o índice de seleção da análise de fatores e desenho da distância genótipo ideótipo <span class="citation" data-cites="rocha2018multitrait">Rocha, Machado, and Carneiro (<a href="#/referências" role="doc-biblioref" onclick="">2018</a>)</span>.</p>
+</section>
+<section id="análise-de-fatores" class="slide level2 smaller scrollable">
+<h2>Análise de Fatores</h2>
+<p>Considerando o Dataset de milho (2 traits * 3 variáveis)</p>
+<p>Inicia com a análise de correlação de pearson entre pares de variáveis e cria a matriz de correlação.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Blue.env</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          GY_1        GY_2         GY_3       PH_1       PH_2       PH_3
+1 -0.299433931 -0.08836286  0.109267596 -0.7960276 -3.2359131  1.5381855
+2  0.099293639 -0.04917734  0.016069572 -2.6922993 -2.2370177  1.3938318
+3  0.354614536  0.04186552 -0.111398567  0.7017383 -0.4216252  1.2066291
+4 -0.006517491 -0.23820750  0.221164735 -3.2523328 -1.3943519 -0.1705401
+5 -0.102230756  0.26035403  0.125588089 -1.4563768 -3.3728975  1.4816980
+6 -0.270834073  0.26110773  0.003232461 -7.0252473 -0.8419086  2.4660021</code></pre>
+</div>
+</div>
+<h3 id="matriz-de-correlações">Matriz de correlações</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Blue.env.std</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         GY_1       GY_2        GY_3       PH_1       PH_2        PH_3
+1 -1.37867867 -0.3996783  0.49698215 -0.4213632 -1.5317044  0.80693911
+2  0.45717605 -0.2224364  0.07308928 -1.4251213 -1.0588819  0.73121050
+3  1.63274581  0.1893639 -0.50667445  0.3714528 -0.1995743  0.63300313
+4 -0.03000838 -1.0774477  1.00592425 -1.7215651 -0.6600100 -0.08946613
+5 -0.47069937  1.1776197  0.57121270 -0.7709074 -1.5965453  0.77730550
+6 -1.24699682  1.1810288  0.01470221 -3.7186910 -0.3985135  1.29367592</code></pre>
+</div>
+
+</div>
+<img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p>Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).</p>
+<h3 id="autovalores">Autovalores</h3>
+<p>Determinação dos autovalores pela seguinte equação <span class="math display">\[
+\[
+\det(\lambda^².I-\rho) = 0
+\]
+\]</span></p>
+Multiplicado por uma matriz identidade diminuida das matriz de correlações <span class="math inline">\(\rho\)</span> $$ [ ( ^2 - ) = (
+<span class="math display">\[\begin{bmatrix}
+\lambda^2 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \lambda^2 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; \lambda^2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^2
+\end{bmatrix}\]</span>
+<ul>
+<li class="fragment"><span class="math display">\[\begin{bmatrix}
+\rho_{11} &amp; \rho_{12} &amp; \rho_{13} &amp; \cdots &amp; \rho_{1n} \\
+\rho_{21} &amp; \rho_{22} &amp; \rho_{23} &amp; \cdots &amp; \rho_{2n} \\
+\rho_{31} &amp; \rho_{32} &amp; \rho_{33} &amp; \cdots &amp; \rho_{3n} \\
+\vdots    &amp; \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots   \\
+\rho_{n1} &amp; \rho_{n2} &amp; \rho_{n3} &amp; \cdots &amp; \rho_{nn}
+\end{bmatrix}\]</span>
+) ]</li>
+</ul>
+[ = (
+<span class="math display">\[\begin{bmatrix}
+\lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
+-\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
+-\rho_{31} &amp; -\rho_{32} &amp; \lambda^2 - \rho_{33} &amp; \cdots &amp; -\rho_{3n} \\
+\vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
+-\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
+\end{bmatrix}\]</span>
+<p>) = 0 ] $$</p>
+<h3 id="polinômio-característico">Polinômio característico</h3>
+<p>Obtenção do polinôminio característica de ordem relativa à quantidade de fatores.( 6 características - ordem 6)</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Error term: 1.070302 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Polinômio característico</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5352 - 3.9883*x + 11.8003*x^2 - 17.7752*x^3 + 14.4279*x^4 - 6*x^5 + x^6 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Raízes do polinômio - Autovalores</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.7653 1.2008 1.0624 0.9772 0.5603 0.4340</code></pre>
+</div>
+</div>
+<p>Os <em>auto valores</em> são as raízes do polinômio característico da matriz de correlações.</p>
+<p>A soma dos autovalores é igual a quantidade de variáveis originais</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p><strong>Percentual de variância - valor do autovalor dividido pelo total</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.4224 20.0130 17.7060 16.2864  9.3389  7.2333</code></pre>
+</div>
+</div>
+<h3 id="autovetores">Autovetores</h3>
+<p>Os autovetores são derivados dos autovalores e resultam de um sistema de equações.</p>
+<p><span class="math display">\[
+det(\lambda^².I-\rho)\mathbf{v}_i = 0
+\]</span></p>
+<p><span class="math display">\[
+\[
+\left(
+\begin{bmatrix}
+\lambda^2 - \rho_{11} &amp; -\rho_{12} &amp; -\rho_{13} &amp; \cdots &amp; -\rho_{1n} \\
+-\rho_{21} &amp; \lambda^2 - \rho_{22} &amp; -\rho_{23} &amp; \cdots &amp; -\rho_{2n} \\
+-\rho_{31} &amp; -\rho_{32} &amp; \lambda^2 - \rho_{33} &amp; \cdots &amp; -\rho_{3n} \\
+\vdots     &amp; \vdots     &amp; \vdots     &amp; \ddots &amp; \vdots   \\
+-\rho_{n1} &amp; -\rho_{n2} &amp; -\rho_{n3} &amp; \cdots &amp; \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\right)
+\begin{bmatrix}
+v_{i1} \\
+v_{i2} \\
+v_{i3} \\
+\vdots \\
+v_{in}
+\end{bmatrix}
+= 0
+\]
+\]</span></p>
+<p><span class="math display">\[
+\[
+\left( \lambda^2 - \rho_{11} \right)v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0
+\]
+\[
+-\rho_{21} v_{i1} + \left( \lambda^2 - \rho_{22} \right)v_{i2} - \rho_{23} v_{i3} - \cdots - \rho_{2n} v_{in} = 0
+\]
+\[
+\vdots
+\]
+\[
+-\rho_{n1} v_{i1} - \rho_{n2} v_{i2} - \rho_{n3} v_{i3} - \cdots + \left( \lambda^2 - \rho_{nn} \right)v_{in} = 0
+\]
+\]</span></p>
+<h3 id="escores-fatoriais">Escores fatoriais</h3>
+<p>Obtido por meio autovalor dividido pela raiz quadrada do seu respectivo autovetor.</p>
+<p>Indica relação com as variáveis originais. <span class="math display">\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
+\]</span></p>
+<h3 id="gerar-os-fatores">Gerar os fatores</h3>
+<p>O escores fatoriais multiplicado pelo Zscore da variável (variável padronizada)</p>
+<p><span class="math display">\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}}
+\]</span></p>
+<h3 id="cargas-fatoriais">Cargas fatoriais</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.7653 1.2008 1.0624 0.9772 0.5603 0.4340</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1]    [,2]    [,3]    [,4]    [,5]    [,6]
+[1,]  0.2642  0.0357  0.0217  0.9319  0.0338  0.2428
+[2,] -0.0388 -0.7794 -0.3337 -0.0320  0.4680  0.2442
+[3,] -0.4919  0.1190 -0.5687  0.0507 -0.4739  0.4396
+[4,]  0.2707  0.4142 -0.7127 -0.0043  0.3744 -0.3272
+[5,]  0.5128 -0.4086 -0.2367 -0.0190 -0.6442 -0.3141
+[6,] -0.5920 -0.1965 -0.0269  0.3573 -0.0087 -0.6946</code></pre>
+</div>
+</div>
+<p>Mais informações sobre a história da análise fatorial nesse artigo <span class="citation" data-cites="Bartholomew1995">Bartholomew (<a href="#/referências" role="doc-biblioref" onclick="">1995</a>)</span></p>
+</section>
+<section id="índice-de-seleção-1" class="slide level2 smaller scrollable">
+<h2>Índice de Seleção</h2>
+<p><span class="math display">\[
+Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
+\]</span> <span class="math inline">\(Pij\)</span> probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, <span class="math inline">\(d_{ij}\)</span> distância genótipo-ideótipo euclidiana padronizada.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Evaluating trait GY |======================                      | 50% 00:00:06 
+Evaluating trait PH |============================================| 100% 00:00:12 
+---------------------------------------------------------------------------
+P-values for Likelihood Ratio Test of the analyzed traits
+---------------------------------------------------------------------------
+    model       GY       PH
+ COMPLETE       NA       NA
+      GEN 3.34e-01 2.02e-03
+  GEN:ENV 4.65e-11 2.75e-14
+---------------------------------------------------------------------------
+All variables with significant (p &lt; 0.05) genotype-vs-environment interaction</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Group        GY    PH
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 GEN      0.0104  2.92
+2 GEN:ENV  0.0936  7.63
+3 Residual 0.181  12.1 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 8
+  VAR   model    npar logLik   AIC    LRT    Df `Pr(&gt;Chisq)`
+  &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;
+1 GY    GEN         9  -532. 1082.  0.935     1     3.34e- 1
+2 GY    GEN:ENV     9  -553. 1124. 43.3       1     4.65e-11
+3 PH    GEN         9 -2028. 4074.  9.53      1     2.02e- 3
+4 PH    GEN:ENV     9 -2052. 4122. 57.9       1     2.75e-14</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-15-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameters</th>
+<th style="text-align: right;">GY</th>
+<th style="text-align: right;">PH</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Phenotypic variance</td>
+<td style="text-align: right;">0.2846834</td>
+<td style="text-align: right;">22.6886054</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Heritability</td>
+<td style="text-align: right;">0.0366519</td>
+<td style="text-align: right;">0.1286568</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">GEIr2</td>
+<td style="text-align: right;">0.3287919</td>
+<td style="text-align: right;">0.3363743</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">h2mg</td>
+<td style="text-align: right;">0.1690933</td>
+<td style="text-align: right;">0.4285381</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: right;">0.4112096</td>
+<td style="text-align: right;">0.6546282</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rge</td>
+<td style="text-align: right;">0.3413013</td>
+<td style="text-align: right;">0.3860411</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CVg</td>
+<td style="text-align: right;">1.9660039</td>
+<td style="text-align: right;">0.7339545</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CVr</td>
+<td style="text-align: right;">8.1803371</td>
+<td style="text-align: right;">1.4966388</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CV ratio</td>
+<td style="text-align: right;">0.2403329</td>
+<td style="text-align: right;">0.4904019</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>GY</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Rank</th>
+<th style="text-align: left;">GEN</th>
+<th style="text-align: right;">Y</th>
+<th style="text-align: right;">BLUPg</th>
+<th style="text-align: right;">Predicted</th>
+<th style="text-align: right;">LL</th>
+<th style="text-align: right;">UL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">47</td>
+<td style="text-align: right;">6.066268</td>
+<td style="text-align: right;">0.1389333</td>
+<td style="text-align: right;">5.334644</td>
+<td style="text-align: right;">5.085201</td>
+<td style="text-align: right;">5.584086</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">94</td>
+<td style="text-align: right;">6.019248</td>
+<td style="text-align: right;">0.1252372</td>
+<td style="text-align: right;">5.320947</td>
+<td style="text-align: right;">5.071505</td>
+<td style="text-align: right;">5.570390</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">57</td>
+<td style="text-align: right;">5.664156</td>
+<td style="text-align: right;">0.0752682</td>
+<td style="text-align: right;">5.270979</td>
+<td style="text-align: right;">5.021536</td>
+<td style="text-align: right;">5.520421</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">98</td>
+<td style="text-align: right;">5.616667</td>
+<td style="text-align: right;">0.0747672</td>
+<td style="text-align: right;">5.270478</td>
+<td style="text-align: right;">5.021035</td>
+<td style="text-align: right;">5.519920</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">97</td>
+<td style="text-align: right;">5.667379</td>
+<td style="text-align: right;">0.0704995</td>
+<td style="text-align: right;">5.266210</td>
+<td style="text-align: right;">5.016767</td>
+<td style="text-align: right;">5.515652</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">45</td>
+<td style="text-align: right;">5.658021</td>
+<td style="text-align: right;">0.0667535</td>
+<td style="text-align: right;">5.262464</td>
+<td style="text-align: right;">5.013021</td>
+<td style="text-align: right;">5.511906</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>PH</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Rank</th>
+<th style="text-align: left;">GEN</th>
+<th style="text-align: right;">Y</th>
+<th style="text-align: right;">BLUPg</th>
+<th style="text-align: right;">Predicted</th>
+<th style="text-align: right;">LL</th>
+<th style="text-align: right;">UL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">43</td>
+<td style="text-align: right;">238.5997</td>
+<td style="text-align: right;">2.517652</td>
+<td style="text-align: right;">235.3006</td>
+<td style="text-align: right;">232.1052</td>
+<td style="text-align: right;">238.4960</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">51</td>
+<td style="text-align: right;">237.8156</td>
+<td style="text-align: right;">2.113532</td>
+<td style="text-align: right;">234.8965</td>
+<td style="text-align: right;">231.7011</td>
+<td style="text-align: right;">238.0919</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">63</td>
+<td style="text-align: right;">237.9328</td>
+<td style="text-align: right;">2.099049</td>
+<td style="text-align: right;">234.8820</td>
+<td style="text-align: right;">231.6866</td>
+<td style="text-align: right;">238.0774</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">57</td>
+<td style="text-align: right;">237.5780</td>
+<td style="text-align: right;">1.984624</td>
+<td style="text-align: right;">234.7676</td>
+<td style="text-align: right;">231.5722</td>
+<td style="text-align: right;">237.9630</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">95</td>
+<td style="text-align: right;">237.9045</td>
+<td style="text-align: right;">1.963011</td>
+<td style="text-align: right;">234.7460</td>
+<td style="text-align: right;">231.5506</td>
+<td style="text-align: right;">237.9414</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">53</td>
+<td style="text-align: right;">236.8737</td>
+<td style="text-align: right;">1.849292</td>
+<td style="text-align: right;">234.6322</td>
+<td style="text-align: right;">231.4368</td>
+<td style="text-align: right;">237.8276</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------------------------
+Principal Component Analysis
+-----------------------------------------------------------------------------------
+    eigen.values cumulative.var
+PC1         1.77          29.42
+PC2         1.20          49.44
+PC3         1.06          67.14
+PC4         0.98          83.43
+PC5         0.56          92.77
+PC6         0.43         100.00
+
+-----------------------------------------------------------------------------------
+Factor Analysis
+-----------------------------------------------------------------------------------
+       FA1   FA2   FA3   FA4 comunalits
+GY_1  0.05  0.00 -0.06  0.98       0.97
+GY_2 -0.16 -0.90  0.13 -0.07       0.85
+GY_3 -0.82 -0.02 -0.31 -0.17       0.79
+PH_1  0.02  0.03 -0.93  0.07       0.88
+PH_2  0.51 -0.62 -0.23  0.16       0.72
+PH_3 -0.80 -0.06  0.38  0.11       0.79
+
+-----------------------------------------------------------------------------------
+Comunalit Mean: 0.8342776 
+Selection differential
+-----------------------------------------------------------------------------------
+   VAR Factor            Xo          Xs          SD        SDperc    sense goal
+1 GY_3      1 -6.714737e-15  0.05526061  0.05526061  8.229750e+14 increase  100
+2 PH_3      1 -1.963264e-13  1.97229749  1.97229749  1.004601e+15 decrease    0
+3 GY_2      2 -3.267018e-15  0.10640752  0.10640752  3.257023e+15 increase  100
+4 PH_2      2 -1.509772e-13 -1.00403932 -1.00403932 -6.650270e+14 decrease  100
+5 PH_1      3  2.351697e-12 -1.30052771 -1.30052771 -5.530166e+13 decrease  100
+6 GY_1      4 -2.459659e-14  0.09774136  0.09774136  3.973777e+14 increase  100
+
+-----------------------------------------------------------------------------------
+Selected genotypes
+96 62 9 64 10 2 65 3 5 61 27 46 50 47 100 97 66 70 86 6
+-----------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  PC    eigen.values cumulative.var
+  &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+1 PC1          1.77            29.4
+2 PC2          1.20            49.4
+3 PC3          1.06            67.1
+4 PC4          0.977           83.4
+5 PC5          0.560           92.8
+6 PC6          0.434          100  </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Variable     FA1      FA2     FA3     FA4 comunalits
+  &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+1 GY_1      0.0534  0.00411 -0.0578  0.984       0.974
+2 GY_2     -0.162  -0.897    0.128  -0.0697      0.851
+3 GY_3     -0.817  -0.0192  -0.306  -0.168       0.790
+4 PH_1      0.0225  0.0287  -0.932   0.0696      0.875
+5 PH_2      0.510  -0.620   -0.232   0.163       0.725
+6 PH_3     -0.797  -0.0593   0.375   0.106       0.791</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          GY_1        GY_2         GY_3       PH_1       PH_2       PH_3
+1 -0.299433931 -0.08836286  0.109267596 -0.7960276 -3.2359131  1.5381855
+2  0.099293639 -0.04917734  0.016069572 -2.6922993 -2.2370177  1.3938318
+3  0.354614536  0.04186552 -0.111398567  0.7017383 -0.4216252  1.2066291
+4 -0.006517491 -0.23820750  0.221164735 -3.2523328 -1.3943519 -0.1705401
+5 -0.102230756  0.26035403  0.125588089 -1.4563768 -3.3728975  1.4816980
+6 -0.270834073  0.26110773  0.003232461 -7.0252473 -0.8419086  2.4660021</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------------------------
+Principal Component Analysis
+-----------------------------------------------------------------------------------
+    eigen.values cumulative.var
+PC1         1.77          29.42
+PC2         1.20          49.44
+PC3         1.06          67.14
+PC4         0.98          83.43
+PC5         0.56          92.77
+PC6         0.43         100.00
+
+-----------------------------------------------------------------------------------
+Factor Analysis
+-----------------------------------------------------------------------------------
+       FA1   FA2   FA3   FA4 comunalits
+GY_1  0.05  0.00 -0.06  0.98       0.97
+GY_2 -0.16 -0.90  0.13 -0.07       0.85
+GY_3 -0.82 -0.02 -0.31 -0.17       0.79
+PH_1  0.02  0.03 -0.93  0.07       0.88
+PH_2  0.51 -0.62 -0.23  0.16       0.72
+PH_3 -0.80 -0.06  0.38  0.11       0.79
+
+-----------------------------------------------------------------------------------
+Comunalit Mean: 0.8342776 
+Selection differential
+-----------------------------------------------------------------------------------
+   VAR Factor            Xo          Xs          SD        SDperc    sense goal
+1 GY_3      1 -6.714737e-15  0.05526061  0.05526061  8.229750e+14 increase  100
+2 PH_3      1 -1.963264e-13  1.97229749  1.97229749  1.004601e+15 decrease    0
+3 GY_2      2 -3.267018e-15  0.10640752  0.10640752  3.257023e+15 increase  100
+4 PH_2      2 -1.509772e-13 -1.00403932 -1.00403932 -6.650270e+14 decrease  100
+5 PH_1      3  2.351697e-12 -1.30052771 -1.30052771 -5.530166e+13 decrease  100
+6 GY_1      4 -2.459659e-14  0.09774136  0.09774136  3.973777e+14 increase  100
+
+-----------------------------------------------------------------------------------
+Selected genotypes
+96 62 9 64 10 2 65 3 5 61 27 46 50 47 100 97 66 70 86 6
+-----------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Evaluating trait GY |============================================| 100% 00:00:58 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 44
+   var   GEN       Y    CV   ACV   POLAR    Var Shukla  Wi_g  Wi_f  Wi_u Ecoval
+   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1 GY    1      4.94 11.1  10.1   0.339  0.604  0.149   83.1    NA  82.2  0.887
+ 2 GY    2      5.22  3.73  3.82 -0.507  0.0759 0.0201  96.2    NA  94.4  0.129
+ 3 GY    3      5.40  5.89  6.50 -0.0462 0.202  0.206   90.0    NA  94.1  1.22 
+ 4 GY    4      5.13 10.8  10.7   0.385  0.617  0.175   85.9    NA  84.9  1.04 
+ 5 GY    5      5.37  8.14  8.87  0.225  0.382  0.129   92.4    NA  87.3  0.767
+ 6 GY    6      5.16 11.3  11.3   0.435  0.680  0.277   82.9    NA  75.7  1.64 
+ 7 GY    7      5.40 10.1  11.2   0.424  0.597  0.140   92.9    NA  96.0  0.832
+ 8 GY    8      5.18  2.87  2.88 -0.752  0.0440 0.0991  90.4    NA  97.9  0.593
+ 9 GY    9      5.28  5.10  5.35 -0.215  0.145  0.0846  92.8    NA  93.2  0.508
+10 GY    10     5.34  6.15  6.63 -0.0290 0.216  0.117   92.4    NA  91.7  0.698
+# ℹ 90 more rows
+# ℹ 32 more variables: bij &lt;dbl&gt;, Sij &lt;dbl&gt;, R2 &lt;dbl&gt;, ASTAB &lt;dbl&gt;, ASI &lt;dbl&gt;,
+#   ASV &lt;dbl&gt;, AVAMGE &lt;dbl&gt;, DA &lt;dbl&gt;, DZ &lt;dbl&gt;, EV &lt;dbl&gt;, FA &lt;dbl&gt;,
+#   MASI &lt;dbl&gt;, MASV &lt;dbl&gt;, SIPC &lt;dbl&gt;, ZA &lt;dbl&gt;, WAAS &lt;dbl&gt;, WAASB &lt;dbl&gt;,
+#   HMGV &lt;dbl&gt;, RPGV &lt;dbl&gt;, HMRPGV &lt;dbl&gt;, Pi_a &lt;dbl&gt;, Pi_f &lt;dbl&gt;, Pi_u &lt;dbl&gt;,
+#   Gai &lt;dbl&gt;, S1 &lt;dbl&gt;, S2 &lt;dbl&gt;, S3 &lt;dbl&gt;, S6 &lt;dbl&gt;, N1 &lt;dbl&gt;, N2 &lt;dbl&gt;,
+#   N3 &lt;dbl&gt;, N4 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-----------------------------------------------------------------------------------
+Principal Component Analysis
+-----------------------------------------------------------------------------------
+    eigen.values cumulative.var
+PC1         1.31          65.38
+PC2         0.69         100.00
+
+-----------------------------------------------------------------------------------
+Factor Analysis
+-----------------------------------------------------------------------------------
+    FA1 comunalits
+GY 0.81       0.65
+PH 0.81       0.65
+
+-----------------------------------------------------------------------------------
+Comunalit Mean: 0.6538288 
+Selection differential
+-----------------------------------------------------------------------------------
+  VAR Factor        Xo        Xs SD SDperc    sense goal
+1  GY      1   5.19571   5.19571  0      0 increase    0
+2  PH      1 232.78294 232.78294  0      0 decrease    0
+
+-----------------------------------------------------------------------------------
+Selected genotypes
+59 78 66 11 71 81 70 35 41 92 54 62 44 53 73 77 55 50 38 93 100 60 46 36 3 96 69 23 99 76 98 61 43 97 51 49 65 91 27 63 45 95 94 57 47 20 48 22 18 74 12 80 10 21 24 6 32 8 4 15 67 13 90 1 19 68 25 14 42 84 30 72 26 87 9 89 16 2 56 40 82 88 75 31 7 39 17 83 79 28 85 37 64 34 33 58 5 86 52 29
+-----------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Exp_Plan_-_data_analysis_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  PC    eigen.values cumulative.var
+  &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+1 PC1          1.31            65.4
+2 PC2          0.692          100  </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  Variable   FA1 comunalits
+  &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+1 GY       0.809      0.654
+2 PH       0.809      0.654</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Variable   FA1
+  &lt;chr&gt;    &lt;dbl&gt;
+1 GY       0.618
+2 PH       0.618</code></pre>
+</div>
+</div>
+</section>
+<section id="referências" class="slide level2 smaller scrollable">
+<h2>Referências</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bartholomew1995" class="csl-entry" role="listitem">
+Bartholomew, D. J. 1995. <span>“Spearman and the Origin and Development of Factor Analysis.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 48 (November): 211–20. <a href="https://doi.org/10.1111/J.2044-8317.1995.TB01060.X">https://doi.org/10.1111/J.2044-8317.1995.TB01060.X</a>.
+</div>
+<div id="ref-Hazel1943" class="csl-entry" role="listitem">
+Hazel, L N. 1943. <span>“The Genetic Basis for Constructing Selection Indexes.”</span> <em>Genetics</em> 28: 476–90. <a href="http://www.ncbi.nlm.nih.gov/pubmed/17247099%0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC1209225">http://www.ncbi.nlm.nih.gov/pubmed/17247099%0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC1209225</a>.
+</div>
+<div id="ref-Henderson1975" class="csl-entry" role="listitem">
+Henderson, C R. 1975. <span>“Best Linear Unbiased Estimation and Prediction Under a Selection Model.”</span> <em>Biometrics</em> 31: 423. <a href="https://doi.org/10.2307/2529430">https://doi.org/10.2307/2529430</a>.
+</div>
+<div id="ref-henderson1953estimation" class="csl-entry" role="listitem">
+Henderson, Charles R. 1953. <span>“Estimation of Variance and Covariance Components.”</span> <em>Biometrics</em> 9 (2): 226–52.
+</div>
+<div id="ref-Kempthorne1959" class="csl-entry" role="listitem">
+Kempthorne, Oscar, and Arne W Nordskog. 1959. <span>“Restricted Selection Indices.”</span> <em>Biometrics</em> 15: 10–19. <a href="http://www.jstor.org/stable/2527598">http://www.jstor.org/stable/2527598</a>.
+</div>
+<div id="ref-Patterson1971" class="csl-entry" role="listitem">
+Patterson, H D, and R Thompson. 1971. <span>“Recovery of Inter-Block Information When Block Sizes Are Unequal.”</span> <em>Biometrika</em> 58: 545–54. <a href="https://doi.org/10.2307/2334389">https://doi.org/10.2307/2334389</a>.
+</div>
+<div id="ref-rocha2018multitrait" class="csl-entry" role="listitem">
+Rocha, João Romero do Amaral Santos de Carvalho, Juarez Campolina Machado, and Pedro Crescêncio Souza Carneiro. 2018. <span>“Multitrait Index Based on Factor Analysis and Ideotype-Design: Proposal and Application on Elephant Grass Breeding for Bioenergy.”</span> <em>Gcb Bioenergy</em> 10 (1): 52–60.
+</div>
+<div id="ref-Smith1936" class="csl-entry" role="listitem">
+Smith, H. F. 1936. <span>“A Discriminant Function for Plant Selection.”</span> <em>Annuals of Eugenics</em> 7: 240–50.
+</div>
 </div>
 <div class="quarto-auto-generated-content">
 <p><img src="https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png" class="slide-logo"></p>
@@ -972,6 +1709,7 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
   <script src="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="Exp_Plan_&amp;_data_analysis_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -994,6 +1732,7 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1164,7 +1903,7 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1243,18 +1982,7 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1286,7 +2014,29 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1294,7 +2044,7 @@ fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

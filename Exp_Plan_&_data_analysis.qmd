@@ -7,12 +7,16 @@ format:
     transition: slide
     background-transition: fade
     chalkboard: true
+    pointer: true
     theme:  simple
     footer: "Exp_Plan_&_Data_Analysis"
     logo: "https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png"
     embed-resources: false
+revealjs-plugins:
+  - pointer
 editor_options: 
   chunk_output_type: console
+bibliography: references.bib
 ---
 
 ## Apresentação {.smaller}
@@ -35,9 +39,10 @@ editor_options:
 -   Análise de variância individual
 -   Análise de variância conjunta
 -   Predição de valores genotípicos
+-   Análise de Fatores
 -   Índices de seleção
 
-## Princípios da Experimentação agrícola
+## Princípios da Experimentação agrícola {.smaller}
 
 ::: {layout-ncol="2"}
 -   Repetição
@@ -55,7 +60,7 @@ crd1 <- CRD(
 )
 #crd1$infoDesign
 #head(crd1$fieldBook, 3)
-cat("DIC")
+cat("DIC - 5trat*3rep")
 plot(crd1)
 
 rcbd1 <- RCBD(t = 5, reps = 3,l = 1, 
@@ -66,7 +71,7 @@ rcbd1 <- RCBD(t = 5, reps = 3,l = 1,
               locationNames = "Coimbra")
 #rcbd1$infoDesign
 #head(rcbd1$fieldBook, 3)
-cat("DBC")
+cat("DBC - 5trat*3rep")
 plot(rcbd1)
 ```
 :::
@@ -94,13 +99,15 @@ head(squareLattice1$fieldBook)[1:3,]
 ## Planejamento de Experimentos agronômicos {.smaller}
 
 ::: columns
-::: {.column width="30%"}
+::: {.column width="35%"}
 -   Experimento com restrição quanto à disponibilidade de sementes e/ou volume grande de tratamentos para a área experimental
--   Delineamento em blocos aumentados (30gen/3test/k6)
+-   Delineamento em blocos aumentados
+
+(30gen/3test/k6)
 :::
 
-::: {.column width="70%"}
-```{r,fig.width=6, fig.height=4} 
+::: {.column width="65%"}
+```{r,fig.width=6, fig.height=4}
 ARCBD1 <- RCBD_augmented(lines = 30, checks = 3, b = 6, l = 1, planter = "serpentine", plotNumber = 1001, seed = 23, locationNames = "COIMBRA")
 head(ARCBD1$fieldBook)[1:3,] 
 cat("DBA") 
@@ -110,7 +117,7 @@ plot(ARCBD1)
 :::
 
 ::: {style="width: 80%"}
-```{}
+```         
 ```
 :::
 
@@ -118,7 +125,7 @@ plot(ARCBD1)
 
 ## Equações de modelos mistos {.smaller}
 
-Charles Roy Henderson (melhorista animal) descobriu em 1953 as equações de modelos mistos.
+@henderson1953estimation (melhorista animal) propôs as equações de modelos mistos 
 
 As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor preditor linear não viesado) e estimadores de máxima verossimilhança dos efeitos fixos de $\beta$.
 
@@ -148,9 +155,9 @@ $$
 \end{align*}
 $$
 
-### Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood) {.smaller}
+### Máxima verossimilhança restrita <br> (REML-Restricted maximum likelihood)
 
-Patterson & Thompson (1971)
+@Patterson1971
 
 Função de densidade de probabilidade normal
 
@@ -158,7 +165,7 @@ $$
 f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 $$
 
-A função de Máxima verossimilhança buscar a otimização dos valores da média $\mu$ e variância $\sigma$, dado as observações e considerando distribuição normal.
+A função de máxima verossimilhança buscar a otimização dos valores da média $\mu$ e variância $\sigma$, dado as observações e considerando distribuição normal.
 
 Neste exemplo consideramos 100 valores aleatórios gerados de uma distribuição normal com média 10 ($\mu$) e desvio padrão $\sqrt{10}$ ($\sigma$)
 
@@ -167,6 +174,7 @@ set.seed(2024) #fixando o valor da "semente aleatória"set.seed(2024) #fixando o
 y=rnorm(100,10,sqrt(10)) #gerando as 100 obs amostrais com media=10 e desvio padrão= sqrt(10)
 cat("head de valores amostrados")
 head(y) #visualizando a amostra
+
 
 plot(density(y),main = "Distribuição normal")#plotar
 n=100 #tamanho da amostra
@@ -179,12 +187,20 @@ f <- function(mu,sig2)
 like <- outer(mu, sig2, f)# função de verossimilhança
 persp(mu, sig2, like, theta = 30, phi = 30, expand = 0.5,
 col = "lightblue", ltheta = 120, shade = 0.75, ticktype = "detailed",
-xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main="Função densidade de probabilidade normal")
+xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "likelihood", main="Função densidade de probabilidade normal",cex.axis = 0.5
+)
+
+
 ```
 
 ## Equações de modelos mistos {.smaller .scrollable}
 
-BLUE (Melhor estimador linear não viesado - efeitos fixos) BLUP (Melhor preditor linear não viesado - efeitos aleatórios) - Henderson(1975)
+BLUE (Melhor estimador linear não viesado - efeitos fixos) 
+
+
+BLUP (Melhor preditor linear não viesado - efeitos aleatórios) 
+
+@Henderson1975
 
 ### Simulação de dados fenotípicos - Exemplo
 
@@ -330,7 +346,7 @@ head(RHS)
 sol = solve(LHS) %*% RHS  #Solutions
 head(sol)
 
-head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS") 
+
 
 
 
@@ -343,15 +359,15 @@ library(lme4)
 mmi=lme4::lmer(GY ~ rep + 
      (1 | id), data=pheno_env1)
 summary(mmi)
+
+head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS") 
 unlist(ranef(mmi))[1:6] |> kableExtra::kable(caption = "LME4") 
 
 #cor(sol[-c(1:2)],unlist(ranef(mm)))
 
 ```
 
-## Análise conjunta
-
-
+## Análise conjunta{.smaller .scrollable}
 
 Existem diversas propostas de índices com e sem restrição, aqui iremos abordar o índice da análise de fatores e desenho da distância genótipo-ideótipo.
 
@@ -371,9 +387,317 @@ unlist(ranef(mmc))[1:6] |> kableExtra::kable(caption = "LME4 - g x e")
 unlist(ranef(mmc))[301:306] |> kableExtra::kable(caption = "LME4 - g") 
 library(lattice)
 str(rr1 <- ranef(mmc))
+dev.off()
+
 dotplot(rr1) 
+
+
 ```
 
-## Índice de Seleção
 
 
+## Índice de Seleção{.smaller}
+
+Diversos índices de seleção foram propostos com e sem restrições
+(@Smith1936 & @Hazel1943 ; @Kempthorne1959)
+
+Aqui iremos abordar o índice de seleção da análise de fatores e desenho da distância genótipo ideótipo @rocha2018multitrait.
+
+## Análise de Fatores{.smaller .scrollable}
+
+Considerando o Dataset de milho (2 traits * 3 variáveis)
+
+Inicia com a análise de correlação de pearson entre pares de variáveis e 
+cria a matriz de correlação.
+
+```{r}
+mmcp=lme4::lmer(PH ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
+PH.df=do.call(rbind,ranef(mmc,whichel=("id:env")))
+PH.df=do.call(rbind,ranef(mmcp,whichel=("id:env")))
+GY.df=do.call(rbind,ranef(mmc,whichel=("id:env")))
+PH.df <- PH.df |> rownames_to_column("effect") |> 
+  mutate(env=sub(".*:","",effect)) |> mutate(geno=str_extract(string = rownames(PH.df), pattern = paste(rev(seq(1:100)), collapse = "|"))) |> 
+  rename("blup"=2) |> mutate(trait="PH")
+
+GY.df <- GY.df |> rownames_to_column("effect") |> 
+  mutate(env=sub(".*:","",effect)) |> mutate(geno=str_extract(string = rownames(GY.df), pattern = paste(rev(seq(1:100)), collapse = "|"))) |> 
+  rename("blup"=2) |> mutate(trait="GY")
+
+
+blup.env=rbind(GY.df,PH.df)
+
+blup.env <- blup.env |> pivot_wider(names_from = c("trait","env"),values_from = c("blup"),id_cols = "geno") |> column_to_rownames("geno")
+cat("Blue.env")
+head(blup.env)
+```
+
+### Matriz de correlações
+```{r}
+blup.env.std <-scale(blup.env)
+cat("Blue.env.std")
+head(blup.env.std)
+library(corrplot)
+cormat <- cor(blup.env.std) 
+cormat |> corrplot()
+```
+
+Correlações próximas de zero propiciam a extração de fatores diferentes.
+Representar as correlações entre os traits por meio de variáveis latentes (fatores).
+
+### Autovalores
+Determinação dos autovalores pela seguinte equação
+$$
+\[
+\det(\lambda^².I-\rho) = 0
+\]
+$$
+
+Multiplicado por uma matriz identidade diminuida das matriz de correlações $\rho$
+$$
+\[
+\det\left( \lambda^2 \mathbf{I} - \rho \right) = 
+\det\left( 
+\begin{bmatrix}
+\lambda^2 & 0 & 0 & \cdots & 0 \\
+0 & \lambda^2 & 0 & \cdots & 0 \\
+0 & 0 & \lambda^2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda^2
+\end{bmatrix}
+-
+\begin{bmatrix}
+\rho_{11} & \rho_{12} & \rho_{13} & \cdots & \rho_{1n} \\
+\rho_{21} & \rho_{22} & \rho_{23} & \cdots & \rho_{2n} \\
+\rho_{31} & \rho_{32} & \rho_{33} & \cdots & \rho_{3n} \\
+\vdots    & \vdots    & \vdots    & \ddots & \vdots   \\
+\rho_{n1} & \rho_{n2} & \rho_{n3} & \cdots & \rho_{nn}
+\end{bmatrix}
+\right)
+\]
+
+\[
+= \det\left(
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\right) = 0
+\]
+$$
+
+### Polinômio característico
+Obtenção do polinôminio característica de ordem relativa à quantidade de 
+fatores.( 6 características - ordem 6)
+
+```{r}
+library(pracma)
+
+A <- charpoly(cormat, info = TRUE)
+#round(A$cp,4) 
+#A$det
+#zapsmall(A$inv %*% cormat)
+library(polyMatrix)
+poly=charpolynom(cormat)
+poly=round(poly,4)
+
+cat("Polinômio característico")
+print(poly)
+
+cat("Raízes do polinômio - Autovalores")
+round(roots(A$cp),4) 
+
+```
+
+
+Os *auto valores* são as raízes do polinômio característico da matriz de correlações.
+
+A soma dos autovalores é igual a quantidade de variáveis originais
+```{r}
+sum(roots(A$cp)) 
+```
+
+**Percentual de variância - valor do autovalor dividido pelo total**
+```{r}
+round((roots(A$cp)/6)*100,4)
+```
+
+### Autovetores
+
+Os autovetores são derivados dos autovalores e resultam de um sistema de equações.
+
+$$
+det(\lambda^².I-\rho)\mathbf{v}_i = 0 
+$$
+
+
+
+$$
+\[
+\left( 
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\right)
+\begin{bmatrix}
+v_{i1} \\
+v_{i2} \\
+v_{i3} \\
+\vdots \\
+v_{in}
+\end{bmatrix}
+= 0
+\]
+$$
+
+
+$$
+\[
+\left( \lambda^2 - \rho_{11} \right)v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0
+\]
+\[
+-\rho_{21} v_{i1} + \left( \lambda^2 - \rho_{22} \right)v_{i2} - \rho_{23} v_{i3} - \cdots - \rho_{2n} v_{in} = 0
+\]
+\[
+\vdots
+\]
+\[
+-\rho_{n1} v_{i1} - \rho_{n2} v_{i2} - \rho_{n3} v_{i3} - \cdots + \left( \lambda^2 - \rho_{nn} \right)v_{in} = 0
+\]
+$$
+
+### Escores fatoriais
+
+Obtido por meio autovalor dividido pela raiz quadrada do seu respectivo autovetor.
+
+Indica relação com as variáveis originais.
+$$
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+$$
+
+### Gerar os fatores
+
+O escores fatoriais multiplicado pelo Zscore da variável (variável padronizada)
+
+$$
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+$$
+
+
+### Cargas fatoriais
+
+```{r}
+
+pca_res <- eigen(cormat) 
+library(psych) 
+# factor_analysis <- fa(cormat, nfactors = 6, rotate = "varimax") 
+# factor_analysis$score.cor
+print(round(pca_res$values,4))
+print(round(pca_res$vectors,4))
+# 
+# # Calculate the proportion of variance explained by each component 
+# explained_variance <- pca_res$values / sum(pca_res$values) 
+#   
+# # Cumulative proportion of variance explained 
+# cumulative_proportion <- cumsum(explained_variance) 
+#   
+# # Determine the number of components to retain 
+# num_components <- sum(cumulative_proportion <= 0.95) 
+# print(num_components)
+```
+
+
+Mais informações sobre a história da análise fatorial nesse 
+artigo @Bartholomew1995
+
+## Índice de Seleção{.smaller .scrollable}
+
+$$
+Pij = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
+$$
+$Pij$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, $d_{ij}$ distância genótipo-ideótipo euclidiana padronizada.
+
+```{r}
+library(metan)
+#a=inspect(pheno_df,plot=TRUE,threshold = 100) # threshold é quantidade de níveis do fator com mais níveis
+#save(a,file = "a.rda")
+load("a.rda")
+```
+
+
+```{r}
+modelb= gamem_met(pheno_df,
+            env = env,
+            gen = id,
+            rep = rep,
+            resp = c("GY","PH"), random = "gen",
+            verbose = TRUE)
+
+get_model_data(modelb, what = "vcomp")
+get_model_data(modelb, "lrt")
+
+plot(modelb,var = 1)
+plot(modelb,var = 2)
+
+
+get_model_data(modelb) |> kableExtra::kable()
+
+head(modelb$GY$BLUPgen) |> kableExtra::kable(caption="GY")
+
+head(modelb$PH$BLUPgen) |> kableExtra::kable(caption="PH")
+```
+
+
+```{r}
+FAI.met=blup.env %>%
+  fai_blup(SI = 20,
+                DI = c("max, max, max, min, min, min"),
+                UI = c("min, min, min, max, max, max"),mineval = 0.7)
+FAI.met$eigen
+FAI.met$FA
+  head(blup.env)
+blup.env %>%
+  fai_blup(SI = 20,
+                DI = c("max, max, max, min, min, min"),
+                UI = c("min, min, min, max, max, max"),mineval = 0.7) %>%
+plot()
+```
+
+
+```{r}
+a <- plot_blup(modelb,var=1) # plotar variável 1 - GY
+b <- plot_blup(modelb,var = 2) # plotar variável 2 - PH
+arrange_ggplot(a, b, tag_levels = "a")
+```
+
+```{r}
+stats <- ge_stats(pheno_df, env, id, rep, GY)
+
+get_model_data(stats)
+```
+
+```{r}
+
+FAI <- fai_blup(modelb,
+                SI = 100,
+                DI = c('max, min'),
+                UI = c('min, max'),mineval = 0.7)
+library(corrplot)
+FAI$cormat |> corrplot()
+
+FAI$eigen
+FAI$FA
+FAI$canonical_loadings
+```
+
+
+## Referências
+
+::: {#refs}
+:::

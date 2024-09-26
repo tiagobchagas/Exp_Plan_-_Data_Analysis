@@ -6,12 +6,11 @@ format:
     incremental: true
     transition: slide
     background-transition: fade
-    chalkboard: true
     pointer: true
     theme:  simple
     footer: "Exp_Plan_&_Data_Analysis"
     logo: "https://dados.ufv.br/uploads/group/2018-09-21-175551.774793800x600-cominscricao.png"
-    embed-resources: false
+    embed-resources: true
 revealjs-plugins:
   - pointer
 editor_options: 

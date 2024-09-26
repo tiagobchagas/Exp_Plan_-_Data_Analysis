@@ -87,13 +87,13 @@ pheno_df <- make_phenotypes(
 )
 
 
-
+# coloca banco de dados real
 
 
 
 # Blups --------------------------------------------------------
 library(metan)
-a=inspect(pheno_df,plot=TRUE,threshold = 100)
+inspect(pheno_df,plot=TRUE,threshold = 100)
 
 colnames(pheno_df)=c("env","block","col","row","id","rep","GY","PH")
 head(pheno_df)
@@ -120,7 +120,7 @@ head(blups)
 bmean = blups |>
   pivot_wider(names_from = c("Trait","ENV"),values_from = c("Y"),id_cols = "GEN") |> 
 column_to_rownames("GEN") 
-
+head(bmean)
 # Análise Fatorial --------------------------------------------------------
 
 
@@ -232,7 +232,7 @@ cargas_fatoriais
 # cargas_fatoriais dos dois primeiros fatores
 P2=cargas_fatoriais[, c(1,2)] |> data.frame() %>%
   rownames_to_column("variáveis") %>%
-  ggplot(aes(x = RC6 , y = RC3, label = variáveis)) +
+  ggplot(aes(x = RC5 , y = RC3, label = variáveis)) +
   geom_point(color = "darkorchid",
              size = 3) +
   geom_text_repel() +

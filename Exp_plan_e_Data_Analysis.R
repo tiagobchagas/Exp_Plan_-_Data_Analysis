@@ -12,6 +12,7 @@ pacotes=c("psych","metan","ggcorrplot", "lme4", "FieldSimR", "ggrepel",
 
 install.packages(pacotes)
 
+sapply(pacotes, library, character.only=T, logical.return=T)
 
 # Simulando o experimento de Milho ----------------------------------------
 

@@ -1,0 +1,1250 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+
+\usetheme[]{Berlin}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Selection indexes in plant breeding},
+  pdfauthor={José Tiago Barroso Chagas},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Selection indexes in plant breeding}
+\author{José Tiago Barroso Chagas}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\begin{frame}{Apresentação}
+\phantomsection\label{apresentauxe7uxe3o}
+\pandocbounded{\includegraphics[keepaspectratio]{misc/linkedin.png}}
+
+\emph{Engenheiro agronômo (\textbf{UFCA}- 2018)}
+
+\emph{Mestre em genética e melhoramento de plantas (\textbf{UENF}-2020)}
+
+\emph{Doutor em genética e melhoramento (\textbf{UFV}- 2024)}
+
+\emph{Pesquisador de pós doutorado (\textbf{UFV}-2024-2025)}
+
+\emph{Pesquisador de pós doutorado (\textbf{ESALQ/USP}-2025)}
+\end{frame}
+
+\begin{frame}{Sumário}
+\phantomsection\label{sumuxe1rio}
+\begin{itemize}
+\tightlist
+\item
+  Princípios da experimentação agrícola
+\item
+  Planejamento de Experimentos agronômicos
+\item
+  Equações de Modelos Mistos
+\item
+  Análise de variância individual
+\item
+  Análise de variância conjunta
+\item
+  Predição de valores genotípicos
+\item
+  Análise de Fatores
+\item
+  Índices de seleção
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Princípios da Experimentação agrícola}
+\phantomsection\label{princuxedpios-da-experimentauxe7uxe3o-agruxedcola}
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Repetição
+\item
+  Casualização
+\item
+  Controle local
+\end{itemize}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{verbatim}
+DIC - 5trat*3rep
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-1-1.pdf}}
+
+\begin{verbatim}
+DBC - 5trat*3rep
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-1-2.pdf}}
+
+\end{minipage}%
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}[fragile]{Planejamento de Experimentos agronômicos}
+\phantomsection\label{planejamento-de-experimentos-agronuxf4micos}
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Experimentos com grande número de tratamentos para os blocos
+  casualizados em DBC
+\item
+  \textbf{k} Tratamentos divididos em \textbf{k} blocos
+  (ktrat*kblocos)\\
+\item
+  Látice quadrado (9trat/k3/rep3)
+\end{itemize}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{verbatim}
+LÁTICE
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-2-1.pdf}}
+
+\begin{verbatim}
+  ID LOCATION PLOT REP IBLOCK UNIT ENTRY TREATMENT
+1  1  COIMBRA 1001   1      1    1     7       G-7
+2  2  COIMBRA 1002   1      1    2     3       G-3
+3  3  COIMBRA 1003   1      1    3     4       G-4
+\end{verbatim}
+
+\end{minipage}%
+
+\end{figure}%
+\end{frame}
+
+\begin{frame}[fragile]{Planejamento de Experimentos agronômicos}
+\phantomsection\label{planejamento-de-experimentos-agronuxf4micos-1}
+\begin{columns}[T]
+\begin{column}{0.35\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  Experimento com restrição quanto à disponibilidade de sementes e/ou
+  volume grande de tratamentos para a área experimental
+\item
+  Delineamento em blocos aumentados
+\end{itemize}
+
+(30gen/3test/k6)
+\end{column}
+
+\begin{column}{0.65\linewidth}
+\begin{verbatim}
+  ID  EXPT LOCATION YEAR PLOT ROW COLUMN CHECKS BLOCK ENTRY TREATMENT
+1  1 Expt1  COIMBRA 2025 1001   1      1      1     1     3       CH3
+2  2 Expt1  COIMBRA 2025 1002   1      2      1     1     2       CH2
+3  3 Expt1  COIMBRA 2025 1003   1      3      0     1    23       G23
+\end{verbatim}
+
+\begin{verbatim}
+DBA
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-3-1.pdf}}
+\end{column}
+\end{columns}
+
+\begin{verbatim}
+\end{verbatim}
+
+::::
+\end{frame}
+
+\begin{frame}{Equações de modelos mistos}
+\phantomsection\label{equauxe7uxf5es-de-modelos-mistos}
+Charles R. Henderson (1953) (melhorista animal) propôs as equações de
+modelos mistos
+
+As quais possibilitaram obter BLUPs dos efeitos aleatórios (Melhor
+preditor linear não viesado) e estimadores de máxima verossimilhança dos
+efeitos fixos de \(\beta\).
+
+\pandocbounded{\includegraphics[keepaspectratio]{misc/henderso.jpeg}}
+\end{frame}
+
+\begin{frame}{Equações de modelos mistos}
+\phantomsection\label{equauxe7uxf5es-de-modelos-mistos-1}
+\[
+\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
+\]
+
+\[ 
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
+ \mathbf{Z}'\mathbf{X} & \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}}
+\end{bmatrix}
+=
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{y} \\
+ \mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\]
+\end{frame}
+
+\begin{frame}[fragile]{Equações de modelos mistos}
+\phantomsection\label{equauxe7uxf5es-de-modelos-mistos-2}
+\begin{block}{Máxima verossimilhança restrita (REML-Restricted maximum
+likelihood)}
+\phantomsection\label{muxe1xima-verossimilhanuxe7a-restrita-reml-restricted-maximum-likelihood}
+Patterson and Thompson (1971)
+
+Função de densidade de probabilidade normal
+
+\[
+f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
+\]
+
+A função de máxima verossimilhança buscar a otimização dos valores da
+média \(\mu\) e variância \(\sigma\), dado as observações e considerando
+distribuição normal.
+
+Neste exemplo consideramos 100 valores aleatórios gerados de uma
+distribuição normal com média 10 (\(\mu\)) e desvio padrão \(\sqrt{10}\)
+(\(\sigma\))
+
+\begin{verbatim}
+head de valores amostrados
+\end{verbatim}
+
+\begin{verbatim}
+[1] 13.105260 11.482207  9.658565  9.326820 13.662229 14.086785
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-4-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-4-2.pdf}}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Equações de modelos mistos}
+\phantomsection\label{equauxe7uxf5es-de-modelos-mistos-3}
+BLUE (Melhor estimador linear não viesado - efeitos fixos)
+
+BLUP (Melhor preditor linear não viesado - efeitos aleatórios)
+
+C. R. Henderson (1975)
+
+\begin{block}{Simulação de dados fenotípicos - Exemplo}
+\phantomsection\label{simulauxe7uxe3o-de-dados-fenotuxedpicos---exemplo}
+Traits: Produtividade de grãos e altura de planta
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{misc/gy.jpeg}}
+
+}
+
+\subcaption{Fonte: Bayer crop science}
+
+\end{figure}%
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{misc/ph.jpeg}}
+
+}
+
+\subcaption{Fonte: Bayer crop science}
+
+\end{figure}%
+
+\end{minipage}%
+
+\end{figure}%
+
+\textbf{2 características; 100 genótipos; 2 blocos}
+
+\begin{verbatim}
+Variâncias residuais Trait per environment -
+    c(Yld:E1, Yld:E2, Yld:E3, Pht:E1, Pht:E2, Pht:E3
+\end{verbatim}
+
+\begin{verbatim}
+[1]  0.20  0.28  0.14 15.10  8.50 11.70
+\end{verbatim}
+
+\begin{verbatim}
+Correlação dos erros devido tendências espaciais
+\end{verbatim}
+
+\begin{verbatim}
+     1    2
+1 1.00 0.49
+2 0.49 1.00
+\end{verbatim}
+
+\begin{verbatim}
+Correlação dos erros devido causas não conhecidas
+    (Caminhamento,máquinas e implementos)
+\end{verbatim}
+
+\begin{verbatim}
+     1    2
+1 1.00 0.02
+2 0.02 1.00
+\end{verbatim}
+
+\begin{verbatim}
+Banco de dados simulado de Milho
+\end{verbatim}
+
+\begin{verbatim}
+'data.frame':   200 obs. of  8 variables:
+ $ env  : Factor w/ 1 level "1": 1 1 1 1 1 1 1 1 1 1 ...
+ $ block: Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ col  : Factor w/ 10 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ row  : Factor w/ 20 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ id   : Factor w/ 100 levels "1","2","3","4",..: 39 4 77 14 49 62 47 94 40 63 ...
+ $ rep  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ GY   : num  5.51 5.7 5.8 5.17 5.32 ...
+ $ PH   : num  230 230 230 232 239 ...
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-5-1.pdf}}
+
+\begin{verbatim}
+Solving mixed models with RHS
+\end{verbatim}
+
+\begin{verbatim}
+[1] 5.513532 5.703086 5.796593 5.168647 5.323202 5.033188
+\end{verbatim}
+\end{block}
+
+\begin{block}{Resolvendo as equações de modelos mistos (RHS) - GY}
+\phantomsection\label{resolvendo-as-equauxe7uxf5es-de-modelos-mistos-rhs---gy}
+\[ 
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{X} & \mathbf{X}'\mathbf{Z} \\
+ \mathbf{Z}'\mathbf{X} & \mathbf{Z}'\mathbf{Z} + \lambda \mathbf{K}^{-1}
+\end{bmatrix}
+\begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}}
+\end{bmatrix}
+=
+\begin{bmatrix}
+ \mathbf{X}'\mathbf{y} \\
+ \mathbf{Z}'\mathbf{y}
+\end{bmatrix}
+\]
+
+\begin{verbatim}
+X matrix - Efeitos fixos
+\end{verbatim}
+
+\begin{verbatim}
+  block1 block2
+1      1      0
+2      1      0
+3      1      0
+4      1      0
+5      1      0
+6      1      0
+\end{verbatim}
+
+\begin{verbatim}
+Z matrix - Efeitos aleatórios
+\end{verbatim}
+
+\begin{verbatim}
+   id1 id2 id3 id4 id5 id6 id7 id8 id9 id10
+1    0   0   0   0   0   0   0   0   0    0
+2    0   0   0   1   0   0   0   0   0    0
+3    0   0   0   0   0   0   0   0   0    0
+4    0   0   0   0   0   0   0   0   0    0
+5    0   0   0   0   0   0   0   0   0    0
+6    0   0   0   0   0   0   0   0   0    0
+7    0   0   0   0   0   0   0   0   0    0
+8    0   0   0   0   0   0   0   0   0    0
+9    0   0   0   0   0   0   0   0   0    0
+10   0   0   0   0   0   0   0   0   0    0
+\end{verbatim}
+
+\begin{verbatim}
+Phenotypic data
+\end{verbatim}
+
+\begin{verbatim}
+   env block col row id rep       GY       PH
+1    1     1   1   1 39   1 5.513532 230.2357
+2    1     1   1   2  4   1 5.703086 230.2436
+3    1     1   1   3 77   1 5.796593 230.4429
+4    1     1   1   4 14   1 5.168647 231.6617
+5    1     1   1   5 49   1 5.323202 238.9142
+6    1     1   1   6 62   1 5.033188 233.4361
+7    1     1   1   7 47   1 5.969180 227.9464
+8    1     1   1   8 94   1 5.296897 233.5849
+9    1     1   1   9 40   1 3.751499 226.4649
+10   1     1   1  10 63   1 4.588704 235.6345
+\end{verbatim}
+
+\begin{verbatim}
+Error variance
+\end{verbatim}
+
+\begin{verbatim}
+[1] 0.2075
+\end{verbatim}
+
+\begin{verbatim}
+Genotypic variance
+\end{verbatim}
+
+\begin{verbatim}
+[1] 0.0948
+\end{verbatim}
+
+\begin{verbatim}
+Lambda
+\end{verbatim}
+
+\begin{verbatim}
+[1] 2.188819
+\end{verbatim}
+
+\begin{verbatim}
+XpX
+\end{verbatim}
+
+\begin{verbatim}
+       block1 block2
+block1    100      0
+block2      0    100
+\end{verbatim}
+
+\begin{verbatim}
+XpZ
+\end{verbatim}
+
+\begin{verbatim}
+       id1 id2 id3 id4 id5
+block1   1   1   1   1   1
+block2   1   1   1   1   1
+\end{verbatim}
+
+\begin{verbatim}
+ZpX
+\end{verbatim}
+
+\begin{verbatim}
+    block1 block2
+id1      1      1
+id2      1      1
+id3      1      1
+id4      1      1
+id5      1      1
+id6      1      1
+\end{verbatim}
+
+\begin{verbatim}
+ZpZ
+\end{verbatim}
+
+\begin{verbatim}
+    id1 id2 id3 id4 id5
+id1   2   0   0   0   0
+id2   0   2   0   0   0
+id3   0   0   2   0   0
+id4   0   0   0   2   0
+id5   0   0   0   0   2
+\end{verbatim}
+
+\begin{verbatim}
+Xpy
+\end{verbatim}
+
+\begin{verbatim}
+           [,1]
+block1 498.0205
+block2 509.2963
+\end{verbatim}
+
+\begin{verbatim}
+Zpy
+\end{verbatim}
+
+\begin{verbatim}
+         [,1]
+id1  8.834306
+id2 10.478144
+id3 11.530348
+id4 10.042302
+id5  9.734658
+id6  9.007352
+\end{verbatim}
+
+\begin{verbatim}
+LHS
+\end{verbatim}
+
+\begin{verbatim}
+       block1 block2      id1      id2      id3
+block1    100      0 1.000000 1.000000 1.000000
+block2      0    100 1.000000 1.000000 1.000000
+id1         1      1 4.188819 0.000000 0.000000
+id2         1      1 0.000000 4.188819 0.000000
+id3         1      1 0.000000 0.000000 4.188819
+\end{verbatim}
+
+\begin{verbatim}
+RHS
+\end{verbatim}
+
+\begin{verbatim}
+             [,1]
+block1 498.020468
+block2 509.296324
+id1      8.834306
+id2     10.478144
+id3     11.530348
+id4     10.042302
+\end{verbatim}
+
+\begin{verbatim}
+Solutions solve(LHS) %*% RHS
+\end{verbatim}
+
+\begin{verbatim}
+               [,1]
+block1  4.980204681
+block2  5.092963242
+id1    -0.295754501
+id2     0.096680330
+id3     0.347873860
+id4    -0.007368719
+\end{verbatim}
+\end{block}
+
+\begin{block}{Resolvendo as equações de modelos mistos (LME4) - GY}
+\phantomsection\label{resolvendo-as-equauxe7uxf5es-de-modelos-mistos-lme4---gy}
+\begin{verbatim}
+Solving mixed models with package LME4
+\end{verbatim}
+
+\begin{verbatim}
+Linear mixed model fit by REML ['lmerMod']
+Formula: GY ~ rep + (1 | id)
+   Data: pheno_env1
+
+REML criterion at convergence: 320.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.15158 -0.56334  0.05882  0.58978  2.09491 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 0.1010   0.3178  
+ Residual             0.1982   0.4451  
+Number of obs: 200, groups:  id, 100
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  4.98020    0.05469  91.058
+rep2         0.11276    0.06295   1.791
+
+Correlation of Fixed Effects:
+     (Intr)
+rep2 -0.576
+\end{verbatim}
+
+\begingroup\fontsize{20}{22}\selectfont
+
+\begin{longtable}[t]{r}
+\caption{\label{tab:unnamed-chunk-7}RHS}\\
+\toprule
+x\\
+\midrule
+-0.2957545\\
+0.0966803\\
+0.3478739\\
+-0.0073687\\
+-0.0808127\\
+\addlinespace
+-0.2544430\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begingroup\fontsize{20}{22}\selectfont
+
+\begin{longtable}[t]{lr}
+\caption{\label{tab:unnamed-chunk-7}LME4}\\
+\toprule
+ & x\\
+\midrule
+id.(Intercept)1 & -0.3126610\\
+id.(Intercept)2 & 0.1022069\\
+id.(Intercept)3 & 0.3677597\\
+id.(Intercept)4 & -0.0077899\\
+id.(Intercept)5 & -0.0854323\\
+\addlinespace
+id.(Intercept)6 & -0.2689879\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Análise conjunta}
+\phantomsection\label{anuxe1lise-conjunta}
+\pandocbounded{\includegraphics[keepaspectratio]{Sel_ind_files/figure-beamer/unnamed-chunk-8-1.pdf}}
+
+\[
+\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon} 
+\]
+
+\([\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]\) e
+\([\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]\), onde n é o
+número de genótipos e p é o número de ambientes.
+
+\textbf{2 características; 100 genótipos; 2-3 blocos; 3 ambientes}
+
+Testar os efeitos de genótipo e da interação genótipo x ambiente para as
+características avaliadas.
+
+\[
+LRT = -2(LogL_-LogL_{r})
+\]
+
+onde \(LogL\) é o ponto de máxima da função de verossimilhança residual
+do modelo completo e \(LogL_{r}\) é o mesmo para o modelo reduzido.
+
+\begin{verbatim}
+Análise de variância conjunta - GY
+\end{verbatim}
+
+\begin{verbatim}
+Linear mixed model fit by REML ['lmerMod']
+Formula: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+   Data: pheno_df
+
+REML criterion at convergence: 1063.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.67400 -0.55510  0.01111  0.57905  2.30558 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id:env   (Intercept) 0.09360  0.3059  
+ id       (Intercept) 0.01043  0.1021  
+ Residual             0.18065  0.4250  
+Number of obs: 700, groups:  id:env, 300; id, 100
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  4.98020    0.05336  93.340
+env2         0.13322    0.07406   1.799
+env3         0.48945    0.07406   6.609
+env1:rep2    0.11276    0.06011   1.876
+env2:rep2   -0.02553    0.06011  -0.425
+env3:rep2   -0.12331    0.06011  -2.051
+env3:rep3   -0.19016    0.06011  -3.164
+
+Correlation of Fixed Effects:
+          (Intr) env2   env3   env1:2 env2:2 env3:2
+env2      -0.694                                   
+env3      -0.694  0.500                            
+env1:rep2 -0.563  0.406  0.406                     
+env2:rep2  0.000 -0.406  0.000  0.000              
+env3:rep2  0.000  0.000 -0.406  0.000  0.000       
+env3:rep3  0.000  0.000 -0.406  0.000  0.000  0.500
+fit warnings:
+fixed-effect model matrix is rank deficient so dropping 2 columns / coefficients
+\end{verbatim}
+
+\begin{verbatim}
+LRT GxE effect - Trait GY
+\end{verbatim}
+
+\begin{verbatim}
+[1] 43.31988
+\end{verbatim}
+
+\begin{verbatim}
+Data: pheno_df
+Models:
+mmcr: GY ~ env + rep:env + (1 | id)
+mmc: GY ~ env + rep:env + (1 | id) + (1 | id:env)
+     npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+mmcr    9 1096.1 1137.0 -539.03    1078.1                         
+mmc    10 1054.3 1099.8 -517.15    1034.3 43.758  1  3.717e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begingroup\fontsize{20}{22}\selectfont
+
+\begin{longtable}[t]{lr}
+\caption{\label{tab:unnamed-chunk-9}LME4 - g x e}\\
+\toprule
+ & (Intercept)\\
+\midrule
+id:env.1:1 & -0.2994339\\
+id:env.1:2 & -0.0883629\\
+id:env.1:3 & 0.1092676\\
+id:env.2:1 & 0.0992936\\
+id:env.2:2 & -0.0491773\\
+\addlinespace
+id:env.2:3 & 0.0160696\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begingroup\fontsize{20}{22}\selectfont
+
+\begin{longtable}[t]{lr}
+\caption{\label{tab:unnamed-chunk-9}LME4 - g}\\
+\toprule
+ & (Intercept)\\
+\midrule
+id.1 & -0.0310489\\
+id.2 & 0.0073780\\
+id.3 & 0.0317793\\
+id.4 & -0.0026264\\
+id.5 & 0.0316266\\
+\addlinespace
+id.6 & -0.0007239\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+\end{frame}
+
+\begin{frame}{Índice de Seleção}
+\phantomsection\label{uxedndice-de-seleuxe7uxe3o}
+Diversos índices de seleção foram propostos com e sem restrições (Smith
+(1936) \& Hazel (1943) ; Kempthorne and Nordskog (1959))
+
+Neste curso abordaremos o índice de seleção da \emph{análise de fatores
+e desenho da distância genótipo ideótipo} Rocha, Machado, and Carneiro
+(2018).
+\end{frame}
+
+\begin{frame}[fragile]{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores}
+Considerando o dataset simulado de milho (2 traits * 3 ambientes)
+
+Para proceder análise fatorial, deve-se realizar a análise de correlação
+de pearson entre pares de variáveis e criar a matriz de correlações.
+
+\begin{verbatim}
+Blups per trait:env
+\end{verbatim}
+
+\begin{verbatim}
+          GY_1        GY_2         GY_3       PH_1       PH_2       PH_3
+1 -0.299433931 -0.08836286  0.109267596 -0.7960276 -3.2359131  1.5381855
+2  0.099293639 -0.04917734  0.016069572 -2.6922993 -2.2370177  1.3938318
+3  0.354614536  0.04186552 -0.111398567  0.7017383 -0.4216252  1.2066291
+4 -0.006517491 -0.23820750  0.221164735 -3.2523328 -1.3943519 -0.1705401
+5 -0.102230756  0.26035403  0.125588089 -1.4563768 -3.3728975  1.4816980
+6 -0.270834073  0.26110773  0.003232461 -7.0252473 -0.8419086  2.4660021
+\end{verbatim}
+
+\begin{verbatim}
+Blups per trait:env standarized
+\end{verbatim}
+
+\begin{verbatim}
+         GY_1       GY_2        GY_3       PH_1       PH_2        PH_3
+1 -1.37867867 -0.3996783  0.49698215 -0.4213632 -1.5317044  0.80693911
+2  0.45717605 -0.2224364  0.07308928 -1.4251213 -1.0588819  0.73121050
+3  1.63274581  0.1893639 -0.50667445  0.3714528 -0.1995743  0.63300313
+4 -0.03000838 -1.0774477  1.00592425 -1.7215651 -0.6600100 -0.08946613
+5 -0.47069937  1.1776197  0.57121270 -0.7709074 -1.5965453  0.77730550
+6 -1.24699682  1.1810288  0.01470221 -3.7186910 -0.3985135  1.29367592
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-1}
+\begin{block}{Matriz de correlações}
+\phantomsection\label{matriz-de-correlauxe7uxf5es}
+\begin{verbatim}
+            GY_1        GY_2        GY_3        PH_1       PH_2        PH_3
+GY_1  1.00000000 -0.05369986 -0.15382851  0.09624741  0.1535808 -0.03312696
+GY_2 -0.05369986  1.00000000  0.04461362 -0.08982962  0.2295911  0.14690621
+GY_3 -0.15382851  0.04461362  1.00000000  0.09267733 -0.2505011  0.38971600
+PH_1  0.09624741 -0.08982962  0.09267733  1.00000000  0.1306623 -0.26498653
+PH_2  0.15358083  0.22959111 -0.25050112  0.13066234  1.0000000 -0.34163029
+PH_3 -0.03312696  0.14690621  0.38971600 -0.26498653 -0.3416303  1.00000000
+\end{verbatim}
+
+Correlações próximas de zero propiciam a extração de fatores diferentes.
+Representar as correlações entre os traits por meio de variáveis
+latentes (fatores).
+\end{block}
+\end{frame}
+
+\begin{frame}{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-2}
+\begin{block}{Autovalores}
+\phantomsection\label{autovalores}
+Determinação dos autovalores pela seguinte equação:
+
+\[
+[\det(\lambda^².I-\rho) = 0]
+\]
+
+Multiplicado por uma matriz identidade diminuida da matriz de
+correlações \(\rho\)
+
+\[
+\begin{bmatrix}
+\lambda^2 & 0 & 0 & \cdots & 0 \\
+0 & \lambda^2 & 0 & \cdots & 0 \\
+0 & 0 & \lambda^2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda^2
+\end{bmatrix}
+  \begin{bmatrix}
+    \rho_{11} & \rho_{12} & \rho_{13} & \cdots & \rho_{1n} \\
+    \rho_{21} & \rho_{22} & \rho_{23} & \cdots & \rho_{2n} \\
+    \rho_{31} & \rho_{32} & \rho_{33} & \cdots & \rho_{3n} \\
+    \vdots    & \vdots    & \vdots    & \ddots & \vdots   \\
+    \rho_{n1} & \rho_{n2} & \rho_{n3} & \cdots & \rho_{nn}
+    \end{bmatrix}\cdots
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}= 0
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-3}
+\begin{block}{Polinômio característico}
+\phantomsection\label{polinuxf4mio-caracteruxedstico}
+Obtenção do polinôminio característica de ordem relativa à quantidade de
+fatores.
+
+(n características - ordem n)
+
+\begin{verbatim}
+Error term: 1.070302 
+\end{verbatim}
+
+\begin{verbatim}
+Polinômio característico
+\end{verbatim}
+
+\begin{verbatim}
+0.5352 - 3.9883*x + 11.8003*x^2 - 17.7752*x^3 + 14.4279*x^4 - 6*x^5 + x^6 
+\end{verbatim}
+
+\begin{verbatim}
+Raízes do polinômio - Autovalores
+\end{verbatim}
+
+\begin{verbatim}
+[1] 1.7653 1.2008 1.0624 0.9772 0.5603 0.4340
+\end{verbatim}
+
+Os \emph{auto valores} são as raízes do polinômio característico da
+matriz de correlações.
+
+A soma dos autovalores é igual a quantidade de variáveis originais
+
+\begin{verbatim}
+[1] 6
+\end{verbatim}
+
+\textbf{Percentual de variância - valor do autovalor dividido pelo
+total}
+
+\begin{verbatim}
+[1] 29.4224 20.0130 17.7060 16.2864  9.3389  7.2333
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-4}
+\begin{block}{Autovetores}
+\phantomsection\label{autovetores}
+Os autovetores são derivados dos autovalores e resultam de um sistema de
+equações.
+
+\[
+[det(\lambda^².I-\rho)\mathbf{v}_i = 0]
+\]
+
+\[
+\begin{bmatrix}
+\lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
+-\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
+-\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
+\vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
+-\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
+\end{bmatrix}
+\begin{bmatrix}
+v_{i1} \\
+v_{i2} \\
+v_{i3} \\
+\vdots \\
+v_{in}
+\end{bmatrix}= 0
+\]
+
+\[
+(\lambda^2 - \rho_{11}) v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0 ]
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-5}
+\begin{block}{Escores fatoriais}
+\phantomsection\label{escores-fatoriais}
+Obtido por meio do \emph{autovalor} dividido pela raiz quadrada do seu
+respectivo \emph{autovetor}.
+
+Indica relação com as variáveis originais.
+
+\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+\]
+\end{block}
+
+\begin{block}{Extração dos fatores}
+\phantomsection\label{extrauxe7uxe3o-dos-fatores}
+Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore)
+geram os fatores.
+
+A grandeza dos escores para cada variável representará o seu peso em
+cada fator.
+
+\[
+S_{11}=\frac{v_{11}}{\sqrt{\lambda²_1}} 
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-6}
+\begin{block}{Cargas fatoriais}
+\phantomsection\label{cargas-fatoriais}
+Representam as correlações de pearson entre os fatores extraídos e as
+variáveis originais (+carga = +importância da variável em cada fator).
+
+O resultado da soma das cargas fatoriais ao quadrado de cada fator é
+próprio autovalor do qual ele foi extraído.
+
+Mais informações sobre a história da análise fatorial nesse artigo
+Bartholomew (1995)
+\end{block}
+\end{frame}
+
+\begin{frame}{Índice de Seleção}
+\phantomsection\label{uxedndice-de-seleuxe7uxe3o-1}
+\[
+P_{ij} = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
+\]
+
+\(P_{ij}\) probabilidade do i-ésimo genótipo ser similar ao j-ésimo
+ideótipo, \(d_{ij}\) distância genótipo-ideótipo euclidiana padronizada.
+\end{frame}
+
+\begin{frame}{Referências}
+\phantomsection\label{referuxeancias}
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-Bartholomew1995}
+Bartholomew, D. J. 1995. {``Spearman and the Origin and Development of
+Factor Analysis.''} \emph{British Journal of Mathematical and
+Statistical Psychology} 48 (November): 211--20.
+\url{https://doi.org/10.1111/J.2044-8317.1995.TB01060.X}.
+
+\bibitem[\citeproctext]{ref-Hazel1943}
+Hazel, L N. 1943. {``The Genetic Basis for Constructing Selection
+Indexes.''} \emph{Genetics} 28: 476--90.
+\url{http://www.ncbi.nlm.nih.gov/pubmed/17247099\%0Ahttp://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC1209225}.
+
+\bibitem[\citeproctext]{ref-Henderson1975}
+Henderson, C R. 1975. {``Best Linear Unbiased Estimation and Prediction
+Under a Selection Model.''} \emph{Biometrics} 31: 423.
+\url{https://doi.org/10.2307/2529430}.
+
+\bibitem[\citeproctext]{ref-henderson1953estimation}
+Henderson, Charles R. 1953. {``Estimation of Variance and Covariance
+Components.''} \emph{Biometrics} 9 (2): 226--52.
+
+\bibitem[\citeproctext]{ref-Kempthorne1959}
+Kempthorne, Oscar, and Arne W Nordskog. 1959. {``Restricted Selection
+Indices.''} \emph{Biometrics} 15: 10--19.
+\url{http://www.jstor.org/stable/2527598}.
+
+\bibitem[\citeproctext]{ref-Patterson1971}
+Patterson, H D, and R Thompson. 1971. {``Recovery of Inter-Block
+Information When Block Sizes Are Unequal.''} \emph{Biometrika} 58:
+545--54. \url{https://doi.org/10.2307/2334389}.
+
+\bibitem[\citeproctext]{ref-rocha2018multitrait}
+Rocha, João Romero do Amaral Santos de Carvalho, Juarez Campolina
+Machado, and Pedro Crescêncio Souza Carneiro. 2018. {``Multitrait Index
+Based on Factor Analysis and Ideotype-Design: Proposal and Application
+on Elephant Grass Breeding for Bioenergy.''} \emph{Gcb Bioenergy} 10
+(1): 52--60.
+
+\bibitem[\citeproctext]{ref-Smith1936}
+Smith, H. F. 1936. {``A Discriminant Function for Plant Selection.''}
+\emph{Annuals of Eugenics} 7: 240--50.
+
+\end{CSLReferences}
+\end{frame}
+
+
+
+
+\end{document}

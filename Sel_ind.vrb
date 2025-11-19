@@ -1,0 +1,18 @@
+\frametitle{Análise de Fatores}
+\phantomsection\label{anuxe1lise-de-fatores-1}
+\begin{block}{Matriz de correlações}
+\phantomsection\label{matriz-de-correlauxe7uxf5es}
+\begin{verbatim}
+            GY_1        GY_2        GY_3        PH_1       PH_2        PH_3
+GY_1  1.00000000 -0.05369986 -0.15382851  0.09624741  0.1535808 -0.03312696
+GY_2 -0.05369986  1.00000000  0.04461362 -0.08982962  0.2295911  0.14690621
+GY_3 -0.15382851  0.04461362  1.00000000  0.09267733 -0.2505011  0.38971600
+PH_1  0.09624741 -0.08982962  0.09267733  1.00000000  0.1306623 -0.26498653
+PH_2  0.15358083  0.22959111 -0.25050112  0.13066234  1.0000000 -0.34163029
+PH_3 -0.03312696  0.14690621  0.38971600 -0.26498653 -0.3416303  1.00000000
+\end{verbatim}
+
+Correlações próximas de zero propiciam a extração de fatores diferentes.
+Representar as correlações entre os traits por meio de variáveis
+latentes (fatores).
+\end{block}

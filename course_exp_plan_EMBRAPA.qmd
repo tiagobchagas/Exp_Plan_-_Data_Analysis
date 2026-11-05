@@ -16,7 +16,7 @@ institute: "Departamento de Genética <br> Escola Superior de Agricultura Luiz d
 date: today
 date-format: "DD/MM/YYYY"
 logo: "misc/logo-Esalq.png"
-chalkboard: true
+embed-resources: true
 ---
 
 ```{r setup, include=FALSE}
@@ -74,7 +74,7 @@ Austrian monk carried out experiments (1854-1863)
 
 
 ## Mendel Experiments
-![Dominant](misc/dominant.jpg){width=65%}
+![Dominant](misc/dominant.jpg){width=60%}
 *<small>Source: [ScienceABC - Laws of inheritance ](https://www.scienceabc.com/humans/gregor-mendels-laws-of-inheritance-law-of-segregation-dominance-independent-assortment.html)</small>*
 
 ## Mendel Rediscovery  (1899-1900)
@@ -87,19 +87,7 @@ Austrian monk carried out experiments (1854-1863)
 - Carl Erich Correns (German botanist)
  
 
-## Ronald A. Fisher research
 
-::::: columns
-::: {.column width="40%"}
-![](misc/fisher.jpeg){width=78%}
-:::
-::: {.column width="60%"}
-- Extended the use of Student's t test (developed the theory of significance)
-- Provided the correct interpretation of Pearson's Chi-square 
-- Variance and Analysis of Variance (ANOVA) 1918
-- The design of experiments (Blocking, Replication and Randomizartion - ways of increase reliability)
-:::
-:::::
 
 
 
@@ -141,8 +129,22 @@ Austrian monk carried out experiments (1854-1863)
 ![](misc/Bateson.jpg){width=78%}
 :::
 ::: {.column width="60%"}
-- In contrast, Bateson had published a book on **discontinuously varying** traits so he was in a position to understand and embrace Mendel’s principles of inheritance when they were rediscovered in 1900.  [@Gillham2015]
+- In contrast, Bateson had published a book on **discontinuously varying** traits so he was in a position to understand and embrace Mendel’s principles of inheritance when they were rediscovered in 1900 [@Gillham2015].
 - Mendelian theory finally won out
+:::
+:::::
+
+## Ronald A. Fisher research
+
+::::: columns
+::: {.column width="40%"}
+![](misc/fisher.jpeg){width=78%}
+:::
+::: {.column width="60%"}
+- Extended the use of Student's t test (developed the theory of significance)
+- Provided the correct interpretation of Pearson's Chi-square 
+- Variance and Analysis of Variance (ANOVA) 1918
+- The design of experiments (Blocking, Replication and Randomizartion - ways of increase reliability)
 :::
 :::::
 
@@ -161,7 +163,7 @@ $$
 
 ::: {.callout-note .fragment}
 ### Gene action
-![Source: Filipe Ferrão](misc/meant/gene_action.png){fig-align="center" width="800"}
+![Source: Filipe Ferrão](misc/meant/gene_action.png){fig-align="center" width="600"}
 :::
 
 
@@ -331,22 +333,22 @@ Os dados amostrais são separados em grupos segundo característica (fator).
 
 ## Anova Assumptions 
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="minimal" .fragment}
 ### Aditividade
 Condição imposta pelo modelo onde os diversos efeitos se somam.
 :::
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="minimal" .fragment}
 ### Normalidade dos erros
 Os erros devem ser normalmente distribuídos
 :::
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="minimal" .fragment}
 ### Homogeneidade de variâncias
 Assume que os erros possuem a mesma variância.
 :::
 
-::: {.callout-tip appearance="minimal"}
+::: {.callout-tip appearance="minimal" .fragment}
 ### Independência dos erros
 A probabilidade do erro de uma observação qualquer assumir um dado valor não deve depender dos valores dos outros erros, o que define a independência deles.
 :::
@@ -373,7 +375,7 @@ onde $\sum_{ij}Y_{ij}^2$ é o somatório de Yij ao quadrado e C é um fator de c
 
 ::: {.callout-tip}
 ### Quadrado médio
-Os quadrados médios são obtidos dividindo-se as Soma de quadrados pelos gl das respectivas fontes de variação.
+Os quadrados médios são obtidos dividindo-se as Soma de quadrados pelos graus de liberdade (GL) das respectivas fontes de variação.
 :::
 
 
@@ -389,10 +391,11 @@ A razão entre QMT/QME fornece o valor de F para se quantificar o componente $\s
 
 # Statistical models of experimental designs
 
-## Statistical model Delineamento Inteiramente Casualizado (DIC)
+## Statistical model DIC
 
 ::: {.callout-tip}
-### DIC
+### Delineamento Inteiramente Casualizado (DIC)
+
 $$ Y_{ij} = \mu + t_i + e_{ij} $$
 :::
 
@@ -404,7 +407,7 @@ $t_i$ é o efeito do tratamento $i$
 
 $e_{ij}$ é o erro aleatório
 
-## Statistical model Delineamento Inteiramente Casualizado (DIC)
+## Statistical model (DIC)
 ::: {.callout-tip}
 ### Hipóteses
 
@@ -416,10 +419,11 @@ $H_1$: $\mu_1 \neq \mu_2 \neq \mu_i$
 :::
 
 
-## Statistical model Delineamento em Blocos Casualizados (DBC)
+## Statistical model DBC
 
 ::: {.callout-tip}
-### DBC
+### Delineamento em Blocos Casualizados (DBC)
+
 $$ y_{ij}= \mu + t_i + b_j + e_{ij} $$
 :::
 
@@ -433,7 +437,7 @@ $b_j$ é o efeito do bloco $j$
 
 $e_{ij}$ é o erro aleatório
 
-## Statistical model Delineamento em Blocos Casualizados (DBC)
+## Statistical model (DBC)
 ::: {.callout-tip}
 ### Hipóteses
 **Hipótese Nula** $H_0$: $\mu_1 = \mu_2 = \mu_i$
@@ -526,14 +530,17 @@ Tutoriais e material de apoio podem ser consultado na página Genes News no face
 
 -   Ex: @ramalho2012 - Absorção de água por grãos de feijão
 
+:::{.fragment}
 ![](misc/meant/Slide7.1.png){fig-align="center" width="400"}
+:::
 
 ## Delineamento Inteiramente Casualizado
 
 -   10 linhagens e 3 repetições
 
+:::{.fragment}
 ![](misc/meant/Slide8.1.png){fig-align="center" width="400"}
-
+:::
 ## Delineamento em Blocos Casualizados
 
 -   9 tratamentos e 2 repetições
@@ -598,14 +605,16 @@ plot_dau(outdesign)
 
 ## Planilha de experimentos
 
+:::{.fragment}
 ![](misc/meant/Slide9.1.png){fig-align="center" width="400"}
-
+:::
 -   Antes de realizar o experimeto (casualização, planejamento)
 
 ## Análise de Variância
 
+:::{.fragment}
 ![](misc/meant/Slide10.1.png){fig-align="center" width="400"}
-
+:::
 -   Depois de realizar o experimento, coletar e analisar os dados.
 
 ## Teste de comparação de médias (Dunnet)

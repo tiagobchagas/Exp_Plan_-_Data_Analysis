@@ -82,11 +82,9 @@ date: today
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE)
 ```
 
+## Background
 
-
-## Background 
-
-![](misc/linkedin.png){width=58%}
+![](misc/linkedin.png){width="58%"}
 
 *Agronomist (**UFCA**- 2018)*
 
@@ -99,9 +97,13 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE
 <!-- ## Outline -->
 
 <!-- -   Experimental design -->
+
 <!-- -   Mixed models equation -->
+
 <!-- -   Individual analyses and multienvironmental trials -->
+
 <!-- -   Factor analysis -->
+
 <!-- -   Selection indexes -->
 
 # Experimental Design
@@ -109,9 +111,9 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache=TRUE
 ## Main principles of experimental design
 
 ::: {layout-ncol="2"}
--   Replication
--   Randomization
--   Local control
+- Replication
+- Randomization
+- Local control
 
 ```{r}
 #| fig-width: 4
@@ -147,10 +149,11 @@ plot(rcbd1)
 
 ::::: columns
 ::: {.column width="25%"}
--   Many test genotypes to evaluate in RCBD
--   **k** treatments  by **k** blocks 
--    (9treat/k3/rep3)
+- Many test genotypes to evaluate in RCBD
+- **k** treatments by **k** blocks
+- (9treat/k3/rep3)
 :::
+
 ::: {.column width="75%"}
 ```{r,fig.width=4, fig.height=2}
 
@@ -171,8 +174,8 @@ head(squareLattice1$fieldBook)[1:3,]
 
 ::::: columns
 ::: {.column width="30%"}
-- Trials with few seeds available 
-- Large number of treatments 
+- Trials with few seeds available
+- Large number of treatments
 - (30gen/3check/k6)
 :::
 
@@ -190,29 +193,25 @@ plot(ARCBD1)
 :::
 :::::
 
-# Mixed models equation 
+# Mixed models equation
 
 ## Mixed models equation
 
 ::::: columns
 ::: {.column width="65%"}
-
 @henderson1953estimation (animal breeder) propose the mixed models equations.
 
 Enables Best linear unbiased prediction (BLUP) and Best Linear Unbiased Estimator (BLUE).
 :::
+
 ::: {.column width="35%"}
-![](misc/henderso.jpeg){width=58%}
+![](misc/henderso.jpeg){width="58%"}
 :::
 :::::
 
 ## Mixed models equation
 
-
-$$
-\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}
-$$
-
+$$\textbf{y} = \mathbf{X}\beta + \mathbf{Z}u+ \mathbf{e}$$
 
 $$ 
 \begin{bmatrix}
@@ -227,23 +226,15 @@ $$
 \begin{bmatrix}
  \mathbf{X}'\mathbf{y} \\
  \mathbf{Z}'\mathbf{y}
-\end{bmatrix}
-$$
-
+\end{bmatrix}$$
 
 ### Restricted maximum likelihood - (REML)
 
 @Patterson1971 Restricted Maximum Likelihood (REML) of random $u$ and fixed effects $\beta$.
 
-
-
 ## Maximum likelihood function
 
-
-$$
-f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
-$$
-
+$$f(x)= \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$$
 
 The maximum likelihood function seeks to optimize the values of the mean $\mu$ and variance $\sigma$, given the observations and considering normal distribution.
 
@@ -262,7 +253,8 @@ plot(density(y),main = "Normal density")#plotar
 
 ```
 
-##  Maximum likelihood function
+## Maximum likelihood function
+
 ```{r}
 #| fig.height: 3.5
 #| fig.width: 6
@@ -284,37 +276,37 @@ xlim=c(5,15),ylim=c(5,15),xlab = "mu", ylab = "sig2", zlab = "Likelihood",cex.ax
 
 ```
 
-
-
 <!-- ## Mixed models equation -->
 
-
 <!-- Best linear unbiased prediction (BLUP) - random -->
+
 <!-- and Best Linear Unbiased Estimator (BLUE) - fixed -->
+
 <!-- @Henderson1975 -->
+
 # Single and Multienvironment trials
 
 ## Simulating phenotypic traits
 
-
-::: columns
-
+::::: columns
 ::: {.column width="55%"}
 ```{r gy-fig, fig.cap="Grain yield (kg ha⁻¹) of maize hybrids in simulated trials", fig.width=6, fig.height=4, out.width="88%"}
 knitr::include_graphics("misc/gy.jpeg")
 
 ```
 :::
+
 ::: {.column width="45%"}
 ```{r,r gy-fig, fig.cap="Plant Height (cm) of maize hybrids in simulated trials", fig.width=6, fig.height=4, out.width="48%"}
 knitr::include_graphics("misc/ph.jpeg")
 ```
 :::
-:::
+:::::
 
 ## Simulating phenotypic traits
 
 **2 traits; 100 genotypes; 2 blocks**
+
 ```{r}
 #| fig.height: 3
 #| fig.width: 6
@@ -406,7 +398,6 @@ pheno_df$gv.Trait2 <- pheno_ls$Trait2$gv.Trait2
 y=pheno_env1$GY
 ```
 
-
 ## Solving mixed models equation
 
 $$ 
@@ -422,8 +413,7 @@ $$
 \begin{bmatrix}
  \mathbf{X}'\mathbf{y} \\
  \mathbf{Z}'\mathbf{y}
-\end{bmatrix}
-$$
+\end{bmatrix}$$
 
 ```{r}
 #| label: tbl-mixed-models
@@ -456,9 +446,6 @@ su = 0.0948                   #Genotypic variance
 erro_geno=data.frame(geno=su,erro=se)
 kable(head(erro_geno),caption = "lambda")
 ```
-
-
-
 
 ## Solving mixed models equation
 
@@ -522,7 +509,6 @@ kable(head(Zpy)[1:2],caption = "Zpy")
 # cat("LHS")
 ```
 
-
 ## Solving mixed models equation
 
 ::: {layout-ncol="2"}
@@ -534,7 +520,6 @@ LHS = rbind(cbind(XpX, XpZ), cbind(ZpX, ZpZ + diag(100)* lambda)) #LHS
 head(LHS)[1:3,1:3]
 ```
 
-
 ```{r}
 #| label: tbl-rhs
 #| tbl-cap: "RHS matrice"
@@ -542,7 +527,6 @@ RHS = rbind(Xpy,Zpy) #RHS
 # cat("RHS")
 head(RHS,n=4)
 ```
-
 
 ```{r}
 #| label: tbl-sol
@@ -555,6 +539,7 @@ head(sol,n=4)
 :::
 
 ## Solving mixed models equation (LME4)
+
 ::: {layout-ncol="2"}
 ```{r}
 #| label: tbl-rhs-lme4
@@ -569,7 +554,6 @@ library(kableExtra)
 head(sol[-c(1:2)]) |> kableExtra::kable(caption = "RHS") |>  kable_styling(full_width = FALSE, font_size = 10)
 head(sol)[1:2]
 ```
-
 
 ```{r}
 #| label: tbl-lme4
@@ -605,30 +589,22 @@ geom_boxplot() +
 plot(p2)
 ```
 
-$$
-\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon} 
-$$
+$$\mathbf{y} = \mathbf{X}_1\mathbf{e} + \mathbf{X}_2\mathbf{be} + \mathbf{Z}_1\mathbf{g} + \mathbf{Z}_2\mathbf{ge} + \mathbf{\epsilon} $$
 
-
-$[\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]$ and
-$[\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]$,
-where $n$ is the number of genotypes and $p$ is the number of environments.
-
+$[\mathbf{g}\sim N(0,\sigma_g^2\mathbf{I}_n)]$ and $[\mathbf{ge}\sim N(0,\sigma_{ge}^2\mathbf{I}_{np})]$, where $n$ is the number of genotypes and $p$ is the number of environments.
 
 ## Multienvironmental trials
-**2 traits; 100 genotypes; 2-3 blocks; 3 environments**
 
+**2 traits; 100 genotypes; 2-3 blocks; 3 environments**
 
 Testing genotype and genotype $\times$ environment interaction effects along traits.
 
-$$
-LRT = -2(LogL_-LogL_{r})
-$$
+$$LRT = -2(LogL_-LogL_{r})$$
 
 where $LogL$ é o ponto de máxima da função de verossimilhança residual do modelo completo e $LogL_{r}$ é o mesmo para o modelo reduzido.
 
-
 ## Multienvironmental trials
+
 ```{r}
 library(tidyverse)
 library(lme4)
@@ -648,11 +624,11 @@ anova(mmcr,mmc)
 ```
 
 ## Multienvironmental trials
+
 ::: {layout-ncol="2"}
 ```{r}
 head(do.call(rbind,ranef(mmc,whichel=("id:env")))) |> kableExtra::kable(caption = "LME4 - g x e") |>kable_styling(full_width = FALSE, font_size = 10)
 ```
-
 
 ```{r}
 
@@ -662,6 +638,7 @@ head(do.call(rbind,ranef(mmc,whichel=("id")))) |> kableExtra::kable(caption = "L
 :::
 
 ## Multienvironmental trials
+
 ```{r}
 #| fig.height: 5
 #| fig.width: 6
@@ -678,32 +655,24 @@ plot(p1$id)
 
 # Selection indexes
 
-
 ## Selection indexes
-
 
 ### Indexes
 
-Several indexes were proposed with and without restrictions (@Smith1936 & @Hazel1943 ; @Kempthorne1959).
-We take a deep look in Factor analysis and ideotype design index (FAI-BLUP)[ @rocha2018multitrait] and Bayesian probabilistic selection index (BPSI)[@Chagas2025].
+Several indexes were proposed with and without restrictions (@Smith1936 & @Hazel1943 ; @Kempthorne1959). We take a deep look in Factor analysis and ideotype design index (FAI-BLUP)[@rocha2018multitrait] and Bayesian probabilistic selection index (BPSI)[@Chagas2025].
 
 ## Indexes
+
 ### Smith e Hazel
- 
-$$
-\hat{\underline{b}} = \hat{P}^{-1} \hat{G} \hat{a};\;
-$$
-where $\hat{P}$ and $\hat{G}$ are phenotypic and genotypic variance-covariance matrix, respectively, and $\hat{a}$ are relative economic values.  
+
+$$\hat{\underline{b}} = \hat{P}^{-1} \hat{G} \hat{a};\;$$ where $\hat{P}$ and $\hat{G}$ are phenotypic and genotypic variance-covariance matrix, respectively, and $\hat{a}$ are relative economic values.
 
 ### Desire
 
-$$
-\underline{b} = G^{-1} \underline{q}
-$$
-where $G$ is the genotypic variance-covariance matrix and $q$ is the vector of desired gains [@Peek1969] 
-
+$$\underline{b} = G^{-1} \underline{q}$$ where $G$ is the genotypic variance-covariance matrix and $q$ is the vector of desired gains [@Peek1969]
 
 ## Desire and SH
+
 ```{r}
 #| label: tbl-ds-sh
 #| tbl-cap: "smith-hazel and desire indexes"
@@ -795,7 +764,6 @@ desiredGain = desiredGain/sqrt(sum(desiredGain^2))
 # sum(desiredGain^2) # = 1
 ```
 
-
 ## Desire and SH
 
 ```{r}
@@ -866,6 +834,7 @@ scaleExpRespOpt <- expRespOpt / sqrt(sum(expRespOpt^2))
 ```
 
 ## Desire and SH
+
 ```{r}
 #| label: tbl-ds-sh-gain
 #| tbl-cap: "weights smith-hazel and desire"
@@ -910,14 +879,12 @@ kable(sum((desiredGain - scaleExpRespOpt)^2), caption = "sum gain DS")
 
 ```
 
-
-
 ## Factor analysis
 
 Maize simulated dataset (2 traits \* 3 enviroments)
 
 To proceed factor analysis, we should do the pearson correlation between traits and create matrix correlation.
- 
+
 ```{r}
 #| layout-ncol: 2
 mmcp=lme4::lmer(PH ~ env+ rep:env + (1| id)+ (1| id:env), data=pheno_df)
@@ -952,7 +919,6 @@ head(round(blup.env.std,2))[1:3,1:6]
 
 ## Análise de Fatores
 
-
 ```{r,fig.format='png', fig.height=6, fig.width=8}
 
 cormat = cor(blup.env.std) 
@@ -964,8 +930,7 @@ print(round(cormat,2))
 
 ```
 
-Correlation near to zero leading to different factors. Representing correlation among traits
-Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).
+Correlation near to zero leading to different factors. Representing correlation among traits Correlações próximas de zero propiciam a extração de fatores diferentes. Representar as correlações entre os traits por meio de variáveis latentes (fatores).
 
 ## Análise de Fatores - Autovalores
 
@@ -973,12 +938,9 @@ Determinação dos autovalores pela seguinte equação:
 
 $[\det(\lambda^2.I-\rho) = 0]$
 
-
 Multiplicado por uma matriz identidade diminuida da matriz de correlações $\rho$
 
-
-$$
-\begin{bmatrix}
+$$\begin{bmatrix}
 \lambda^2 & 0 & 0 & \cdots & 0 \\
 0 & \lambda^2 & 0 & \cdots & 0 \\
 0 & 0 & \lambda^2 & \cdots & 0 \\
@@ -998,9 +960,7 @@ $$
 -\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
 \vdots     & \vdots     & \vdots     & \ddots & \vdots   \\
 -\rho_{n1} & -\rho_{n2} & -\rho_{n3} & \cdots & \lambda^2 - \rho_{nn}
-\end{bmatrix}= 0
-$$
-
+\end{bmatrix}= 0$$
 
 ## Análise de Fatores - Polinômio característico
 
@@ -1047,13 +1007,9 @@ round((roots(A$cp)/6)*100,4)
 
 Os autovetores são derivados dos autovalores e resultam de um sistema de equações.
 
-$$
-[det(\lambda^2.I-\rho)\mathbf{v}_i = 0]
-$$
+$$[det(\lambda^2.I-\rho)\mathbf{v}_i = 0]$$
 
-
-$$
-\begin{bmatrix}
+$$\begin{bmatrix}
 \lambda^2 - \rho_{11} & -\rho_{12} & -\rho_{13} & \cdots & -\rho_{1n} \\
 -\rho_{21} & \lambda^2 - \rho_{22} & -\rho_{23} & \cdots & -\rho_{2n} \\
 -\rho_{31} & -\rho_{32} & \lambda^2 - \rho_{33} & \cdots & -\rho_{3n} \\
@@ -1066,13 +1022,9 @@ v_{i2} \\
 v_{i3} \\
 \vdots \\
 v_{in}
-\end{bmatrix}= 0
-$$
+\end{bmatrix}= 0$$
 
-
-$$
-(\lambda^2 - \rho_{11}) v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0 ]
-$$
+$$(\lambda^2 - \rho_{11}) v_{i1} - \rho_{12} v_{i2} - \rho_{13} v_{i3} - \cdots - \rho_{1n} v_{in} = 0 ]$$
 
 ## Análise de Fatores - Escores fatoriais
 
@@ -1080,9 +1032,7 @@ Obtido por meio do *autovalor* dividido pela raiz quadrada do seu respectivo *au
 
 Indica relação com as variáveis originais.
 
-$$
-S_{11}=\frac{v_{11}}{\sqrt{\lambda^2_1}}
-$$
+$$S_{11}=\frac{v_{11}}{\sqrt{\lambda^2_1}}$$
 
 ## Extração dos fatores
 
@@ -1090,10 +1040,7 @@ Os escores fatoriais multiplicados pelas variáveis padronizadas (Zscore) geram 
 
 A grandeza dos escores para cada variável representará o seu peso em cada fator.
 
-$$
-S_{11}=\frac{v_{11}}{\sqrt{\lambda^2_1}}
-$$
-
+$$S_{11}=\frac{v_{11}}{\sqrt{\lambda^2_1}}$$
 
 ## Análise de Fatores- Cargas fatoriais
 
@@ -1103,13 +1050,9 @@ O resultado da soma das cargas fatoriais ao quadrado de cada fator é próprio a
 
 Mais informações sobre a história da análise fatorial nesse artigo @Bartholomew1995
 
-
 ## Índice de Seleção
 
-
-$$
-P_{ij} = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}
-$$
+$$P_{ij} = \frac{\frac{1}{d_{ij}}}{\sum^{i=n;j=m}_{i=1;j=1} \frac{1}{d_{ij}}}$$
 
 $P_{ij}$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, $d_{ij}$ distância genótipo-ideótipo euclidiana padronizada.
 
@@ -1124,10 +1067,6 @@ $P_{ij}$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, 
 \end{itemize}
 \end{block}
 
-
-
-
-
 ## Goals
 
 \begin{itemize}
@@ -1135,26 +1074,17 @@ $P_{ij}$ probabilidade do i-ésimo genótipo ser similar ao j-ésimo ideótipo, 
 \item ii) select families from carioca common bean recurrent selection to extract pure lines using BPSI index.
 \end{itemize}
 
+## Bayesian Probabilistic selection index
 
-## Bayesian Probabilistic selection index	
+BPSI index uses the probability of superior performance to estimate the chance of a genotype being selected in multienvironmental trials @Dias2022.
 
-BPSI index uses the probability of superior performance to estimate the chance of a genotype being selected in multienvironmental trials @Dias2022. 
-	
-$$
-Pr\left({\hat{g}}_i \in \Omega \middle| y\right) = \frac{1}{s}\sum_{s=1}^{s} I \left({\hat{g}}_i^{(s)} \in \Omega \middle| y\right) \tag{1}
-$$
-where $\hat{g}_i$ is the genotypic value, $\Omega$ is a subset of genotypes with superior performance and $s$ represents each sample of posterior distribution.
+$$Pr\left({\hat{g}}_i \in \Omega \middle| y\right) = \frac{1}{s}\sum_{s=1}^{s} I \left({\hat{g}}_i^{(s)} \in \Omega \middle| y\right) \tag{1}$$ where $\hat{g}_i$ is the genotypic value, $\Omega$ is a subset of genotypes with superior performance and $s$ represents each sample of posterior distribution.
 
+## Bayesian Probabilistic selection index
 
-## Bayesian Probabilistic selection index		
+$$BPSI_i = \sum_{m=1}^{t} RankProSup_m$$
 
-	
-$$
-BPSI_i = \sum_{m=1}^{t} RankProSup_m
-$$
-		
 where $i$ represents the rank from probability of superior performance for each genotype evaluated and $m$ the amount of traits.
-		
 
 ```{r}
 #| label: tbl-table1
@@ -1179,22 +1109,13 @@ kable(table_data,
 
 ```
 
-## Bayesian Probabilistic selection index		
+## Bayesian Probabilistic selection index
 
-Probability of superior performance within environments
-$$
-					Pr\left(\widehat{g_{ij}} \in \Omega_j \middle| y\right) = \frac{1}{S}\sum_{s=1}^{S} I\left(\widehat{g_{ij}^{(s)}} \in \Omega_j \middle| y\right)
-$$
+Probability of superior performance within environments $$                    Pr\left(\widehat{g_{ij}} \in \Omega_j \middle| y\right) = \frac{1}{S}\sum_{s=1}^{S} I\left(\widehat{g_{ij}^{(s)}} \in \Omega_j \middle| y\right)$$
 
 Pairwise probability of superior performance
 
-$$
-		Pr\left(\widehat{g_i} > \widehat{g_{i^\prime}} \middle| y\right) = \frac{1}{S}\sum_{s=1}^{S} I\left(\widehat{g_i^{(s)}} > \widehat{g_{i^\prime}^{(s)}} \middle| y\right)
-$$
-
-
-
-
+$$        Pr\left(\widehat{g_i} > \widehat{g_{i^\prime}} \middle| y\right) = \frac{1}{S}\sum_{s=1}^{S} I\left(\widehat{g_i^{(s)}} > \widehat{g_{i^\prime}^{(s)}} \middle| y\right)$$
 
 ## Plant material and experimental design
 
@@ -1206,53 +1127,43 @@ $$
 #| echo: false
 
 knitr::include_graphics("misc/images/experimental design.pdf")
-```		
+```
 
-	
 ## Traits evaluated
 
-::: {.columns}
+:::::: columns
 ::: {.column width="32%"}
-![Grain Appearance](misc/images/acg.jpg){#fig-acg width=55%}
-:::
-
-::: {.column width="32%"}
-![Plant Architecture](misc/images/arq.jpg){#fig-arq width=55%}
+![Grain Appearance](misc/images/acg.jpg){#fig-acg width="55%"}
 :::
 
 ::: {.column width="32%"}
-![Grain Yield](misc/images/prod.jpg){#fig-prod width=55%}
+![Plant Architecture](misc/images/arq.jpg){#fig-arq width="55%"}
 :::
+
+::: {.column width="32%"}
+![Grain Yield](misc/images/prod.jpg){#fig-prod width="55%"}
 :::
-
-
-
+::::::
 
 ## First step: Adjusted means
 
 Individual analysis was realized in each trial to get genotypes adjusted means:
 
-		
-$$
-			\mathbf{Y} = \mathbf{X}_{1}\mathbf{r} + \mathbf{X}_{2}\mathbf{g} + \mathbf{Z}\mathbf{b} + \boldsymbol{\epsilon}
-$$
-		
+$$            \mathbf{Y} = \mathbf{X}_{1}\mathbf{r} + \mathbf{X}_{2}\mathbf{g} + \mathbf{Z}\mathbf{b} + \boldsymbol{\epsilon}$$
+
 where $\mathbf{Y}_{(n\times1)}$ is vector of observations, $\mathbf{X_1}_{(n \times r)}$ is a incidence matrix $\textbf{r}$ of replication effect assumed as fixed, $\mathbf{X_2}_{(n\times rk)}$ is a incidence matrix $\textbf{g}$ of genotype effect assumed as fixed, $\mathbf{Z}_{(n\times k)}$ is a incidence matrix $\textbf{k}$ of block effect assumed as random and $\mathbf{\varepsilon}_{(n\times 1)}$ is a vector of random errors.
-		
+
 The variance probability density related to model terms are: $\textbf{b} \sim N (0,\sigma_{b}^{2}\mathbf{I}_k)$
 
-	
-##	Second step: Bayesian model
+## Second step: Bayesian model
 
 The probabilistic model proposed by @Dias2022 was fitted to each trait and setting priors to variance components of genotype, environment, and $(G\times E)$ interaction.
-		
-$$
-			E[{Y}_{ij}] = {\mu} + {g}_i + {a}_j + {(ga)}_{ij} + {\epsilon}_{ij}
-$$
-	
+
+$$            E[{Y}_{ij}] = {\mu} + {g}_i + {a}_j + {(ga)}_{ij} + {\epsilon}_{ij}$$
+
 where $E[{Y}_{ij}]$ is expectation of observation $ij$, ${g}_{i}$ is the effect $i$ of genotypes assumed as random ($i^{th}$ = 121 genotypes), ${a}_{j}$ is the effect $j$ of environment assumed as random ($j^{th}$ = 4 environments), ${ga}_{ij}$ is the effect of $(G\times E)$ interaction assumed as random and ${\varepsilon}$ is the effect of random errors.
 
-##	Priori
+## Priori
 
 Prior distribution was normal density and the variance probability density related to model terms are:
 
@@ -1264,8 +1175,7 @@ $${(ga)}_{ij} \sim N (0,{S}^{[ga]})$$
 
 $${\sigma} \sim HalfCauchy (0,{S}^{[\sigma]})$$
 
-
-##	Priori
+## Priori
 
 Parameters of prior distribution was assumed as hyperparameters:
 
@@ -1304,7 +1214,6 @@ variance_data <- data.frame(
 variance_data |>kableExtra::kable(caption = "Common bean UFV carioca population variance components for different traits at trials from 2020 to 2023") |>kable_styling(full_width = FALSE, font_size = 8)
 ```
 
-
 ## Bayesian model fitting
 
 ```{r bayesian-model, fig.cap="Bayesian model fitting results", out.width="60%"}
@@ -1329,21 +1238,14 @@ knitr::include_graphics("misc/images/PlotsConds.pdf")
 knitr::include_graphics("misc/images/PlotsPairs.pdf")
 ```
 
-
 ## Bayesian Probabilistic Selection Index
 
 ```{r bsim-plot, fig.cap="Probabilistic Selection Index visualization", out.width="60%"}
 knitr::include_graphics("misc/images/PSIplot.pdf")
 ```
 
-
-
-
 ## Conclusion
 
 Applying BPSI to carioca common bean panel, 12 families was selected aiming to extract pure lines to GA, GY and PA simultaneously. BPSI has potential to be applied on selection stage in breeding programs.
-
-
-
 
 ## Bibliography
